@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>Atividade Interativa: Soma de Riemann</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="GeoGebra" />
+  
+  <link type="text/css" href="css/style.css" rel="Stylesheet" />
+  <link type="text/css" href="css/smoothness/jquery-ui-1.8.19.custom.css" rel="stylesheet" />
+  
+  <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.8.6.custom.min.js"></script> 
+  <script type="text/javascript" src="js/SCORM_API_wrapper.js"></script>
+  <script type="text/javascript" src="js/swfobject.js"></script> 
+  <script type="text/javascript" src="js/scorm-config.js"></script> 
+</head>
+
+<body>
+
+  <h1 style="display:none;">Centro de Ensino e Pesquisa Aplicada - CEPA</h1>
+	<h1 style="display:none;">Universidade Virtual do Estado de São Paulo - UNIVESP</h1>
+	
+	<h3>Atividade Interativa: Soma de Riemann</h3>
+	
+	<div id="completion-message" class="completion-message-off">
+    <strong>Atenção:</strong> esta Atividade Interativa já foi concluída. Você pode refazer os exercícios quantas vezes quiser, mas não valerá nota.
+  </div>
+
+  <div id="ai-container">
+		<a href="http://www.adobe.com/go/getflash">
+			<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Obtenha o Adobe Flash player" />
+		</a>
+  </div>
+  
+  <div style="clear:both"></div>
+  <form id="limpa">
+  
+  <div id="exercicios">
+    <ul>
+		<li><a href="#orientacoes"><span class="ui-icon ui-icon-info" style="float: left; margin-left: -4px; margin-right: 4px;"></span>Orientações</a></li>
+        <li><a href="#ex1"><span class="ui-icon ui-icon-carat-1-e" style="float: left; margin-left: -7px; margin-right: 4px;"></span>Questão 1</a></li>
+        <li><a href="#ex2"><span class="ui-icon ui-icon-carat-1-e" style="float: left; margin-left: -7px; margin-right: 4px;"></span>Questão 2</a></li>
+		<li><a href="#ex3"><span class="ui-icon ui-icon-carat-1-e" style="float: left; margin-left: -7px; margin-right: 4px;"></span>Questão 3</a></li>
+		<li><a href="#ex4"><span class="ui-icon ui-icon-carat-1-e" style="float: left; margin-left: -7px; margin-right: 4px;"></span>Questão 4</a></li>
+		<li><a href="#ex5"><span class="ui-icon ui-icon-carat-1-e" style="float: left; margin-left: -7px; margin-right: 4px;"></span>Questão 5</a></li>
+		<li><a href="#ex6"><span class="ui-icon ui-icon-carat-1-e" style="float: left; margin-left: -7px; margin-right: 4px;"></span>Questão 6</a></li>
+		<li><a href="#creditos"><span class="ui-icon ui-icon-contact" style="float: left; margin-left: -4px; margin-right: 4px;"></span>Créditos</a></li>		
+    </ul>
+
+    <!-- Orientações -->
+    <div id="orientacoes">
+		<p>Esta Atividade Interativa é um pouco diferente dos questionários que você experimentou até agora. Nele, começaremos com ideias que você já experimentou antes no curso, e iremos além, até conceitos muito interessantes, úteis, mas não por isso complexos.</p>
+		<p>As cinco primeiras questões valem nota, mas a sexta não, pois trata de um assunto não explorado até então. Entretanto, ela é muito interessante e recomendamos fazê-la também.</p>
+		<p>Diferentemente dos questionários anteriores, neste você pode fazer e refazer as questões quantas vezes quiser, sempre valendo nota. Seu objetivo é atingir um aproveitamento de pelo menos 80% (mesmo após atingir esta meta você pode continuar tentando).</p>
+		<p>Então, se por um lado você pode sempre tentar recuperar uma questão perdida, por outro esta questão pesará bastante nessa recuperação, obrigando-o(a) a refazer as questões mais vezes (e a treinar mais, por conseguinte). Por isso, responda as questões com atenção.</p>
+    </div>	
+    
+    <!-- Exercício 1 -->
+    <div id="ex1">
+		<div id="frame01">
+			<p>Como você aprendeu no capítulo 15, a área sob uma curva f(x) qualquer num intervalo [a,b] pode ser obtida, de forma aproximada, como no plano cartesiano acima: dividimos a área de nosso interesse em N (= 4, neste caso) retângulos de larguras iguais, mas com alturas que dependem de f(x), e somamos as áreas de cada um desses retângulos. Este processo é chamado de <i>soma de Riemann</i>.</p>
+			<p>Se escolhermos as alturas dos retângulos de modo que eles estejam sempre <strong>abaixo</strong> de f(x), como representado acima, a soma das áreas será sempre <i>menor</i> que a área de interesse. Esta é a "soma inferior". Faça isso agora: para a situação do plano cartesiano acima, calcule a soma inferior e preencha o campo abaixo <strong>apropriado</strong>. Ao concluir, pressione "próximo":</p>
+			<p><input id="U-ex1" type="text" size="6"/> <= ∫ <sup>a</sup><sub>b</sub> f(x) dx <= <input id="K-ex1" type="text" size="6"/> <span class="invisible invert-button">Inverter</span></p>
+		</div>
+			
+		<p><span class="next-button">Próximo</span></p>
+			
+		<!-- Segunda parte do exercício 1 -->
+		<div id="frame02" style="display:none;">
+			<p>Alternativamente, podemos escolher as alturas dos retângulos de tal modo que eles estejam sempre <b>acima</b> da curva, como representado no plano agora. Neste caso, a soma das áreas será sempre maior que a área de interesse. É a chamada "soma superior". Calcule-a agora e termine de preencher a desigualdade acima. Pressione "terminei" quando pronto.</p>
+			<p>Se escolhermos as alturas dos retângulos de modo que eles estejam sempre <b>abaixo</b> de f(x), como representado acima, a soma das áreas será sempre <i>menor</i> que a área de interesse. Esta é a "soma inferior". Faça isso agora: para a situação do plano cartesiano acima, calcule a soma inferior e preencha o campo abaixo <b>apropriado</b>. Ao concluir, pressione "próximo":</p>
+			<p class="obs"><strong>obs</strong>.: caso você tenha invertido as somas inferior e superior, use o botão "inverter" para trocá-las. Além disso, caso queira refazer suas contas, use as duas opções abaixo para selecionar a soma que você gostaria de ver.</p>
+			<p>
+				<form id="radio-ex1">
+					<input type="radio" name="choice" value="inf" checked="true"/> soma inferior<br />
+					<input type="radio" name="choice" value="sup" /> soma superior
+				</form> 
+			</p>
+			
+		<p><span class="check-button">Terminei</span></p>
+		</div>
+			
+	
+		<div id="frame01">
+			<p class="obs"><strong>obs</strong>.: para ver as coordenadas de um ponto qualquer no plano cartesiano acima, posicione o mouse ali e aguarde por alguns instantes.</p>
+		</div>
+
+		<p id="message1"></p>
+
+    </div>
+    
+    <!-- Exercício 2 -->
+    <div id="ex2">
+		<div id="frame01" class="active visible">
+			<p>Refaça as contas da questão anterior com N = <input id="X-ex2" type="text" size="6"/> (preencha com base no plano cartesiano acima):</p>
+			<p><input id="U-ex2" type="text" size="6"/> <= ∫ <sup>a</sup><sub>b</sub> f(x) dx >= <input id="K-ex2" type="text" size="6"/> <span class="visible invert-button">Inverter</span></p>
+			<p>
+				<form id="radio-ex2">
+					<input type="radio" name="choice2" value="inf" checked="true"/> soma inferior<br />
+					<input type="radio" name="choice2" value="sup" /> soma superior
+				</form> 
+			</p>
+			<p>Observe como as duas somas estão mais próximas uma da outra, quando comparadas com a questão anterior. Este comportamento progride conforme aumentamos a quantidade N de <b>elementos de área</b>; ou, equivalentemente, conforme reduzimos a largura do elemento de área.</p>
+		</div>
+			
+		<p class="terminei visible"><span id="" class="check-button">Terminei</span></p>
+
+		<p id="message2"></p>
+    </div>
+	
+	<!-- Exercício 3 -->
+	<div id="ex3">
+		<div class="active visible frame01">
+			<p>O <b>teorema fundamental do cálculo</b> estabelece, essencialmente, que a derivação e a integração são operações inversas. Ou seja, se f'(x) é a <b>derivada</b> de f(x), então f(x) é a <b>integral</b> de f'(x). Na verdade, o correto é escrever assim:</p>
+			<p>∫ <sup>a</sup><sub>b</sub> f'(x) dx = f(b) - f(a).</p>
+			<p>Mais importante que isso, o teorema fundamental do cálculo é uma ferramenta muito útil. Certamente foi bastante trabalhoso encontrar a resposta correta das duas questões anteriores. Imagine o trabalho de fazermos aquele cálculo para N = 1000, por exemplo. Nós fizemos isso para você e o resultado é ?? (soma inferior ou superior?). </p>
+			<p>Mas agora, sabendo que o gráfico apresentado acima é o da função f'(x) = <span class="ex3-der"></span> , você pode determinar a área sob ela utilizando as técnicas de primitivação (integração) que você aprendeu. Faça isso agora: determine a integral de f'(x) no intervalo [a,b]. Dito de outra forma: encontre a função f(x) cuja derivada é <span class="ex3-der"></span>, manualmente ou através de uma tabela de derivadas, como <a href="http://pt.wikipedia.org/wiki/Tabela_de_derivadas" about=>essa</a>. Pressione "próximo" em seguida.</p>
+			<p>∫ <sup>a</sup><sub>b</sub> f'(x) dx = f(b) - f(a) = <input id="U-ex3" type="text" size="6"/><span class="right-answer"></span> </p>
+		</div>
+	
+		<p class="proximo visible"><span class="next-button3">Próximo</span></p>
+	
+		<div id="frame03" style="display:none">
+			<p>Observe como o resultado <span class="erro-ex3"></span> pelo teorema fundamental do cálculo é muito próximo daquele cálculo que fizemos para N = 1000. Isto significa que, ao invés de somarmos elementos de área (soma de Riemann), podemos simplesmente procurar pela função f(x) cuja derivada é a curva sob a qual queremos calcular a área, e calcular f(b) - f(a).</p>
+		<p class="terminei invisible"><span class="check-button">Terminei</span></p>
+		</div>
+		
+		<div id="frame01">
+			<p class="obs"><strong></strong></p>
+		</div>
+
+		<p id="message3"></p>
+
+	</div>
+			
+	<!-- Exercício 4 -->
+	<div id="ex4">
+		<div id="frame04" class="active visible">
+			<p>Outro teorema importante do cálculo integral é o do <b>valor médio</b>:</p>
+			<p>Existe ao menos um &#958; &#8712; [a,b] tal que ∫ <sup>a</sup><sub>b</sub> f(x) dx, dx = f(&#958;) (b - a).</p>
+			<p>Mas não deixe a aparência desta expressão impressioná-lo(a), pois o significado dela é muito simples: independentemente de qual seja a função f(x) e o intervalo [a,b], existe um retângulo de base b - a e altura f(&#958;) cuja área é igual à área procurada (a integral de f(x) no intervalo [a,b]). Vejamos por partes...</p>
+			<p>No plano cartesiano acima, arraste o ponto M até a abscissa --- dentro do intervalo [a,b] --- em que f(M) é <b>mínima</b> no intervalo [a,b]. Ao concluir, pressione "Próximo".</p>
+		</div>
+		<p class="visible proximo01"><span class="next-button4">Próximo</span></p>
+			
+		<div id="frame04-2" style="display:none">
+			<p>Imagine agora uma função g<sub>1</sub>(x) = f(M), ou seja, uma reta horizontal em y = f(M). f(M) é apenas um número... vamos chamá-lo de f<sub>min</sub> para simplificar.</p>
+			<p>Como g<sub>1</sub>(x) <= f(x) em <b>todo</b> o intervalo [a,b], a área sob g<sub>1</sub>(x), que é simplesmente a área do retângulo com borda cinza na figura, é sempre menor ou igual à área sob f(x) (visualize mentalmente as áreas no plano cartesiano acima). Esta área é igual a f<sub>min</sub>*(b - a) (a altura vezes a base do retângulo). Entenda isso antes de prosseguir (pressione "Próximo").</p>
+		
+		<p class="proximo02 invisible"><span id="next-button4-2" class="next-button4-2">Próximo</span></p>
+		</div>
+		
+		<div id="frame04-3" style="display:none">
+			<p>Agora faça o contrário: posicione o ponto M de modo que f(M) seja <b>máxima</b> no intervalo [a,b]. Ao concluir, pressione "Próximo".</p>
+		
+		<p class="invisible proximo03"><span id="next-button4-3" class="next-button4-3">Próximo</span></p>
+		</div>
+		
+		<div id="frame04-4" style="display:none">
+			<p>Analogamente à situação anterior, se imaginarmos g<sub>2</sub>(x) = f(M) = f<sub>max</sub>, então, como g<sub>2</sub>(x) >= f(x) em <b>todo</b> o intervalo [a,b], a área sob g<sub>2</sub>(x), que é simplesmente f<sub>max</sub>*(b-a), é sempre <b>maior</b> ou igual à área sob f(x). Logo, podemos escrever que</p>
+			<p>f<sub>min</sub> (b - a) <= ∫ <sup>a</sup><sub>b</sub> f(x) dx <= f<sub>max</sub> (b - a)</p>
+			<p>Se f(x) é contínua no intevalo [a,b] --- e isto é muito importante --- então ao variar de f<sub>min</sub> até f<sub>max</sub>, f(x) assumirá, para <b>algum x</b> em [a,b], um valor &#956; tal que f<sub>min</sub> <= &#956; <= f<sub>max</sub> e &#956; * (b - a), igual à área procurada. Matematicamente,</p>
+			<p>∫ <sup>a</sup><sub>b</sub> f(x) dx, dx = &#956; * (b - a).</p>
+		    <p>&#956; é o chamado *valor médio* da função f(x) no intervalo [a,b], e como \mu é um valor assumido por f(x) para <b>algum x</b>, chamamos <b>esse x</b> de &#958;. Ou seja, f(&#958;) = &#956;.</p>
+			<p>Vamos então reescrever o teorema do valor médio: existe um retângulo de base b - a e altura f(\xsi) cuja área é igual à área de interesse.</p>
+			<p>Vamos colocar isto em prática: posicione o ponto M de modo que a área f(M) * (b - a) seja <b>aproximadamente</b> igual à integral de f(x) no intervalo [a,b] (você não precisa fazer conta alguma para isso). Uma maneira de fazer isso é posicionar M de modo que a área pintada acima de f(M) seja aproximadamente igual àquela pintada abaixo de f(M). Imagine-se movendo a área acima de f(M) para abaixo dele, de modo a completar a área do quadrado de base (b - a) e altura f(M). Quando tiver concluído, pressione "Avançar/terminei".</p>
+			<p>Você talvez esteja se perguntado: mas se eu não sei a integral, como determinar o valor médio? Na verdade, o teorema do valor médio é útil na dedução de resultados mais práticos, como o próprio teorema fundamental do cálculo (veja uma demonstração <a href="#">aqui-></a>, em inglês).</p>
+			<p class="obs"><strong>obs</strong>.: atenção que existe o teorema do valor médio para integrais (este) e o teorema do valor médio para derivadas.</p>
+		
+		<p class="terminei invisible"><span class="check-button">Terminei</span></p>
+		</div>
+			
+		<p id="message4"></p>
+
+	</div>
+
+	<!-- Exercício 5 -->
+	<form name="selects">
+	<div id="ex5">
+		<p>Na questão anterior nós deduzimos que uma integral é maior ou menor que outra apenas comparando os integrandos (as funções que estamos integrando). Faça isso nas integrais abaixo: sem calculá-las, indique a relação de ordem delas selecionando < ou >. Pressione "Terminei" para concluir.</p>
+		<b>a)</b> &#8747;<sub>0</sub><sup>1</sup> &#8730;{1 + x<sup>2</sup>} dx </p>
+		<select name="ex5_select_01" onchange="verificaSelect();">
+			<option value="" selected>Selecione:</option>
+			<option value="menor"><</option>
+			<option value="maior">></option>
+		</select></p>
+		&#8747;<sub>0</sub><sup>1</sup> x dx</p>
+		<div class="clear"></div>
+		<p id="feedback5-a" style="display:none">No item a, observe primeiramente que o intervalo de integração é o mesmo (se não fosse, teríamos de calcular as integrais para poder ordená-las). Nesse intervalo, a função &#8730;{1 + x<sup>2</sup>} <b>></b> x sempre (calcule mentalmente as funções em x = 0 e x = 1 para ter uma percepção disso). Logo, a integral à esquerda é maior que a integral à direita. </p>
+		
+		<b>b)</b> &#8747;<sub>0</sub><sup>1</sup> x<sup>2</sup>sen<sup>2</sup>(x) dx </p>
+		<select name="ex5_select_02" onchange="verificaSelect();">
+			<option value="" selected>Selecione:</option>
+			<option value="menor"><</option>
+			<option value="maior">></option>
+		</select></p>
+	 	<p class="tabular-3">&#8747;<sub>0</sub><sup>1</sup> xsen<sup>2</sup>(x) dx</p>
+		<div class="clear"></div>
+		<p id="feedback5-b" style="display:none">No item b, observe primeiramente que o intervalo de integração é o mesmo (se não fosse, teríamos de calcular as integrais para poder ordená-las). Observe também que a função à esquerda (f<sub>e</sub>) é igual à função à direita (f<sub>d</sub>), vezes x: f<sub>e</sub> = x * f<sub>d</sub>. Como 0 <= x <= 1, então f<sub>e</sub> < f<sub>d</sub> em todo o intervalo aberto ]0,1[. E apenas para x = 0 e x = 1 teremos f<sub>e</sub> = f<sub>d</sub>. Logo, a integral à esquerda é menor que aquela à direita.</p>
+	 
+		<b>c)</b> &#8747;<sub>1</sub><sup>2</sup> x<sup>2</sup>sen<sup>2</sup>(x) dx</p>
+		<select name="ex5_select_03" onchange="verificaSelect();">
+			<option value="" selected>Selecione:</option>
+			<option value="menor"><</option>
+			<option value="maior">></option>
+		</select></p>
+	 	&#8747;<sub>1</sub><sup>2</sup> xsen<sup>2</sup>(x) dx</p>
+		<div class="clear"></div>
+		<p id="feedback5-c" style="display:none">No item c, observe primeiramente que o intervalo de integração é o mesmo (se não fosse, teríamos de calcular as integrais para poder ordená-las). Observe também que a função à esquerda (f<sub>e</sub>) é igual à função à direita (f<sub>d</sub>), vezes x: f<sub>e</sub> = x * f<sub>d</sub>. Como x >= 1, então f<sub>e</sub> > f<sub>d</sub> em todo o intervalo aberto ]1,2[. E apenas para x = 1 teremos f<sub>e</sub> = f<sub>d</sub>. Logo, a integral à esquerda é maior que aquela à direita.</p>
+	
+		<b>d)</b> 	&#8747;<sub>1</sub><sup>2</sup> e<sup>{x<sup>2</sup>}</sup> dx</p>
+		<select name="ex5_select_04" onchange="verificaSelect();">
+		    <option value="" selected>Selecione:</option>
+			<option value="menor"><</option>
+			<option value="maior">></option>
+		</select></p>
+	 	&#8747;<sub>1</sub><sup>2</sup> e<sup>x</sup> dx</p>
+		<div class="clear"></div>
+		<p id="feedback5-d" style="display:none">No item d, observe primeiramente que o intervalo de integração é o mesmo (se não fosse, teríamos de calcular as integrais para poder ordená-las). Observe também que na função à esquerda o expoente (x<sup>2</sup>) é o quadrado daquele da função à direita (x). E como x<sup>2</sup> > x no intervalo de integração, também e<sup>{x<sup>2</sup>}</sup> > e<sup>x</sup>. Apenas em x = 1 teremos as duas funções iguais. Portanto, a integral à esquerda é maior que aquela à direita.</p>
+		<span class="check-button">Terminei</span></p>
+	</form>
+	</div>
+
+	<!-- Exercício 6 -->
+	<div id="ex6">
+		<div id="frame01" class="active visible">
+			<p>Conforme vimos, o teorema fundamental do cálculo pode nos auxiliar bastante quando sabemos determinar analiticamente (ie, com "lápis e papel") a primitiva de uma função. No entanto, a maioria das situações reais não são assim. De fato, muitos fenômenos são caracterizados por funções cujas integrais simplesmente não têm representação analítica. Para esses casos empregam-se computadores e <b>métodos numéricos de integração</b>.</p>
+			<p>Para resolver uma integral com um computador podemos, por exemplo, instruí-lo a calcular as somas inferior e/ou superior para &#916;x bem pequeno, e assumir esse valor como "a área" procurada (isto implica também na necessidade de se avaliar o <b>erro</b> no cálculo da integral. Mas não vamos nos preocupar com isso aqui). As somas inferior e superior são a aproximação mais simples possível, embora não sejam muito utilizadas, devido ao grande erro inerente a elas.</p>
+			<p>Mas há vários outros métodos. Um exemplo simples de entender é a regra do trapézio, através do qual usamos não retângulos como elementos de área, mas trapézios, como está agora exibido no gráfico acima. Deste modo, o que fazemos é somar as áreas dos N = 4 trapézios acima e tomá-la como a integral procurada. Faça isso: calcule a área abaixo da curva através da regra do trapézio.</p>
+			<p>Área sob a curva f(x) pela regra do trapézio = <input id="X-ex6" type="text" size="6"/></p>
+		</div>
+	
+		<p class="terminei visible"><span id="" class="check-button">Terminei</span>  <span id="reiniciar">Reiniciar</span></form></p>
+		<p id="message6"></p>        
+	</div>
+
+    <!-- Créditos -->
+    <div id="creditos">
+      <p align="justify">Este material foi criado, com o <a href="http://www.geogebra.org/" target="_blank">Geogebra</a>, pelo Centro de Ensino e Pesquisa Aplicada (CEPA) do Departamento de Física Experimental do Instituto de Física da Universidade de São Paulo, campus capital, e é distribuido conforme a licença Creative Commons Atribuição - Uso não-comercial - Compartilhamento pela mesma licença 3.0 Brasil (CC BY-NC-SA 3.0). Isto significa que você pode compartilhar ou remixar esta obra, segundo esta mesma licença, desde que cite o autor original (CEPA) e sua página web (cepa.if.usp.br). Você NÃO pode usar esta obra, nem variações dela, para fins comerciais (para este propósito, entre em contato com o CEPA).</p>
+	  <p><li><i>Patrocínio:</i> <a href="http://sti.usp.br" target="_blank">Superintentência de Tecnologia da Informação</a></li>
+	  <li><i>Realização:</i> <a href="http://cepa.if.usp.br/" target="_blank">Centro de Ensino e Pesquisa Aplicada</a></li>
+	  <li><i>Apoio:</i> <a href="http://www5.usp.br/" target="_blank">Universidade de São Paulo</a></li>
+	  <li><i>Coordenação de produção:</i> Beatriz Casaro</li>
+	  <li><i>Criação de conteúdo:</i> Ivan Ramos Pagnossin</li>
+      <li><i>Design Instrucional:</i> Roberta Takahashi Soledade</li>
+      <li><i>Gerência de produção:</i> Ivan Ramos Pagnossin<br></li>
+      <li><i>Ilustração:</i> Celso Roberto Lourenço</li>
+      <li><i>Leiaute:</i> Celso Roberto Lourenço, Maria Izabel Vinha Vieira</li>
+      <li><i>Programação:</i> Maria Izabel Vinha Vieira</li>
+      <li><i>Testes:</i> Luciano de Lucena Rezende</li>	
+	</div>
+	
+  </div>
+  
+</body>
+</html>
