@@ -9,6 +9,9 @@ scorm.version = "2004"; // Versão da API SCORM
 var PING_INTERVAL = 5 * 60 * 1000; // milissegundos
 var pingCount = 0; // Conta a quantidade de pings enviados para o LMS
 var ai; // Referência para a AI (Flash)
+var MAX_INIT_TRIES = 60;
+var init_tries = 0;
+var debug = true;
 var SCORE_UNIT = 100/6;
 var sorteado;//valor do indice da função
 var funcao = [
@@ -27,17 +30,33 @@ var funcao = [
   {
     f_display: "x<SUP>3</SUP> - x<SUP>2</SUP> + 5",
     if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x",
-  },
-  ];
+  }
+];
 
-// Inicia a AI.
-$(document).ready(function(){       
+$(document).ready(init); // Inicia a AI.
+$(window).unload(uninit); // Encerra a AI.
+
+/*
+ * Inicia a Atividade Interativa (AI)
+ */
+function init () {
+  configAi();
+  checkCallbacks();
+}
+
+/*
+ * Encerra a Atividade Interativa (AI)
+ */ 
+function uninit () {
+  if (!completed) {
+    save2LMS();
+    scorm.quit();
+  }
+}
+
+function configAi () {
 	
-  //Deixa a aba "Orientações" ativa no carregamento da atividade
-  $('#exercicios').tabs({ selected: 0 });
-  
-  //Carrega SWF
-  	var flashvars = {};
+	var flashvars = {};
 	flashvars.ai = "swf/AI-0107.swf";
 	flashvars.width = "640";
 	flashvars.height = "480";
@@ -51,11 +70,10 @@ $(document).ready(function(){
 	attributes.align = "middle";
 
 	swfobject.embedSWF("swf/AI-0107.swf", "ai-container", flashvars.width, flashvars.height, "10.0.0", "expressInstall.swf", flashvars, params, attributes);
-	ai = $(".ai")[0];
-	//alert(ai)
 	
-	
-	
+	 //Deixa a aba "Orientações" ativa no carregamento da atividade
+  $('#exercicios').tabs({ selected: 0 });
+
 	
   //INICIALIZA A ATIVIDADE 
   //applyAndSortFunctions();  
@@ -76,6 +94,36 @@ $(document).ready(function(){
   $('.next-button').button().click(habilitaVisual);
   $('.next-button3').button().click(habilitaVisual);
   $('.next-button4').button().click(habilitaVisual);
+}
+
+function checkCallbacks () {
+	var t2 = new Date().getTime();
+	ai = document.getElementById("ai");
+	try {
+		ai.doNothing();
+		message("swf ok!");
+		iniciaAtividade();
+	}
+	catch(error) {
+		++init_tries;
+		
+		if (init_tries > MAX_INIT_TRIES) {
+			alert("Carregamento falhou.");
+		}
+		else {
+			message("falhou");
+			setTimeout("checkCallbacks()", 1000);
+		}
+	}
+}
+
+function getAi(){
+	ai = document.getElementById("ai");
+	iniciaAtividade();
+}
+
+// Inicia a AI.
+function iniciaAtividade(){       
    
   //Configuração do botão inverter do primeiro e segundo exercício
   $('.invert-button').button().click(function(){
@@ -120,7 +168,7 @@ $(document).ready(function(){
   
   
   initAI();
-});
+}
 
 //Refresh da Página.
 function reloadPage()
@@ -167,14 +215,6 @@ function MostraTexto2()
   document.getElementById('frame04-4').style.display="block";
   $( ".next-button4-3" ).button({ disabled: true });
 }
-
-// Encerra a AI.
-$(window).unload(function (){
-  if (!completed) {
-    save2LMS();  
-    scorm.quit();
-  }
-});
 
 /*
  * Inicia a AI.
@@ -541,3 +581,12 @@ log.error = function (message) {
   }
 }
 
+// Mensagens de log
+function message (m) {
+	try {
+		if (debug) console.log(m);
+	}
+	catch (error) {
+		// Nada.
+	}
+}
