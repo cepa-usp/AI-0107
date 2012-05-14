@@ -1,1 +1,4 @@
-h1. Soma de Riemann
+h1. Um sistema de coordenadas incomum
+
+Nesta Atividade Interativa (AI) o usuário recebe um ponto P qualquer, mais um segmento AB, aleatoriamente escolhidos. Cabe a ele informar as coordenadas do ponto P no sistema de referência dos "pontos de vista de A e B", conforme explicado o §5 do capítulo 5 (tema 2, módulo 1) do material impresso da disciplina de _Fundamentos de Matemática I_ (PLC0001) .
+

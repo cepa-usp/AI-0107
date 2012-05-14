@@ -30,66 +30,67 @@ var funcao = [
   },
   ];
 
-//$(document).ready(initAI); // Inicia a AI. 
-//$(window).unload(uninitAI); // Encerra a AI.
-
 // Inicia a AI.
-$(document).ready(function(){ 
-
-//Deixa a aba "Orientações" ativa no carregamento da atividade
-$('#exercicios').tabs({ selected: 0 });
-
-/*
- * Configurações iniciais da Atividade Interativa (AI)
- */ 
-function initAI () {
-  // Carrega o SWF
-  //swfobject.embedSWF("AI-0083.swf", "ai-container", flashvars.width, flashvars.height, "10.0.0", "expressInstall.swf", flashvars, params, attributes);
-  //$('#ai-container').flash('AI-0083.swf');
-	flashMovie = $('#ai');
-
-	flashMovie.flash(
-		{
-			swf: 'AI-0107.swf',
-			width: 640,
-			height: 480,
-			play: false,
-			id: "atividade",
-		}
-	);
+$(document).ready(function(){       
 	
-	ai = document.getElementById("atividade");
-	
-	//INICIALIZA A ATIVIDADE
-	applyAndSortFunctions();
-	
+  //Deixa a aba "Orientações" ativa no carregamento da atividade
+  $('#exercicios').tabs({ selected: 0 });
   
-  // Ao pressionar numa aba (exercício), define aquele como exercício da tela.
+  //Carrega SWF
+  	var flashvars = {};
+	flashvars.ai = "swf/AI-0107.swf";
+	flashvars.width = "640";
+	flashvars.height = "480";
+	
+	var params = {};
+	params.menu = "false";
+	params.scale = "noscale";
 
+	var attributes = {};
+	attributes.id = "ai";
+	attributes.align = "middle";
+
+	swfobject.embedSWF("swf/AI-0107.swf", "ai-container", flashvars.width, flashvars.height, "10.0.0", "expressInstall.swf", flashvars, params, attributes);
+	ai = $(".ai")[0];
+	//alert(ai)
+	
+	
+	
+	
+  //INICIALIZA A ATIVIDADE 
+  //applyAndSortFunctions();  
+
+  // Habilita/desabilita a visualização da mediatriz
   $('#exercicios').tabs({
-      select: function(event, ui) {
-
-        screenExercise = ui.index;
-		configExercise(screenExercise);
-      }
+    select: function(event, ui) {
+    
+      screenExercise = ui.index;
+    
+      //if (screenExercise == 2) document.ggbApplet.setVisible('e', true);
+      //else document.ggbApplet.setVisible('e', false);
+    }
   });
-  
+
   // Configurações dos botões em geral
   $('.check-button').button().click(evaluateExercise);
   $('.next-button').button().click(habilitaVisual);
-  
+  $('.next-button3').button().click(habilitaVisual);
+  $('.next-button4').button().click(habilitaVisual);
+   
   //Configuração do botão inverter do primeiro e segundo exercício
   $('.invert-button').button().click(function(){
 	var value01 = $("input[type=text][id=U-ex1]").val();
 	var value02 = $("input[type=text][id=K-ex1]").val();
 	$("input[type=text][id=U-ex1]").val(value02);
 	$("input[type=text][id=K-ex1]").val(value01);
-
-
-
-
   });
-  
+    $('.invert-button').button().click(function(){
+	var value01 = $("input[type=text][id=U-ex2]").val();
+	var value02 = $("input[type=text][id=K-ex2]").val();
+	$("input[type=text][id=U-ex2]").val(value02);
+	$("input[type=text][id=K-ex2]").val(value01);
+  });
+ 
   //Configuração do radio button do primeiro e segundo exercicio
   $("input[name='choice']").change(function(){
 	if ($("input[name='choice']:checked").val() == 'inf'){
@@ -113,59 +114,72 @@ function initAI () {
 	}
 	});
 
+  $('#reiniciar').button().click(reloadPage);
+  $('#next-button4-2').button().click(MostraTexto);
+  $('#next-button4-3').button().click(MostraTexto2);
   
-  //initSCORM();
   
-  // (Re)abilita os exercícios já feitos e desabilita aqueles ainda por fazer.
-  if (completed) $('#exercicios').tabs("option", "disabled", []);
-  else {
-    for (i = 0; i <= N_EXERCISES; i++) {
-      if (i <= scormExercise) $('#exercicios').tabs("enable", i);
-      else $('#exercicios').tabs("disable", i);
-    }
-  }
+  initAI();
+});
 
+//Refresh da Página.
+function reloadPage()
+{
+	document.getElementById("limpa").reset();
+	
+	//reabilita caixas de seleção.
+	document.selects.ex5_select_01.disabled = false;
+	document.selects.ex5_select_02.disabled = false;
+	document.selects.ex5_select_03.disabled = false;
+	document.selects.ex5_select_04.disabled = false;
+    
+	//seta todos os options na primeira posição.
+	document.selects.ex5_select_01[0].selected = true;
+	document.selects.ex5_select_02[0].selected = true;
+	document.selects.ex5_select_03[0].selected = true;
+	document.selects.ex5_select_04[0].selected = true;
 
-
-
-
-
-
-
-
-  
-  // Posiciona o aluno no exercício da vez
-  screenExercise = scormExercise;
-  $('#exercicios').tabs("select", scormExercise - 1);
-  configExercise(scormExercise - 1);
-
-
-
-
-
-
-
-
+	window.location.reload() 
 }
 
-/*
- * Encerra a Atividade Interativa (AI)
- */ 
+//Verificar selects do Exercício 5 e mostra texto.
+function verificaSelect() {
+   	var valor1 = document.selects.ex5_select_01.value; 
+	var valor2 = document.selects.ex5_select_02.value;
+	var valor3 = document.selects.ex5_select_03.value;
+	var valor4 = document.selects.ex5_select_04.value;
+	if (valor1 == 'menor') {document.getElementById('feedback5-a').style.display="block";}
+	if (valor2 == 'maior') {document.getElementById('feedback5-b').style.display="block";}
+	if (valor3 == 'menor') {document.getElementById('feedback5-c').style.display="block";}	
+	if (valor4 == 'menor') {document.getElementById('feedback5-d').style.display="block";}
+} 
 
-function uninitAI () {
+//Mostra bloco do Exercício 4:Frame4-3
+function MostraTexto()
+{
+  document.getElementById('frame04-3').style.display="block";
+  $( ".next-button4-2" ).button({ disabled: true });
+}
+
+//Mostra bloco do Exercício 4:Frame4-4
+function MostraTexto2()
+{
+  document.getElementById('frame04-4').style.display="block";
+  $( ".next-button4-3" ).button({ disabled: true });
+}
+
+// Encerra a AI.
+$(window).unload(function (){
   if (!completed) {
-    save2LMS();
+    save2LMS();  
     scorm.quit();
   }
-}
-
+});
 
 /*
- * Inicia a conexão SCORM.
-
+ * Inicia a AI.
  */ 
-function initSCORM () {
-
+function initAI () {
  
   // Conecta-se ao LMS
   var connected = scorm.init();
@@ -188,7 +202,7 @@ function initSCORM () {
         scormExercise = 1;
         score = 0;
         
-        $("#completion-message").removeClass().addClass("completion-message-off");    
+        $("#completion-message").removeClass().addClass("completion-message-off");     
         break;
         
       // Continuando a AI...
@@ -215,19 +229,18 @@ function initSCORM () {
     if (isNaN(scormExercise)) scormExercise = 1;
     if (isNaN(score)) score = 0;
     
-    pingLMS();
-
-
-
-
-
+    // Posiciona o aluno no exercício da vez
+    screenExercise = scormExercise;
+    $('#exercicios').tabs("select", scormExercise - 1);  
+	    
+    //---------------- Particular da AI -------------------------
     
-
-
-
-
-
-
+    // Habilita/desabilita a visualização da mediatriz
+    //if (scormExercise == 2) document.ggbApplet.setVisible('e', true);
+   // else document.ggbApplet.setVisible('e', false);
+    //-----------------------------------------------------------
+   
+    pingLMS(); 
   }
   // A tentativa de conexão com o LMS falhou.
   else {
@@ -235,34 +248,34 @@ function initSCORM () {
     learnername = "";
     scormExercise = 1;
     score = 0;
-
+    log.error("A conexão com o Moodle falhou.");
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+  // (Re)abilita os exercícios já feitos e desabilita aqueles ainda por fazer.
+	/*if (completed) $('#exercicios').tabs("option", "disabled", []);
+	else {
+		$('#exercicios').tabs((scormExercise >= 1 ? "enable": "disable"), 1);
+		$('#exercicios').tabs((scormExercise >= 2 ? "enable": "disable"), 2);
+	}*/
+  
+  // (Re)abilita os exercícios já feitos e desabilita aqueles ainda por fazer.
+  //if (completed) $('#exercicios').tabs("option", "disabled", []);
+  //else {
+    //for (i = 0; i <= N_EXERCISES; i++) {
+      //if (i <= scormExercise) $('#exercicios').tabs("enable", i);
+      //else $('#exercicios').tabs("disable", i);
+    //}
+  //}
 }
 
 /*
  * Salva cmi.score.raw, cmi.location e cmi.completion_status no LMS
  */ 
 function save2LMS () {
- /* if (scorm.connection.isActive) {
+  if (scorm.connection.isActive) {
   
     // Salva no LMS a nota do aluno.
-    var success = scorm.set("cmi.score.raw", Math.round(score));
+    var success = scorm.set("cmi.score.raw", score);
   
     // Notifica o LMS que esta atividade foi concluída.
     success = scorm.set("cmi.completion_status", (completed ? "completed" : "incomplete"));
@@ -270,13 +283,11 @@ function save2LMS () {
     // Salva no LMS o exercício que deve ser exibido quando a AI for acessada novamente.
     success = scorm.set("cmi.location", scormExercise);
     
-    if (!success) 
+    if (!success) log.error("Falha ao enviar dados para o LMS.");
   }
   else {
-    
-  }*/
-
-
+    log.trace("A conexão com o LMS não está ativa.");
+  }
 }
 
 /*
@@ -289,33 +300,43 @@ function pingLMS () {
 }
 
 /*
+ * Avalia a resposta do aluno ao exercício atual. Esta função é executada sempre que ele pressiona "terminei".
+ */ 
+function evaluateExercise (event) {
+
+  //var currentScore = 0;
+  
+  /* INICIO TEMPORÁRIO ************************************************************/
+								//$(this).hide();
+								//nextExercise();
+  /* FIM TEMPORÁRIO ***************************************************************/
+  
+
+  // Avalia a nota
+  var currentScore = getScore(screenExercise);
+  
+  // Mostra a mensagem de erro/acerto
+  feedback(screenExercise, currentScore);
+ 
+  // Atualiza a nota do LMS (apenas se a questão respondida é aquela esperada pelo LMS)
+  if (!completed && screenExercise == scormExercise) {
+    score = Math.max(0, Math.min(score + currentScore, 100));
+    
+    if (scormExercise < N_EXERCISES) {
+      nextExercise();
+    }
+    else {
+      completed = true;
+      scormExercise = 1;
+      save2LMS();
+      scorm.quit();
+    }
+  }
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
  * Prepara o próximo exercício.
  */ 
 function nextExercise () {
@@ -324,19 +345,19 @@ function nextExercise () {
   $('#exercicios').tabs("enable", scormExercise);
 }
 
+
+
 /*
  * Habilita a visualização de outros "frames"
  */
-function habilitaVisual (event) {
+
+ function habilitaVisual (event) {
 	switch (screenExercise) {
 		
 		// Caso seja o ex1
 		case 1:
-			$("#frame02").removeClass().addClass("active visible");
-			$("#frame01").removeClass().addClass("desactive visible");
-			$(".invert-button").removeClass("invisible").addClass("visible");
-			$(".check-button").removeClass("invisible").addClass("visible");
-			$(".next-button").removeClass("visible").addClass("invisible");
+			document.getElementById('frame02').style.display="block";
+			$( ".next-button" ).button({ disabled: true });
 			ai.setVisible("LOWER_SUM",false);
 			ai.setVisible("UPPER_SUM",true);
 			ai.setVisible("AREA",false);
@@ -346,67 +367,33 @@ function habilitaVisual (event) {
 			$('input[name="choice"]')[1].checked = true;//altera posição do radio button
 			break;
 			
+		// Caso seja o ex3	 
 		case 3:
-			$(".frame02").removeClass().addClass("active visible");
-			$(".frame01").removeClass().addClass("desactive visible");
-			$(".check-button").removeClass("invisible").addClass("visible");
-			$(".next-button").removeClass("visible").addClass("invisible");
+			document.getElementById('frame03').style.display="block";
+			$( ".next-button3" ).button({ disabled: true });
 			break;
 			
+		// Caso seja o ex4	
 		case 4:
-			alert("TODO: Resto da questão 4.LINE:231");
+			document.getElementById('frame04-2').style.display="block";
+			$(".next-button4").button({ disabled: true });		
+			break;
 			
-			break;
 	}
 }
 
 /*
- * Configuração inicial do exercício
- */
-function configExercise(value){
-	switch (value) {
-		
-		// Caso seja o ex1
-		case 1:
-			ai.set("N", 4);
-			ai.setVisible("LOWER_SUM", true);
-			ai.setVisible("UPPER_SUM",false);
-			ai.setVisible("AREA",false);
-			ai.setVisible("PARALLELOGRAM_SUM",false);
-			ai.setVisible("MEAN_VALUE",false);
-			ai.setVisible("MONTE_CARLO",false);
-			$('input[name="choice"]')[0].checked = true;//altera posição do radio button
-			break;
-		// Caso seja o ex2
-		case 2:
-			ai.set("N", 6);
-			ai.setVisible("LOWER_SUM", true);
-			ai.setVisible("UPPER_SUM",false);
-			ai.setVisible("AREA",false);
-			ai.setVisible("PARALLELOGRAM_SUM",false);
-			ai.setVisible("MEAN_VALUE",false);
-			ai.setVisible("MONTE_CARLO",false);
-			$('input[name="choice"]')[0].checked = true;//altera posição do radio button
-			break;
-	}
-}
-/*
- * Avalia a resposta do aluno ao exercício atual. Esta função é executada sempre que ele pressiona "terminei".
-
+ * Avalia a nota do aluno num dado exercício.
  */ 
-function evaluateExercise (event) {
+function getScore (exercise) {
 
-
-  var currentScore = 0;
+  ans = 0;
+      
+  switch (exercise) {
   
-  /* INICIO TEMPORÁRIO ************************************************************/
-								$(this).hide();
-								nextExercise();
-  /* FIM TEMPORÁRIO ***************************************************************/
-  
-  switch (screenExercise) {
-	  // Avalia a nota do ex1
-	  case 1:
+    // Avalia a nota do exercício 1
+    case 1:
+ 
 		var success = true;
 		
 		var field = $("#U-ex1");
@@ -427,451 +414,130 @@ function evaluateExercise (event) {
 		}
 		break;
 		
-	  // Avalia a nota do ex1
+	  // Avalia a nota do ex2
 	  case 2:
+	  alert("Escrever código para avaliar exercício 2!")
 	  
 		break;
 		
-	  // Avalia a nota do ex1
+	  // Avalia a nota do ex3
 	  case 3:
+	  alert("Escrever código para avaliar exercício 3!")	  
 	  
 		break;
 		
-	  // Avalia a nota do ex1
+	  // Avalia a nota do ex4
 	  case 4:
+	  alert("Escrever código para avaliar exercício 4!")
 	  
 		break;
 		
-	  // Avalia a nota do ex1
+	  // Avalia a nota do ex5
 	  case 5:
-	  
+	  //verifica se tem algum select não selecionado. 
+	  var valor1 = document.selects.ex5_select_01.value;
+	  var valor2 = document.selects.ex5_select_02.value;
+	  var valor3 = document.selects.ex5_select_03.value;
+	  var valor4 = document.selects.ex5_select_04.value;
+	  if (valor1 != '' && valor2 != '' && valor3 != '' && valor4 != '' ) {
+	    //desabilita os selects após clique no botão 'terminei'
+		document.selects.ex5_select_01.disabled = true;
+		document.selects.ex5_select_02.disabled = true;
+		document.selects.ex5_select_03.disabled = true;
+		document.selects.ex5_select_04.disabled = true; 
+	  }else { alert ("Preencha todos os itens!") }
+	   	  	  	    
 		break;
 		
-	  // Avalia a nota do ex1
+	  // Avalia a nota do ex6
 	  case 6:
+	  alert("Escrever código para avaliar exercício 6!")
 	  
 		break;
-		
-	// Avalia a nota do ex1
-	  case 7:
-	  
-		break;
+
   }
-  /*switch (screenExercise) {
-
-
-
   
-    // Avalia a nota do exercício 1
-    // ----------------------------
+  return ans;
+}
+
+/*
+ * Exibe a mensagem de erro/acerto (feedback) do aluno para um dado exercício e nota (naquele exercício).
+ */ 
+function feedback (exercise, score) {
+                       
+  switch (exercise) {
+
+    // Feedback da resposta ao exercício 1
     case 1:
-    default: 
-      var user_answer = ai.getTeta();
-      var right_answer_1 = 10;
-      var succeeds_1 = Math.abs(user_answer - right_answer_1) < 0.1 * right_answer_1;
-    
-      currentScore += (succeeds_1 ? SCORE_UNIT : 0);
-
-
-
-
-    
-      user_answer = parseFloat($("#periodo-medido-angulos-pequenos").val().replace(",","."));
-      var right_answer_2 = ai.getPeriodo();
-      var succeeds_2 = !isNaN(user_answer) && (Math.abs(user_answer - right_answer_2) < 0.1 * right_answer_2);
-      
-      currentScore += (succeeds_2 ? SCORE_UNIT : 0);
-      
-      var feedback = "";
-      if (!succeeds_1) {
-        feedback += "<p>A amplitude deveria ser de 10º (já foi corrigida).</p>";
-        
-        ai.setTeta(10);
-        ai.playAnimation();
-      }
-      
-      if (!succeeds_2) {
-        feedback += "<p>O período correto é " + right_answer_2.toFixed(1).replace(".",",") + " s.</p>";
-      }
-      
-      if (succeeds_1 && succeeds_2) {
-        $("#feedback-ex1").html('Correto!');
-        $("#feedback-ex1").removeClass().addClass("right-answer");
-      }
-
-
-      else {
-        $("#feedback-ex1").html(feedback);
-        $("#feedback-ex1").removeClass().addClass("wrong-answer");
-
+    default:
+      if (score == 50) {
+          $('#message1').html('<p/>Resposta correta!').removeClass().addClass("right-answer");
+      } else {
+          $('#message1').html('<p/>Resposta incorreta.').removeClass().addClass("wrong-answer");
       }
       
       break;
-      
-    // Avalia a nota do exercício 2
-    // ----------------------------
+    
+    // Feedback da resposta ao exercício 2
     case 2:
-      var user_answer = parseFloat($("#periodo-calculado").val().replace(",","."));
-      var right_answer = 2 * Math.PI * Math.sqrt(ai.getComprimento() / ai.getGravidade());
-      var succeeds = !isNaN(user_answer) && (Math.abs(user_answer - right_answer) < 0.1 * right_answer);
-      
-      if (succeeds) {
-        currentScore = SCORE_UNIT;
-        
-        $("#feedback-ex2").html('Correto!');
-        $("#feedback-ex2").removeClass().addClass("right-answer");
-      } 
-      else {
-        currentScore = 0;
-        
-        $("#feedback-ex2").html("<p>O período correto é " + right_answer.toFixed(1).replace(".",",") + " s.</p>");
-        $("#feedback-ex2").removeClass().addClass("wrong-answer");
+      if (score == 50) {
+          $('#message2').html('<p/>Resposta correta!').removeClass().addClass("right-answer");
+      } else {
+          $('#message2').html('<p/>Resposta incorreta. O correto seria ????').removeClass().addClass("wrong-answer");
+           
       }
       
       break;
-      
-    // Avalia a nota do exercício 3
-    // ----------------------------
+	  
+    // Feedback da resposta ao exercício 3
     case 3:
-      var small_angle = 10 * Math.PI / 180
-      var user_answer = parseFloat($("#erro-maximo-angulos-pequenos").val().replace(",","."));
-      var right_answer = Math.abs(Math.sin(small_angle) - small_angle);
-      var succeeds = !isNaN(user_answer) && (Math.abs(Math.abs(user_answer) - right_answer) < 0.1 * right_answer);
+      //não tem feedback!
       
-      if (succeeds) {
-        currentScore = SCORE_UNIT;
-        
-        $("#feedback-ex3").html('Correto!');
-        $("#feedback-ex3").removeClass().addClass("right-answer");
-      } 
-      else {
-        currentScore = 0;
-        
-        $("#feedback-ex3").html('<p>O erro máximo é ' + right_answer.toFixed(4).replace(".",",") + " rad.</p>");
-        $("#feedback-ex3").removeClass().addClass("wrong-answer");
-      }
-      
-      break;
-      
-    // Avalia a nota do exercício 4
-    // ----------------------------
+      break;	  
+
+    // Feedback da resposta ao exercício 4
     case 4:
-      var user_answer = parseFloat($("#A-angulos-pequenos").val().replace(",","."));
-      var right_answer_1 = Math.abs(ai.getTeta() * Math.PI / 180);
-      var succeeds_1 = !isNaN(user_answer) && (Math.abs(Math.abs(user_answer) - right_answer_1) < 0.1 * right_answer_1);
-      
-      currentScore += (succeeds_1 ? SCORE_UNIT : 0);
-      
-      user_answer = parseFloat($("#omega-angulos-pequenos").val().replace(",","."));
-      var right_answer_2 = Math.sqrt(ai.getGravidade() / ai.getComprimento());
-      var succeeds_2 = !isNaN(user_answer) && (Math.abs(user_answer - right_answer_2) < 0.1 * right_answer_2);
-      
-      currentScore += (succeeds_2 ? SCORE_UNIT : 0);
-      
-      user_answer = parseFloat($("#fase-angulos-pequenos").val().replace(",","."));
-      var right_answer_3 = 0;
-      var succeeds_3 = !isNaN(user_answer) && (Math.abs(user_answer - right_answer_3) < 0.1);
-      
-      currentScore += (succeeds_3 ? SCORE_UNIT : 0);
-      
-      var feedback = "";
-      if (!succeeds_1) {
-        feedback += "<p>A amplitude (A) correta é " + right_answer_1.toFixed(2).replace(".",",") + " rad.</p>";        
-      }
-      
-      if (!succeeds_2) {
-        feedback += "<p>O ω correto é " + right_answer_2.toFixed(2).replace(".",",") + " rad/s.</p>";
-      }
-      
-      if (!succeeds_3) {
-        feedback += "<p>A fase (&phi;) correta é " + right_answer_3.toFixed(0).replace(".",",") + " rad.</p>";
-      }
-      
-      if (succeeds_1 && succeeds_2 && succeeds_3) {
-        $("#feedback-ex4").html('Correto!');
-        $("#feedback-ex4").removeClass().addClass("right-answer");
-      }
-      else {
-        $("#feedback-ex4").html(feedback);
-        $("#feedback-ex4").removeClass().addClass("wrong-answer");
-      }
-      
+	  //não tem feedback!
+	
       break;
-      
-    // Avalia a nota do exercício 5
-    // ----------------------------
+	  
+    // Feedback da resposta ao exercício 5
     case 5:
-      var user_answer = parseFloat($("#dot-theta").val().replace(",","."));
-      var right_answer_1 = Math.sqrt(ai.getGravidade() / ai.getComprimento()) * (ai.getTeta() * Math.PI / 180);
-      var succeeds_1 = !isNaN(user_answer) && (Math.abs(user_answer - right_answer_1) < 0.1 * right_answer_1);
-      
-      currentScore += (succeeds_1 ? SCORE_UNIT : 0);
-      
-      user_answer = parseFloat($("#velocidade-linear").val().replace(",","."));
-      var right_answer_2 = right_answer_1 * ai.getComprimento();
-      var succeeds_2 = !isNaN(user_answer) && (Math.abs(user_answer - right_answer_2) < 0.1 * right_answer_2);
-      
-      currentScore += (succeeds_2 ? SCORE_UNIT : 0);
-      
-      var feedback = "";
-      if (!succeeds_1) {
-        feedback += "<p>A velocidade angular correta é " + right_answer_1.toFixed(2).replace(".",",") + " rad/s.</p>";        
-      }
-      
-      if (!succeeds_2) {
-        feedback += "<p>A velocidade linear correta é " + right_answer_2.toFixed(2).replace(".",",") + " m/s.</p>";
-      }
-      
-      if (succeeds_1 && succeeds_2) {
-        $("#feedback-ex5").html('Correto!');
-        $("#feedback-ex5").removeClass().addClass("right-answer");
-      }
-      else {
-        $("#feedback-ex5").html(feedback);
-        $("#feedback-ex5").removeClass().addClass("wrong-answer");
-      }
-      
+	  //não tem feedback!
+	      
       break;
-      
-    // Avalia a nota do exercício 6
-    // ----------------------------
+	  
+    // Feedback da resposta ao exercício 6
     case 6:
-      var user_answer = parseFloat($("#max-theta").val().replace(",","."));
-      var right_answer_1 = Math.abs(ai.getTeta()) * Math.PI / 180;
-      var succeeds_1 = !isNaN(user_answer) && (Math.abs(user_answer - right_answer_1) < 0.1 * right_answer_1);
-      
-      currentScore += (succeeds_1 ? SCORE_UNIT : 0);
-      
-      var user_answer = parseFloat($("#max-vel-angular").val().replace(",","."));
-      var right_answer_2 = ai.getVelocidade();
-      var succeeds_2 = !isNaN(user_answer) && (Math.abs(user_answer - right_answer_2) < 0.1 * right_answer_2);
-      
-      currentScore += (succeeds_2 ? SCORE_UNIT : 0);
-      
-      var feedback = "";
-      if (!succeeds_1) {
-        feedback += "<p>O ângulo correto é " + right_answer_1.toFixed(2).replace(".",",") + " rad.</p>";        
+      if (score == 50) {
+          $('#message6').html('<p/>Resposta correta!').removeClass().addClass("right-answer");
+      } else {
+          $('#message6').html('<p/>Resposta incorreta. O correto seria [ESCREVER]').removeClass().addClass("wrong-answer");
+           
       }
       
-      if (!succeeds_2) {
-        feedback += "<p>A velocidade angular correta é " + right_answer_2.toFixed(2).replace(".",",") + " rad/s.</p>";
-      }
-      
-      if (succeeds_1 && succeeds_2) {
-        $("#feedback-ex6").html('Correto!');
-        $("#feedback-ex6").removeClass().addClass("right-answer");
-      }
-      else {
-        $("#feedback-ex6").html(feedback);
-        $("#feedback-ex6").removeClass().addClass("wrong-answer");
-      }
-      
-      break;
-      
-    // Avalia a nota do exercício 7
-    // ----------------------------
-    case 7:
-    */
-      /* theta(t) = A cos(omega t + phi) */
-     // var right_answer_2 = Math.sqrt(ai.getGravidade() / ai.getComprimento()); /* omega */
-     // var right_answer_3 = Math.atan(-3 / (5 * right_answer_2)); /* phi */
-     // var right_answer_1 = (5 * Math.PI / 180) / Math.cos(right_answer_3) /* A */
-    
-     /* var user_answer = parseFloat($("#A-angulos-pequenos-2").val().replace(",","."));
-      var succeeds_1 = !isNaN(user_answer) && (Math.abs(Math.abs(user_answer) - right_answer_1) < 0.1 * right_answer_1);
-      
-      currentScore += (succeeds_1 ? SCORE_UNIT : 0);
-      
-      user_answer = parseFloat($("#omega-angulos-pequenos-2").val().replace(",","."));
-      var succeeds_2 = !isNaN(user_answer) && (Math.abs(user_answer - right_answer_2) < 0.1 * right_answer_2);
-      
-      currentScore += (succeeds_2 ? SCORE_UNIT : 0);
-      
-      user_answer = parseFloat($("#fase-angulos-pequenos-2").val().replace(",","."));
-      var succeeds_3 = !isNaN(user_answer) && (Math.abs(user_answer - right_answer_3) < 0.1 * Math.abs(right_answer_3));
-      
-      currentScore += (succeeds_3 ? SCORE_UNIT : 0);
-      
-      var feedback = "";
-      if (!succeeds_1) {
-        feedback += "<p>A amplitude correta é " + right_answer_1.toFixed(2).replace(".",",") + " rad.</p>";        
-      }
-      
-      if (!succeeds_2) {
-        feedback += "<p>A velocidade angular correta é " + right_answer_2.toFixed(2).replace(".",",") + " rad/s.</p>";
-      }
-      
-      if (!succeeds_3) {
-        feedback += "<p>A fase correta é " + right_answer_3.toFixed(2).replace(".",",") + " rad.</p>";
-      }
-      
-      if (succeeds_1 && succeeds_2 && succeeds_3) {
-        $("#feedback-ex7").html('Correto!');
-        $("#feedback-ex7").removeClass().addClass("right-answer");
-      }
-      else {
-        $("#feedback-ex7").html(feedback);
-        $("#feedback-ex7").removeClass().addClass("wrong-answer");
-      }
-      
-      break;
-      
-    // Avalia a nota do exercício 8
-    // ----------------------------
-    case 8:
-      var user_answer = ai.getTeta();
-      var right_answer_1 = 90;
-      var succeeds_1 = Math.abs(user_answer - right_answer_1) < 0.1 * right_answer_1;
-    
-      currentScore += (succeeds_1 ? SCORE_UNIT : 0);
-    
-      user_answer = parseFloat($("#periodo-medido-angulos-grandes").val().replace(",","."));
-      var right_answer_2 = ai.getPeriodo();
-      var succeeds_2 = !isNaN(user_answer) && (Math.abs(user_answer - right_answer_2) < 0.1 * right_answer_2);
-      
-      currentScore += (succeeds_2 ? SCORE_UNIT : 0);
-      
-      var feedback = "";
-      if (!succeeds_1) {
-        feedback += "<p>A amplitude deveria ser de 90º (já foi corrigida).</p>";
-        
-        ai.setTeta(90);
-        ai.playAnimation();
-      }
-      
-      if (!succeeds_2) {
-        feedback += "<p>O período correto é " + right_answer_2.toFixed(1).replace(".",",") + " s.</p>";
-      }
-
-
-      
-      if (succeeds_1 && succeeds_2) {
-        $("#feedback-ex8").html('Correto!');
-        $("#feedback-ex8").removeClass().addClass("right-answer");
-      }
-
-
-      else {
-        $("#feedback-ex8").html(feedback);
-        $("#feedback-ex8").removeClass().addClass("wrong-answer");
-
-      }    
-    
-      break;
-      
-    // Avalia a nota do exercício 9
-    // ----------------------------
-    case 9:
-      var big_angle = 90 * Math.PI / 180
-      var small_angle = 10 * Math.PI / 180;
-      var user_answer = parseFloat($("#erro-maximo-angulos-grandes").val().replace(",","."));
-      var right_answer = Math.abs(Math.sin(big_angle) - big_angle) / Math.abs(Math.sin(small_angle) - small_angle);
-      var succeeds = !isNaN(user_answer) && (Math.abs(Math.abs(user_answer) - right_answer) < 0.1 * right_answer);
-      
-      if (succeeds) {
-        currentScore = SCORE_UNIT;
-        
-        $("#feedback-ex9").html('Correto!');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        $("#feedback-ex9").removeClass().addClass("right-answer");
-      } 
-      else {
-        currentScore = 0;
-        
-        $("#feedback-ex9").html('O erro para a oscilação de 90º é ' + Math.round(right_answer) + " vezes maior que para a oscilação de 10º.");
-        $("#feedback-ex9").removeClass().addClass("wrong-answer");
-      }
-      
-      break;
-      
-    // Avalia a nota do exercício 10
-    // -----------------------------
-    case 10:
-      var user_answer = $("#planeta").val();
-      var right_answer = "Júpiter";
-      var succeeds = levenshteinDistance(user_answer.toLowerCase(), right_answer.toLowerCase()) < 2;
-      
-      if (succeeds) {
-        currentScore = SCORE_UNIT;
-        
-        $("#feedback-ex10").html('Correto!');
-        $("#feedback-ex10").removeClass().addClass("right-answer");
-      } 
-      else {
-        currentScore = 0;
-        
-        $("#feedback-ex10").html('O planeta correto é ' + right_answer + ".");
-        $("#feedback-ex10").removeClass().addClass("wrong-answer");
-      }
-    
-
-
-
-
-
-
-
-
-
       break;
   }
-  
-  // Atualiza a nota do LMS (apenas se a questão respondida é aquela esperada pelo LMS)
-  if (!completed && screenExercise == scormExercise) {
-    score = Math.max(0, Math.min(Math.round(score + currentScore), 100));
-    
-    if (scormExercise < N_EXERCISES) {
-      nextExercise();
-    }
-    else {
-      completed = true;
-      scormExercise = 1;
-      save2LMS();
-      scorm.quit();
-    }
-  }*/
-  
 }
 
-function applyAndSortFunctions(){
-	sorteado = rand(0,funcao.length-1);
-	ai.setFunction(funcao[sorteado].f_display);
 
+var log = {};
 
-
-
-
-
-
-
-
-
+log.trace = function (message) {
+  if(window.console && window.console.firebug){
+    console.log(message);
+  }
+  else {
+    alert(message);
+  }  
 }
 
-function rand(l,u) // lower bound and upper bound
-{
-	return Math.floor((Math.random() * (u-l+1))+l);
-
-
-
-
-
-
-
+log.error = function (message) {
+  if( (window.console && window.console.firebug) || console){
+    console.error(message);
+  }
+  else {
+    alert(message);
+  }
 }
 
