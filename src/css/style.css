@@ -51,7 +51,7 @@ body {
   display: inline-block;
 }
 
-.wrong-answer {
+.wrong-answer  {
   font-family: Verdana, Helvetica, sans-serif;
   font-weight: bold;
   font-size: 15px;

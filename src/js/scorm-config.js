@@ -14,6 +14,9 @@ var init_tries = 0;
 var debug = true;
 var SCORE_UNIT = 100/6;
 var sorteado;//valor do indice da função
+var currentScore = 0;
+
+
 var funcao = [
   {
     f_display: "e <SUP> x </SUP>",
@@ -71,7 +74,7 @@ function configAi () {
 
 	swfobject.embedSWF("swf/AI-0107.swf", "ai-container", flashvars.width, flashvars.height, "10.0.0", "expressInstall.swf", flashvars, params, attributes);
 	
-	 //Deixa a aba "Orientações" ativa no carregamento da atividade
+  //Deixa a aba "Orientações" ativa no carregamento da atividade
   $('#exercicios').tabs({ selected: 0 });
 
 	
@@ -82,10 +85,9 @@ function configAi () {
   $('#exercicios').tabs({
     select: function(event, ui) {
     
-      screenExercise = ui.index;
-    
-      //if (screenExercise == 2) document.ggbApplet.setVisible('e', true);
-      //else document.ggbApplet.setVisible('e', false);
+      screenExercise = ui.index;  
+	  selectExercise(screenExercise);
+	  
     }
   });
 
@@ -94,6 +96,63 @@ function configAi () {
   $('.next-button').button().click(habilitaVisual);
   $('.next-button3').button().click(habilitaVisual);
   $('.next-button4').button().click(habilitaVisual);
+}
+
+function selectExercise (exercise) {
+	switch(exercise) {
+		case 1:
+			console.log("Configurando o exercício 1");
+			ai.setVisible("LOWER_SUM",true);
+			ai.setVisible("UPPER_SUM",false);
+			ai.setVisible("AREA",false);
+			ai.setVisible("PARALLELOGRAM_SUM",false);
+			ai.setVisible("MEAN_VALUE",false);
+			ai.setVisible("MONTE_CARLO",false);
+			break;
+			
+		case 2:
+		    //sorteia N no gráfico.
+			var n = Math.round(4 + 16 * Math.random());
+			ai.set("N", n);
+	
+			break;
+			
+		case 3:
+			console.log("Configurando o exercício 3");
+			break;
+			
+		case 4:
+			console.log("Configurando o exercício 4");
+			ai.setVisible("LOWER_SUM",false);
+			ai.setVisible("UPPER_SUM",false);
+			ai.setVisible("AREA",true);
+			ai.setVisible("PARALLELOGRAM_SUM",false);
+			ai.setVisible("MEAN_VALUE",true);
+			ai.setVisible("MONTE_CARLO",false);
+			ai.setVisible("M", true);
+			break;
+			
+		case 5:
+			console.log("Configurando o exercício 5");
+			break;
+		
+		case 6:
+			console.log("Configurando o exercício 6");
+			ai.setVisible("LOWER_SUM",false);
+			ai.setVisible("UPPER_SUM",false);
+			ai.setVisible("AREA",false);
+			ai.setVisible("PARALLELOGRAM_SUM",true);
+			ai.setVisible("MEAN_VALUE",false);
+			ai.setVisible("MONTE_CARLO",false);
+			ai.setVisible("A", false);
+			ai.setVisible("B", false);
+			ai.setVisible("M", false);
+			break;
+			
+		default:
+			console.log("Ops! Isto não devia tera acontecido!");
+			break;
+	}
 }
 
 function checkCallbacks () {
@@ -139,7 +198,7 @@ function iniciaAtividade(){
 	$("input[type=text][id=K-ex2]").val(value01);
   });
  
-  //Configuração do radio button do primeiro e segundo exercicio
+  //Configuração do radio button do primeiro exercicio
   $("input[name='choice']").change(function(){
 	if ($("input[name='choice']:checked").val() == 'inf'){
 		ai.setVisible("LOWER_SUM",true);
@@ -148,30 +207,61 @@ function iniciaAtividade(){
 		ai.setVisible("PARALLELOGRAM_SUM",false);
 		ai.setVisible("MEAN_VALUE",false);
 		ai.setVisible("MONTE_CARLO",false);
-		alert("TODO: configuração do swf para soma inferior. LINE 52");
 	}
 	else if ($("input[name='choice']:checked").val() == 'sup'){
-		// TODO: configuração do swf para soma superior
 		ai.setVisible("LOWER_SUM",false);
 		ai.setVisible("UPPER_SUM",true);
 		ai.setVisible("AREA",false);
 		ai.setVisible("PARALLELOGRAM_SUM",false);
 		ai.setVisible("MEAN_VALUE",false);
 		ai.setVisible("MONTE_CARLO",false);
-		alert("TODO: configuração do swf para soma superior. LINE 57");
 	}
 	});
+	
+  //Configuração do radio button do segundo exercicio
+  $("input[name='choice2']").change(function(){
+	if ($("input[name='choice2']:checked").val() == 'inf'){
+		ai.setVisible("LOWER_SUM",true);
+		ai.setVisible("UPPER_SUM",false);
+		ai.setVisible("AREA",false);
+		ai.setVisible("PARALLELOGRAM_SUM",false);
+		ai.setVisible("MEAN_VALUE",false);
+		ai.setVisible("MONTE_CARLO",false);
+	}
+	else if ($("input[name='choice2']:checked").val() == 'sup'){
+		ai.setVisible("LOWER_SUM",false);
+		ai.setVisible("UPPER_SUM",true);
+		ai.setVisible("AREA",false);
+		ai.setVisible("PARALLELOGRAM_SUM",false);
+		ai.setVisible("MEAN_VALUE",false);
+		ai.setVisible("MONTE_CARLO",false);
+	}
+	});	
 
-  $('#reiniciar').button().click(reloadPage);
+  //$('#reiniciar').button().click(reloadPage);
   $('#next-button4-2').button().click(MostraTexto);
   $('#next-button4-3').button().click(MostraTexto2);
-  
+  $('#next-button5-a').button().click(MostraTexto3);
+  $('#next-button5-b').button().click(MostraTexto4);
+  $('#next-button5-c').button().click(MostraTexto5);
   
   initAI();
 }
 
+//função para testar input nos boxes - apenas números, pontos e vírgulas.
+function checkNum(x)
+{  
+  if (!(/^\d+(\.\d+)?(\,\d+)?$/.test(x.value)))
+  {
+	alert("Verificar preenchimento dos campos! \nLetras não são permitidas.");
+	x.focus();
+	return false;
+  }
+  return true;
+}
+
 //Refresh da Página.
-function reloadPage()
+/*function reloadPage()
 {
 	document.getElementById("limpa").reset();
 	
@@ -188,10 +278,10 @@ function reloadPage()
 	document.selects.ex5_select_04[0].selected = true;
 
 	window.location.reload() 
-}
+}*/
 
 //Verificar selects do Exercício 5 e mostra texto.
-function verificaSelect() {
+/*function verificaSelect() {
    	var valor1 = document.selects.ex5_select_01.value; 
 	var valor2 = document.selects.ex5_select_02.value;
 	var valor3 = document.selects.ex5_select_03.value;
@@ -200,7 +290,7 @@ function verificaSelect() {
 	if (valor2 == 'maior') {document.getElementById('feedback5-b').style.display="block";}
 	if (valor3 == 'menor') {document.getElementById('feedback5-c').style.display="block";}	
 	if (valor4 == 'menor') {document.getElementById('feedback5-d').style.display="block";}
-} 
+} */
 
 //Mostra bloco do Exercício 4:Frame4-3
 function MostraTexto()
@@ -216,6 +306,25 @@ function MostraTexto2()
   $( ".next-button4-3" ).button({ disabled: true });
 }
 
+function MostraTexto3()
+{
+  document.getElementById('ex5b').style.display="block";
+  $( ".next-button5-a" ).button({ disabled: true });
+}
+
+function MostraTexto4()
+{
+  document.getElementById('ex5c').style.display="block";
+  $( ".next-button5-b" ).button({ disabled: true });
+}
+
+function MostraTexto5()
+{
+  document.getElementById('ex5d').style.display="block";
+  $( ".next-button5-c" ).button({ disabled: true });
+} 
+ 
+ 
 /*
  * Inicia a AI.
  */ 
@@ -344,7 +453,7 @@ function pingLMS () {
  */ 
 function evaluateExercise (event) {
 
-  //var currentScore = 0;
+  
   
   /* INICIO TEMPORÁRIO ************************************************************/
 								//$(this).hide();
@@ -354,7 +463,7 @@ function evaluateExercise (event) {
 
   // Avalia a nota
   var currentScore = getScore(screenExercise);
-  
+  console.log(screenExercise + "\t" + currentScore);
   // Mostra a mensagem de erro/acerto
   feedback(screenExercise, currentScore);
  
@@ -405,6 +514,7 @@ function nextExercise () {
 			ai.setVisible("MEAN_VALUE",false);
 			ai.setVisible("MONTE_CARLO",false);
 			$('input[name="choice"]')[1].checked = true;//altera posição do radio button
+			
 			break;
 			
 		// Caso seja o ex3	 
@@ -422,6 +532,12 @@ function nextExercise () {
 	}
 }
 
+var TOLERANCE = 0.01;
+
+function evaluate (user_answer, right_answer, tolerance) {
+	return Math.abs(user_answer - right_answer) <= tolerance * Math.abs(right_answer);
+}
+
 /*
  * Avalia a nota do aluno num dado exercício.
  */ 
@@ -433,41 +549,127 @@ function getScore (exercise) {
   
     // Avalia a nota do exercício 1
     case 1:
- 
-		var success = true;
 		
 		var field = $("#U-ex1");
 		var field2 = $("#K-ex1")
-		
 		var user_answer = parseFloat(field.val().replace(",", "."));
 		var user_answer2 = parseFloat(field2.val().replace(",", "."));
+	
+		//verifica o preenchimento dos campos - vazio
+		var campo1 = field.val();
+		var campo2 = field2.val();
 		
-		var right_answer = ai.get("LOWER_SUM");
-		var right_answer2 = ai.get("UPPER_SUM");
+		if (campo1 != ''){
+		alert('alohaa');
+		
+		document.getdata1.teste.disabled=false;}
+		if (campo1 == '' || campo2 == '')
+		{
+			alert('Preencha os campos de resposta!');
+        }else{
+		
+		//if (campo1 != '' && campo2 != '') {
+		alert('hoy');
+			//desabilitar caixas de texto
+			//botão inverter quando clicar em terminei
+		
+				var right_answer = ai.get("LOWER_SUM");
+				var right_answer2 = ai.get("UPPER_SUM");
+				console.log(user_answer);
+				console.log(user_answer2);
+				console.log(right_answer);
+				console.log(right_answer2);
+				console.log(evaluate(user_answer, right_answer, TOLERANCE));
+				console.log(evaluate(user_answer2, right_answer2, TOLERANCE));
 				
-		if (Math.abs(user_answer - right_answer) <= 0.01 * Math.abs(right_answer) && Math.abs(user_answer2 - right_answer2) <= 0.01 * Math.abs(right_answer2)) {
-			currentScore += SCORE_UNIT;
+				if (evaluate(user_answer, right_answer, TOLERANCE)) {
+					ans += 50;
+					field.css("background-color", "#558855");
+				}
+				else {
+					field.css("background-color", "#FF0000");
+				}
+
+				if (evaluate(user_answer2, right_answer2, TOLERANCE)) {
+					ans += 50;
+					field2.css("background-color", "#008800");
+				}
+				else {
+					field2.css("background-color", "#FF0000");
+				}
+		    
 		}
-		else {
-			success = false;
-			field.css("background-color", "#CC3333");
-		}
+		
 		break;
 		
 	  // Avalia a nota do ex2
 	  case 2:
-	  alert("Escrever código para avaliar exercício 2!")
+	  
+		var user_answer_1 = parseFloat($("#N-ex2").val().replace(",","."));
+		var user_answer_2 = parseFloat($("#lower-sum-ex2").val().replace(",","."));
+		var user_answer_3 = parseFloat($("#upper-sum-ex2").val().replace(",","."));
+		
+		//verifica o preenchimento dos campos - vazio
+		var field = $("#N-ex2").val();
+		var field1 = $("#lower-sum-ex2").val();
+		var field2 = $("#upper-sum-ex2").val();
+		if (field == ''  || field1 == '' || field2 == "") { alert('Preencha todos os campos de resposta!');}
+		
+		var right_answer_1 = ai.get("N");
+		var right_answer_2 = ai.get("LOWER_SUM");
+		var right_answer_3 = ai.get("UPPER_SUM");
+		
+		if (evaluate(user_answer_1, right_answer_1, TOLERANCE)) {
+			ans += 100 / 3;
+			$("#N-ex2").css("background-color", "#008800");
+		}
+		else {
+			$("#N-ex2").css("background-color", "#FF0000");
+		}
+		
+		if (evaluate(user_answer_2, right_answer_2, TOLERANCE)) {
+			ans += 100 / 3;
+			$("#lower-sum-ex2").css("background-color", "#008800");
+		}
+		else {
+			$("#lower-sum-ex2").css("background-color", "#FF0000");		
+		}
+		
+		if (evaluate(user_answer_3, right_answer_3, TOLERANCE)) {
+			ans += 100 / 3;
+			$("#upper-sum-ex2").css("background-color", "#008800");
+		}
+		else {
+			$("#upper-sum-ex2").css("background-color", "#FF0000");
+		}
+		
+		ans = Math.round(ans);
+		
 	  
 		break;
 		
 	  // Avalia a nota do ex3
 	  case 3:
-	  alert("Escrever código para avaliar exercício 3!")	  
+	  	var user_answer_1 = parseFloat($("#U-ex3").val().replace(",","."));
+						
+		var right_answer_1 = ai.get("AREA");
+		
+		if (evaluate(user_answer_1, right_answer_1, TOLERANCE)) {
+			ans += 100;
+			$("#U-ex3").css("background-color", "#008800");
+		}
+		else {
+			$("#U-ex3").css("background-color", "#FF0000");
+		}
+		
+		ans = Math.round(ans);
 	  
 		break;
 		
 	  // Avalia a nota do ex4
 	  case 4:
+		//console.log("M = " + ai.f(ai.get("M")));
+		//console.log("mean value = " + ai.get("MEAN_VALUE"));		
 	  alert("Escrever código para avaliar exercício 4!")
 	  
 		break;
@@ -491,7 +693,20 @@ function getScore (exercise) {
 		
 	  // Avalia a nota do ex6
 	  case 6:
-	  alert("Escrever código para avaliar exercício 6!")
+	  	var user_answer_1 = parseFloat($("#X-ex6").val().replace(",","."));
+						
+		var right_answer_1 = ai.get("PARALELOGRAM_SUM");
+		
+		
+		if (evaluate(user_answer_1, right_answer_1, TOLERANCE)) {
+			ans += 100;
+			$("#X-ex6").css("background-color", "#008800");
+		}
+		else {
+			$("#X-ex6").css("background-color", "#FF0000");
+		}
+		
+		ans = Math.round(ans);
 	  
 		break;
 
@@ -508,12 +723,16 @@ function feedback (exercise, score) {
   switch (exercise) {
 
     // Feedback da resposta ao exercício 1
-    case 1:
-    default:
-      if (score == 50) {
-          $('#message1').html('<p/>Resposta correta!').removeClass().addClass("right-answer");
+    case 1:	
+      if (score == 100) {
+          $('#message1').html('Resposta correta!').removeClass().addClass("right-answer");
       } else {
-          $('#message1').html('<p/>Resposta incorreta.').removeClass().addClass("wrong-answer");
+	  
+			var lower_sum = Number(ai.get("LOWER_SUM")).toFixed(2).replace(".", ",");	
+			var upper_sum = Number(ai.get("UPPER_SUM")).toFixed(2).replace(".", ",");
+		
+	      
+          $('#message1').html('O correto seria: soma inferior igual a ' + lower_sum + ' e soma superior igual a ' + upper_sum +'.').removeClass().addClass("wrong-answer");
       }
       
       break;
@@ -531,7 +750,13 @@ function feedback (exercise, score) {
 	  
     // Feedback da resposta ao exercício 3
     case 3:
-      //não tem feedback!
+      if (score == 100) {
+          $('#message3').html('Resposta correta!').removeClass().addClass("right-answer");
+      } else {
+		  var resposta = Number(ai.get("AREA")).toFixed(2).replace(".", ",");	
+			      
+          $('#message3').html('O correto seria ' + resposta +'.').removeClass().addClass("wrong-answer");
+      }
       
       break;	  
 
@@ -542,18 +767,33 @@ function feedback (exercise, score) {
       break;
 	  
     // Feedback da resposta ao exercício 5
-    case 5:
-	  //não tem feedback!
+    case 5:   	
+	
+	var valor1 = document.selects.ex5_select_01.value; 
+	var valor2 = document.selects.ex5_select_02.value;
+	var valor3 = document.selects.ex5_select_03.value;
+	var valor4 = document.selects.ex5_select_04.value;
+	if (valor1 == 'menor') {document.getElementById('feedback5-a').style.display="block";}
+	if (valor2 == 'maior') {document.getElementById('feedback5-b').style.display="block";}
+	if (valor3 == 'menor') {document.getElementById('feedback5-c').style.display="block";}	
+	if (valor4 == 'menor') {document.getElementById('feedback5-d').style.display="block";}
+      if (score == 100) {
+          $('#message5').html('Resposta correta!').removeClass().addClass("right-answer");
+      } else {      
+          $('#message5').html('O correto seria: <br>a)> <br> b)< <br>c)> <br>d)> ').removeClass().addClass("wrong-answer");
+      }
+	  
 	      
       break;
 	  
     // Feedback da resposta ao exercício 6
     case 6:
-      if (score == 50) {
-          $('#message6').html('<p/>Resposta correta!').removeClass().addClass("right-answer");
+      if (score == 100) {
+          $('#message6').html('Resposta correta!').removeClass().addClass("right-answer");
       } else {
-          $('#message6').html('<p/>Resposta incorreta. O correto seria [ESCREVER]').removeClass().addClass("wrong-answer");
-           
+		  var resposta = Number(ai.get("PARALELOGRAM_SUM")).toFixed(2).replace(".", ",");	
+			      
+          $('#message6').html('O correto seria ' + resposta +'.').removeClass().addClass("wrong-answer");
       }
       
       break;
@@ -590,3 +830,4 @@ function message (m) {
 		// Nada.
 	}
 }
+
