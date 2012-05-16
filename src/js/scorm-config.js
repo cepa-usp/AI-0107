@@ -15,7 +15,7 @@ var debug = true;
 var SCORE_UNIT = 100/6;
 var sorteado;//valor do indice da função
 var currentScore = 0;
-
+var exOk;
 
 var funcao = [
   {
@@ -191,11 +191,11 @@ function iniciaAtividade(){
 	$("input[type=text][id=U-ex1]").val(value02);
 	$("input[type=text][id=K-ex1]").val(value01);
   });
-    $('.invert-button').button().click(function(){
-	var value01 = $("input[type=text][id=U-ex2]").val();
-	var value02 = $("input[type=text][id=K-ex2]").val();
-	$("input[type=text][id=U-ex2]").val(value02);
-	$("input[type=text][id=K-ex2]").val(value01);
+    $('.invert-button2').button().click(function(){
+	var value01 = $("input[type=text][id=lower-sum-ex2]").val();
+	var value02 = $("input[type=text][id=upper-sum-ex2]").val();
+	$("input[type=text][id=lower-sum-ex2]").val(value02);
+	$("input[type=text][id=upper-sum-ex2]").val(value01);
   });
  
   //Configuração do radio button do primeiro exercicio
@@ -251,10 +251,10 @@ function iniciaAtividade(){
 //função para testar input nos boxes - apenas números, pontos e vírgulas.
 function checkNum(x)
 {  
-  if (!(/^\d+(\.\d+)?(\,\d+)?$/.test(x.value)))
+  if (!(/^\d+(\.\d+)?(\,\d+)?$/.test(x)))
   {
-	alert("Verificar preenchimento dos campos! \nLetras não são permitidas.");
-	x.focus();
+	//alert("Verificar preenchimento dos campos! \nLetras não são permitidas.");
+	//x.focus();
 	return false;
   }
   return true;
@@ -401,11 +401,16 @@ function initAI () {
   }
   
   // (Re)abilita os exercícios já feitos e desabilita aqueles ainda por fazer.
-	/*if (completed) $('#exercicios').tabs("option", "disabled", []);
+	if (completed) $('#exercicios').tabs("option", "disabled", []);
 	else {
 		$('#exercicios').tabs((scormExercise >= 1 ? "enable": "disable"), 1);
 		$('#exercicios').tabs((scormExercise >= 2 ? "enable": "disable"), 2);
-	}*/
+		$('#exercicios').tabs((scormExercise >= 3 ? "enable": "disable"), 3);
+		$('#exercicios').tabs((scormExercise >= 4 ? "enable": "disable"), 4);
+		$('#exercicios').tabs((scormExercise >= 5 ? "enable": "disable"), 5);
+		$('#exercicios').tabs((scormExercise >= 6 ? "enable": "disable"), 6);
+		
+	}
   
   // (Re)abilita os exercícios já feitos e desabilita aqueles ainda por fazer.
   //if (completed) $('#exercicios').tabs("option", "disabled", []);
@@ -461,8 +466,12 @@ function evaluateExercise (event) {
   /* FIM TEMPORÁRIO ***************************************************************/
   
 
+
+  
+  
   // Avalia a nota
   var currentScore = getScore(screenExercise);
+  if(exOk == false) return;
   console.log(screenExercise + "\t" + currentScore);
   // Mostra a mensagem de erro/acerto
   feedback(screenExercise, currentScore);
@@ -481,6 +490,9 @@ function evaluateExercise (event) {
       scorm.quit();
     }
   }
+  
+  
+  
 }
 
 
@@ -493,7 +505,6 @@ function nextExercise () {
   
   $('#exercicios').tabs("enable", scormExercise);
 }
-
 
 
 /*
@@ -544,77 +555,92 @@ function evaluate (user_answer, right_answer, tolerance) {
 function getScore (exercise) {
 
   ans = 0;
-      
+  exOk = true;
   switch (exercise) {
   
     // Avalia a nota do exercício 1
     case 1:
-		
+		var value01 = $("input[type=text][id=U-ex1]").val();
+		var value02 = $("input[type=text][id=K-ex1]").val();
+		if (value01 == '' || value02 == '' ){ 
+			alert('Preencher todos os campos!');
+			exOk = false;
+			return;
+		}else if (!checkNum(value01) || !checkNum(value02)){
+			alert('Não é permitido letras!');
+			exOk = false;
+			return;
+		}
+  
 		var field = $("#U-ex1");
-		var field2 = $("#K-ex1")
+		var field2 = $("#K-ex1");
 		var user_answer = parseFloat(field.val().replace(",", "."));
 		var user_answer2 = parseFloat(field2.val().replace(",", "."));
-	
-		//verifica o preenchimento dos campos - vazio
-		var campo1 = field.val();
-		var campo2 = field2.val();
 		
-		if (campo1 != ''){
-		alert('alohaa');
+		//desabilitar caixas de texto e botão Inverter.
+		$( ".invert-button" ).button({ disabled: true });
+		$( "#U-ex1" ).attr("disabled",true);
+        $( "#K-ex1" ).attr("disabled",true);
+		$( "#radio1" ).attr("disabled",true);
+		$( "#radio2" ).attr("disabled",true);
 		
-		document.getdata1.teste.disabled=false;}
-		if (campo1 == '' || campo2 == '')
-		{
-			alert('Preencha os campos de resposta!');
-        }else{
-		
-		//if (campo1 != '' && campo2 != '') {
-		alert('hoy');
-			//desabilitar caixas de texto
-			//botão inverter quando clicar em terminei
-		
-				var right_answer = ai.get("LOWER_SUM");
-				var right_answer2 = ai.get("UPPER_SUM");
-				console.log(user_answer);
-				console.log(user_answer2);
-				console.log(right_answer);
-				console.log(right_answer2);
-				console.log(evaluate(user_answer, right_answer, TOLERANCE));
-				console.log(evaluate(user_answer2, right_answer2, TOLERANCE));
+		var right_answer = ai.get("LOWER_SUM");
+		var right_answer2 = ai.get("UPPER_SUM");
+		console.log(user_answer);
+		console.log(user_answer2);
+		console.log(right_answer);
+		console.log(right_answer2);
+		console.log(evaluate(user_answer, right_answer, TOLERANCE));
+		console.log(evaluate(user_answer2, right_answer2, TOLERANCE));
 				
-				if (evaluate(user_answer, right_answer, TOLERANCE)) {
-					ans += 50;
-					field.css("background-color", "#558855");
-				}
-				else {
-					field.css("background-color", "#FF0000");
-				}
+		if (evaluate(user_answer, right_answer, TOLERANCE)) {
+			ans += 50;
+			field.css("background-color", "#558855");
+		}
+		else {
+			field.css("background-color", "#FF0000");
+		}
 
-				if (evaluate(user_answer2, right_answer2, TOLERANCE)) {
-					ans += 50;
-					field2.css("background-color", "#008800");
-				}
-				else {
-					field2.css("background-color", "#FF0000");
-				}
-		    
+		if (evaluate(user_answer2, right_answer2, TOLERANCE)) {
+			ans += 50;
+			field2.css("background-color", "#008800");
+		}
+		else {
+			field2.css("background-color", "#FF0000");
 		}
 		
 		break;
 		
 	  // Avalia a nota do ex2
 	  case 2:
+	    
+		//Verifica se existe algum campo vazio.
+		var value03 = $("input[type=text][id=N-ex2]").val();
+		var value04 = $("input[type=text][id=lower-sum-ex2]").val();
+		var value05 = $("input[type=text][id=upper-sum-ex2]").val();
+ 
+		if(value03 == '' || value04 == '' || value05 == '') {
+			alert ('Preencher todos os campos!');
+			exOk = false;
+			return;
+		}else if (!checkNum(value03) || !checkNum(value04) || !checkNum(value05)){
+			alert('Não é permitido letras!');
+			exOk = false;
+			return;
+		}
 	  
+  		//desabilitar caixas de texto e botão Inverter.
+		$( ".invert-button2" ).button({ disabled: true });
+		$( "#N-ex2" ).attr("disabled",true);
+		$( "#upper-sum-ex2" ).attr("disabled",true);
+        $( "#lower-sum-ex2" ).attr("disabled",true);
+		$( "#radio2-1" ).attr("disabled",true);
+		$( "#radio2-2" ).attr("disabled",true);
+		
 		var user_answer_1 = parseFloat($("#N-ex2").val().replace(",","."));
 		var user_answer_2 = parseFloat($("#lower-sum-ex2").val().replace(",","."));
 		var user_answer_3 = parseFloat($("#upper-sum-ex2").val().replace(",","."));
-		
-		//verifica o preenchimento dos campos - vazio
-		var field = $("#N-ex2").val();
-		var field1 = $("#lower-sum-ex2").val();
-		var field2 = $("#upper-sum-ex2").val();
-		if (field == ''  || field1 == '' || field2 == "") { alert('Preencha todos os campos de resposta!');}
-		
+	
 		var right_answer_1 = ai.get("N");
 		var right_answer_2 = ai.get("LOWER_SUM");
 		var right_answer_3 = ai.get("UPPER_SUM");
@@ -668,9 +694,9 @@ function getScore (exercise) {
 		
 	  // Avalia a nota do ex4
 	  case 4:
-		//console.log("M = " + ai.f(ai.get("M")));
-		//console.log("mean value = " + ai.get("MEAN_VALUE"));		
-	  alert("Escrever código para avaliar exercício 4!")
+
+	  var right_answer_1 = ai.get("FUNCTION_VALUE", ai.get("M"));
+		//alert(right_answer_1);
 	  
 		break;
 		
@@ -711,7 +737,6 @@ function getScore (exercise) {
 		break;
 
   }
-  
   return ans;
 }
 
@@ -739,13 +764,15 @@ function feedback (exercise, score) {
     
     // Feedback da resposta ao exercício 2
     case 2:
-      if (score == 50) {
-          $('#message2').html('<p/>Resposta correta!').removeClass().addClass("right-answer");
+      if (score == 100) {
+          $('#message2').html('Resposta correta!').removeClass().addClass("right-answer");
       } else {
-          $('#message2').html('<p/>Resposta incorreta. O correto seria ????').removeClass().addClass("wrong-answer");
-           
+			var N_number = Number(ai.get("N")).toFixed(2).replace(".", ",");	
+			var lower_sum = Number(ai.get("LOWER_SUM")).toFixed(2).replace(".", ",");	
+			var upper_sum = Number(ai.get("UPPER_SUM")).toFixed(2).replace(".", ",");
+					      
+          $('#message2').html('O correto seria: para N= ' + N_number + ' o campo 1 é igual a ' + lower_sum + ' e o campo 2 é ' + upper_sum +'.').removeClass().addClass("wrong-answer");
       }
-      
       break;
 	  
     // Feedback da resposta ao exercício 3
@@ -782,8 +809,7 @@ function feedback (exercise, score) {
       } else {      
           $('#message5').html('O correto seria: <br>a)> <br> b)< <br>c)> <br>d)> ').removeClass().addClass("wrong-answer");
       }
-	  
-	      
+	   
       break;
 	  
     // Feedback da resposta ao exercício 6
