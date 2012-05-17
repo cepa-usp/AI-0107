@@ -381,14 +381,7 @@ function initAI () {
     // Posiciona o aluno no exercício da vez
     screenExercise = scormExercise;
     $('#exercicios').tabs("select", scormExercise - 1);  
-	    
-    //---------------- Particular da AI -------------------------
-    
-    // Habilita/desabilita a visualização da mediatriz
-    //if (scormExercise == 2) document.ggbApplet.setVisible('e', true);
-   // else document.ggbApplet.setVisible('e', false);
-    //-----------------------------------------------------------
-   
+	       
     pingLMS(); 
   }
   // A tentativa de conexão com o LMS falhou.
@@ -411,15 +404,6 @@ function initAI () {
 		$('#exercicios').tabs((scormExercise >= 6 ? "enable": "disable"), 6);
 		
 	}
-  
-  // (Re)abilita os exercícios já feitos e desabilita aqueles ainda por fazer.
-  //if (completed) $('#exercicios').tabs("option", "disabled", []);
-  //else {
-    //for (i = 0; i <= N_EXERCISES; i++) {
-      //if (i <= scormExercise) $('#exercicios').tabs("enable", i);
-      //else $('#exercicios').tabs("disable", i);
-    //}
-  //}
 }
 
 /*
@@ -457,17 +441,6 @@ function pingLMS () {
  * Avalia a resposta do aluno ao exercício atual. Esta função é executada sempre que ele pressiona "terminei".
  */ 
 function evaluateExercise (event) {
-
-  
-  
-  /* INICIO TEMPORÁRIO ************************************************************/
-								//$(this).hide();
-								//nextExercise();
-  /* FIM TEMPORÁRIO ***************************************************************/
-  
-
-
-  
   
   // Avalia a nota
   var currentScore = getScore(screenExercise);
@@ -490,11 +463,7 @@ function evaluateExercise (event) {
       scorm.quit();
     }
   }
-  
-  
-  
 }
-
 
 
 /*
@@ -587,7 +556,7 @@ function getScore (exercise) {
 		var right_answer = ai.get("LOWER_SUM");
 		var right_answer2 = ai.get("UPPER_SUM");
 		console.log(user_answer);
-		console.log(user_answer2);
+	    console.log(user_answer2);
 		console.log(right_answer);
 		console.log(right_answer2);
 		console.log(evaluate(user_answer, right_answer, TOLERANCE));
@@ -595,10 +564,10 @@ function getScore (exercise) {
 				
 		if (evaluate(user_answer, right_answer, TOLERANCE)) {
 			ans += 50;
-			field.css("background-color", "#558855");
+			field.css("background-color", "#008800");
 		}
 		else {
-			field.css("background-color", "#FF0000");
+			field.css("background-color", "#CD5C5C");
 		}
 
 		if (evaluate(user_answer2, right_answer2, TOLERANCE)) {
@@ -606,7 +575,7 @@ function getScore (exercise) {
 			field2.css("background-color", "#008800");
 		}
 		else {
-			field2.css("background-color", "#FF0000");
+			field2.css("background-color", "#CD5C5C");
 		}
 		
 		break;
@@ -650,7 +619,7 @@ function getScore (exercise) {
 			$("#N-ex2").css("background-color", "#008800");
 		}
 		else {
-			$("#N-ex2").css("background-color", "#FF0000");
+			$("#N-ex2").css("background-color", "#CD5C5C");
 		}
 		
 		if (evaluate(user_answer_2, right_answer_2, TOLERANCE)) {
@@ -658,7 +627,7 @@ function getScore (exercise) {
 			$("#lower-sum-ex2").css("background-color", "#008800");
 		}
 		else {
-			$("#lower-sum-ex2").css("background-color", "#FF0000");		
+			$("#lower-sum-ex2").css("background-color", "#CD5C5C");		
 		}
 		
 		if (evaluate(user_answer_3, right_answer_3, TOLERANCE)) {
@@ -666,7 +635,7 @@ function getScore (exercise) {
 			$("#upper-sum-ex2").css("background-color", "#008800");
 		}
 		else {
-			$("#upper-sum-ex2").css("background-color", "#FF0000");
+			$("#upper-sum-ex2").css("background-color", "#CD5C5C");
 		}
 		
 		ans = Math.round(ans);
@@ -685,7 +654,7 @@ function getScore (exercise) {
 			$("#U-ex3").css("background-color", "#008800");
 		}
 		else {
-			$("#U-ex3").css("background-color", "#FF0000");
+			$("#U-ex3").css("background-color", "#CD5C5C");
 		}
 		
 		ans = Math.round(ans);
@@ -695,9 +664,19 @@ function getScore (exercise) {
 	  // Avalia a nota do ex4
 	  case 4:
 
-	  var right_answer_1 = ai.get("FUNCTION_VALUE", ai.get("M"));
-		//alert(right_answer_1);
-	  
+	  //Colocar tolerancia de 10% para esse!
+		var user_answer = ai.get("FUNCTION_VALUE", ai.get("M"));
+	    var right_answer_1 = ai.get("MEAN_VALUE");
+		
+		if (evaluate(user_answer, right_answer_1, TOLERANCE)) {
+			ans += 100;
+			
+		}else { 
+			ai.set("M",ai.get("FUNCTION_INVERSE", right_answer_1));
+		}
+	    
+		ans = Math.round(ans);
+		
 		break;
 		
 	  // Avalia a nota do ex5
@@ -713,7 +692,40 @@ function getScore (exercise) {
 		document.selects.ex5_select_02.disabled = true;
 		document.selects.ex5_select_03.disabled = true;
 		document.selects.ex5_select_04.disabled = true; 
-	  }else { alert ("Preencha todos os itens!") }
+	  }
+	  else { 
+		alert ("Preencha todos os itens!") 
+	  }
+		
+	  //Como será calculado o score do exercício 5?
+	  if (valor1 == 'menor') {
+		document.getElementById('feedback5-a').style.display="block";
+	  }
+		
+	  if (evaluate(user_answer_2, right_answer_2, TOLERANCE)) {
+		ans += 100 / 4;
+		$("#lower-sum-ex2").css("background-color", "#008800");
+	  }
+	  else {
+		$("#lower-sum-ex2").css("background-color", "#CD5C5C");		
+	  }
+		
+	  if (evaluate(user_answer_3, right_answer_3, TOLERANCE)) {
+		ans += 100 / 4;
+		$("#upper-sum-ex2").css("background-color", "#008800");
+	  }
+	  else {
+		$("#upper-sum-ex2").css("background-color", "#CD5C5C");
+	  }
+		
+	  if (evaluate(user_answer_3, right_answer_3, TOLERANCE)) {
+		ans += 100 / 4;
+		$("#upper-sum-ex2").css("background-color", "#008800");
+	  }
+	  else {
+		$("#upper-sum-ex2").css("background-color", "#CD5C5C");
+	  }
+	  ans = Math.round(ans);
 	   	  	  	    
 		break;
 		
@@ -721,7 +733,7 @@ function getScore (exercise) {
 	  case 6:
 	  	var user_answer_1 = parseFloat($("#X-ex6").val().replace(",","."));
 						
-		var right_answer_1 = ai.get("PARALELOGRAM_SUM");
+		var right_answer_1 = ai.get("PARALLELOGRAM_SUM");
 		
 		
 		if (evaluate(user_answer_1, right_answer_1, TOLERANCE)) {
@@ -729,7 +741,7 @@ function getScore (exercise) {
 			$("#X-ex6").css("background-color", "#008800");
 		}
 		else {
-			$("#X-ex6").css("background-color", "#FF0000");
+			$("#X-ex6").css("background-color", "#CD5C5C");
 		}
 		
 		ans = Math.round(ans);
@@ -752,7 +764,6 @@ function feedback (exercise, score) {
       if (score == 100) {
           $('#message1').html('Resposta correta!').removeClass().addClass("right-answer");
       } else {
-	  
 			var lower_sum = Number(ai.get("LOWER_SUM")).toFixed(2).replace(".", ",");	
 			var upper_sum = Number(ai.get("UPPER_SUM")).toFixed(2).replace(".", ",");
 		
@@ -767,11 +778,13 @@ function feedback (exercise, score) {
       if (score == 100) {
           $('#message2').html('Resposta correta!').removeClass().addClass("right-answer");
       } else {
-			var N_number = Number(ai.get("N")).toFixed(2).replace(".", ",");	
+			var N_number = Number(ai.get("N")).toFixed(0).replace(".", ",");
+			var A_number = Number(ai.get("A")).toFixed(0).replace(".", ",");	
+			var B_number = Number(ai.get("B")).toFixed(0).replace(".", ",");				
 			var lower_sum = Number(ai.get("LOWER_SUM")).toFixed(2).replace(".", ",");	
 			var upper_sum = Number(ai.get("UPPER_SUM")).toFixed(2).replace(".", ",");
 					      
-          $('#message2').html('O correto seria: para N= ' + N_number + ' o campo 1 é igual a ' + lower_sum + ' e o campo 2 é ' + upper_sum +'.').removeClass().addClass("wrong-answer");
+          $('#message2').html('O correto seria: para N = ' + N_number + ', A = ' + A_number + ' e B = ' + B_number + ', a soma inferior é igual a ' + lower_sum + ' e a soma superior é ' + upper_sum +'.').removeClass().addClass("wrong-answer");
       }
       break;
 	  
@@ -789,7 +802,14 @@ function feedback (exercise, score) {
 
     // Feedback da resposta ao exercício 4
     case 4:
-	  //não tem feedback!
+	  if (score == 100) {
+          $('#message4').html('Resposta correta!').removeClass().addClass("right-answer");
+      } else {
+		  var resposta = Number(ai.get("FUNCTION_VALUE", ai.get("M"))).toFixed(2).replace(".", ",");
+          var correto = Number(ai.get("MEAN_VALUE")).toFixed(2).replace(".", ",");
+			      
+          $('#message4').html('Sua resposta foi M = ' + resposta + ', mas o correto seria ' + correto + ' (veja na figura acima: eu reposicionei M no local correto).').removeClass().addClass("wrong-answer");
+      }
 	
       break;
 	  
@@ -804,10 +824,29 @@ function feedback (exercise, score) {
 	if (valor2 == 'maior') {document.getElementById('feedback5-b').style.display="block";}
 	if (valor3 == 'menor') {document.getElementById('feedback5-c').style.display="block";}	
 	if (valor4 == 'menor') {document.getElementById('feedback5-d').style.display="block";}
-      if (score == 100) {
-          $('#message5').html('Resposta correta!').removeClass().addClass("right-answer");
+      if (valor1 == 'menor') {
+		  document.getElementById('feedback5-a').style.display="block";
+          $('#message5a').html('O correto seria: >').removeClass().addClass("wrong-answer");
       } else {      
-          $('#message5').html('O correto seria: <br>a)> <br> b)< <br>c)> <br>d)> ').removeClass().addClass("wrong-answer");
+	      $('#message5a').html('Resposta correta!').removeClass().addClass("right-answer");
+      }
+	  if (valor2 == 'maior') {
+	      document.getElementById('feedback5-b').style.display="block"; 
+          $('#message5b').html('O correto seria: <').removeClass().addClass("wrong-answer");
+      } else {      
+	      $('#message5b').html('Resposta correta!').removeClass().addClass("right-answer");
+      }
+	  if (valor3 == 'menor') {
+	      document.getElementById('feedback5-c').style.display="block";
+          $('#message5c').html('O correto seria: >').removeClass().addClass("wrong-answer");
+      } else {      
+	      $('#message5c').html('Resposta correta!').removeClass().addClass("right-answer");
+      }
+	  if (valor4 == 'menor') {
+	      document.getElementById('feedback5-d').style.display="block";
+          $('#message5d').html('O correto seria: >').removeClass().addClass("wrong-answer");
+      } else {      
+	      $('#message5d').html('Resposta correta!').removeClass().addClass("right-answer");
       }
 	   
       break;
@@ -817,7 +856,7 @@ function feedback (exercise, score) {
       if (score == 100) {
           $('#message6').html('Resposta correta!').removeClass().addClass("right-answer");
       } else {
-		  var resposta = Number(ai.get("PARALELOGRAM_SUM")).toFixed(2).replace(".", ",");	
+		  var resposta = Number(ai.get("PARALLELOGRAM_SUM")).toFixed(2).replace(".", ",");	
 			      
           $('#message6').html('O correto seria ' + resposta +'.').removeClass().addClass("wrong-answer");
       }
