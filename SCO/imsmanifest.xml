@@ -17,9 +17,9 @@
 </metadata>
 <organizations default="CEPA">
 	<organization identifier="CEPA">
-		<title>Taxas de variação e derivadas</title>
-		<item identifier="AI0107_item1" identifierref="AI0107_item1_resource">
-			<title>Questionário</title>
+		<title>Referenciais e a cinemática vetorial</title>
+		<item identifier="AI0058_item1" identifierref="AI0058_item1_resource">
+			<title>Um sistema de coordenadas incomum</title>
 		</item>
 		<imsss:sequencing>
 			<imsss:controlMode choiceExit="true" flow="true"/>
@@ -28,10 +28,9 @@
 	</organization>
 </organizations>
 <resources>
-	<resource identifier="AI0107_item1_resource" adlcp:scormType="sco" href="index.html" type="webcontent">
-		<file href="./index.html"/>
+	<resource identifier="AI0058_item1_resource" adlcp:scormType="sco" href="index.html" type="webcontent">
+		<file href="index.html"/>
 		<file href="./js/SCORM_API_wrapper.js"/>
-		<file href="./js/ai-config.js"/>
 		<file href="./js/scorm-config.js"/>
 		<file href="./js/jquery-1.4.2.min.js"/>
 		<file href="./js/jquery-ui-1.8.5.custom.min.js"/>
