@@ -16,6 +16,7 @@ var SCORE_UNIT = 100/6;
 var sorteado;//valor do indice da função
 var currentScore = 0;
 var exOk;
+var n_ex1 = 5;
 
 var funcao = [
   {
@@ -61,8 +62,8 @@ function configAi () {
 	
 	var flashvars = {};
 	flashvars.ai = "swf/AI-0107.swf";
-	flashvars.width = "640";
-	flashvars.height = "480";
+	flashvars.width = "700";
+	flashvars.height = "500";
 	
 	var params = {};
 	params.menu = "false";
@@ -71,6 +72,7 @@ function configAi () {
 	var attributes = {};
 	attributes.id = "ai";
 	attributes.align = "middle";
+	
 
 	swfobject.embedSWF("swf/AI-0107.swf", "ai-container", flashvars.width, flashvars.height, "10.0.0", "expressInstall.swf", flashvars, params, attributes);
 	
@@ -93,9 +95,18 @@ function configAi () {
 
   // Configurações dos botões em geral
   $('.check-button').button().click(evaluateExercise);
+  $('.check-button2').button().click(evaluateExercise);
+  $('.check-button3').button().click(evaluateExercise);
+  $('.check-button4').button().click(evaluateExercise);
+  $('.check-button5').button().click(evaluateExercise);
+  $('.check-button6').button().click(evaluateExercise);
   $('.next-button').button().click(habilitaVisual);
   $('.next-button3').button().click(habilitaVisual);
   $('.next-button4').button().click(habilitaVisual);
+  
+  //Começa com botão Próximo desabilitado.
+  $( ".next-button" ).button({ disabled: true });
+  $('.next-button3').button({ disabled: true });
 }
 
 function selectExercise (exercise) {
@@ -108,9 +119,11 @@ function selectExercise (exercise) {
 			ai.setVisible("PARALLELOGRAM_SUM",false);
 			ai.setVisible("MEAN_VALUE",false);
 			ai.setVisible("MONTE_CARLO",false);
+			ai.set("N",5);
 			break;
 			
 		case 2:
+		    
 		    //sorteia N no gráfico.
 			var n = Math.round(4 + 16 * Math.random());
 			ai.set("N", n);
@@ -119,9 +132,22 @@ function selectExercise (exercise) {
 			
 		case 3:
 			console.log("Configurando o exercício 3");
+			
+			ai.set("A",1);
+			ai.set("B",3);
+			
+			ai.set("N", 1000);
+			var s_inf = Number(ai.get("LOWER_SUM")).toFixed(2).replace(".", ",");
+			var s_sup = Number(ai.get("UPPER_SUM")).toFixed(2).replace(".", ",");
+	  
+			$('#s_inf').html(s_inf);
+			$('#s_sup').html(s_sup);
+			
 			break;
 			
 		case 4:
+			ai.set("A",1);
+			ai.set("B",3);
 			console.log("Configurando o exercício 4");
 			ai.setVisible("LOWER_SUM",false);
 			ai.setVisible("UPPER_SUM",false);
@@ -134,10 +160,14 @@ function selectExercise (exercise) {
 			
 		case 5:
 			console.log("Configurando o exercício 5");
+			ai.set("A",1);
+			ai.set("B",3);
 			break;
 		
 		case 6:
 			console.log("Configurando o exercício 6");
+			ai.set("A",1);
+			ai.set("B",3);
 			ai.setVisible("LOWER_SUM",false);
 			ai.setVisible("UPPER_SUM",false);
 			ai.setVisible("AREA",false);
@@ -160,6 +190,7 @@ function checkCallbacks () {
 	ai = document.getElementById("ai");
 	try {
 		ai.doNothing();
+		ai.setVisible("MONTE_CARLO",false);
 		message("swf ok!");
 		iniciaAtividade();
 	}
@@ -245,11 +276,40 @@ function iniciaAtividade(){
   $('#next-button5-b').button().click(MostraTexto4);
   $('#next-button5-c').button().click(MostraTexto5);
   
+  //Textfields aceitam apenas número, ponto e vírgula.
+  $('input').keypress(function(e) {
+  
+    var a = [];
+    var k = e.which;
+	    
+    for (i = 44; i < 58; i++)
+        a.push(i);
+    
+    if (!(a.indexOf(k)>=0))
+        e.preventDefault();
+	
+	var value01 = $("input[type=text][id=U-ex1]").val();
+	var value02 = $("input[type=text][id=K-ex1]").val();
+	var value03 = $("input[type=text][id=U-ex3]").val();
+	
+	
+	
+	if((screenExercise == 1) && (value01 != '' || value02 != '' )) {
+	    //Habilita botão de próximo no exercicio 1.
+		$( ".next-button" ).button({ disabled: false });
+	}
+	if((screenExercise == 3) && (value03 != '')) {
+	    //Habilita botão de próximo no exercicio 1.
+		$( ".next-button3" ).button({ disabled: false });
+	}
+	
+  });
+  
   initAI();
 }
 
 //função para testar input nos boxes - apenas números, pontos e vírgulas.
-function checkNum(x)
+/*function checkNum(x)
 {  
   if (!(/^\d+(\.\d+)?(\,\d+)?$/.test(x)))
   {
@@ -258,7 +318,8 @@ function checkNum(x)
 	return false;
   }
   return true;
-}
+  
+}*/
 
 //Refresh da Página.
 /*function reloadPage()
@@ -499,8 +560,11 @@ function nextExercise () {
 			
 		// Caso seja o ex3	 
 		case 3:
+						
 			document.getElementById('frame03').style.display="block";
 			$( ".next-button3" ).button({ disabled: true });
+			
+			
 			break;
 			
 		// Caso seja o ex4	
@@ -529,29 +593,31 @@ function getScore (exercise) {
   
     // Avalia a nota do exercício 1
     case 1:
+		var n = ai.get("N");
 		var value01 = $("input[type=text][id=U-ex1]").val();
 		var value02 = $("input[type=text][id=K-ex1]").val();
 		if (value01 == '' || value02 == '' ){ 
 			alert('Preencher todos os campos!');
 			exOk = false;
 			return;
-		}else if (!checkNum(value01) || !checkNum(value02)){
+		}/*else if (!checkNum(value01) || !checkNum(value02)){
 			alert('Não é permitido letras!');
 			exOk = false;
 			return;
-		}
+		}*/
   
 		var field = $("#U-ex1");
 		var field2 = $("#K-ex1");
 		var user_answer = parseFloat(field.val().replace(",", "."));
 		var user_answer2 = parseFloat(field2.val().replace(",", "."));
 		
-		//desabilitar caixas de texto e botão Inverter.
+		//desabilitar caixas de texto, botão Inverter e Terminei.
 		$( ".invert-button" ).button({ disabled: true });
 		$( "#U-ex1" ).attr("disabled",true);
         $( "#K-ex1" ).attr("disabled",true);
 		$( "#radio1" ).attr("disabled",true);
 		$( "#radio2" ).attr("disabled",true);
+		$( ".check-button" ).button({ disabled: true });
 		
 		var right_answer = ai.get("LOWER_SUM");
 		var right_answer2 = ai.get("UPPER_SUM");
@@ -564,21 +630,23 @@ function getScore (exercise) {
 				
 		if (evaluate(user_answer, right_answer, TOLERANCE)) {
 			ans += 50;
-			field.css("background-color", "#008800");
+			field.css("background-color", "#66CC33");
 		}
 		else {
-			field.css("background-color", "#CD5C5C");
+			field.css("background-color", "#FA5858");
 		}
 
 		if (evaluate(user_answer2, right_answer2, TOLERANCE)) {
 			ans += 50;
-			field2.css("background-color", "#008800");
+			field2.css("background-color", "#66CC33");
 		}
 		else {
-			field2.css("background-color", "#CD5C5C");
+			field2.css("background-color", "#FA5858");
 		}
 		
 		break;
+		
+		
 		
 	  // Avalia a nota do ex2
 	  case 2:
@@ -592,19 +660,20 @@ function getScore (exercise) {
 			alert ('Preencher todos os campos!');
 			exOk = false;
 			return;
-		}else if (!checkNum(value03) || !checkNum(value04) || !checkNum(value05)){
+		}/*else if (!checkNum(value03) || !checkNum(value04) || !checkNum(value05)){
 			alert('Não é permitido letras!');
 			exOk = false;
 			return;
-		}
+		}*/
 	  
-  		//desabilitar caixas de texto e botão Inverter.
+  		//desabilitar caixas de texto, botão Inverter e Terminei.
 		$( ".invert-button2" ).button({ disabled: true });
 		$( "#N-ex2" ).attr("disabled",true);
 		$( "#upper-sum-ex2" ).attr("disabled",true);
         $( "#lower-sum-ex2" ).attr("disabled",true);
 		$( "#radio2-1" ).attr("disabled",true);
 		$( "#radio2-2" ).attr("disabled",true);
+		$( ".check-button2" ).button({ disabled: true });
 		
 		var user_answer_1 = parseFloat($("#N-ex2").val().replace(",","."));
 		var user_answer_2 = parseFloat($("#lower-sum-ex2").val().replace(",","."));
@@ -616,26 +685,26 @@ function getScore (exercise) {
 		
 		if (evaluate(user_answer_1, right_answer_1, TOLERANCE)) {
 			ans += 100 / 3;
-			$("#N-ex2").css("background-color", "#008800");
+			$("#N-ex2").css("background-color", "#66CC33");
 		}
 		else {
-			$("#N-ex2").css("background-color", "#CD5C5C");
+			$("#N-ex2").css("background-color", "#FA5858");
 		}
 		
 		if (evaluate(user_answer_2, right_answer_2, TOLERANCE)) {
 			ans += 100 / 3;
-			$("#lower-sum-ex2").css("background-color", "#008800");
+			$("#lower-sum-ex2").css("background-color", "#66CC33");
 		}
 		else {
-			$("#lower-sum-ex2").css("background-color", "#CD5C5C");		
+			$("#lower-sum-ex2").css("background-color", "#FA5858");		
 		}
 		
 		if (evaluate(user_answer_3, right_answer_3, TOLERANCE)) {
 			ans += 100 / 3;
-			$("#upper-sum-ex2").css("background-color", "#008800");
+			$("#upper-sum-ex2").css("background-color", "#66CC33");
 		}
 		else {
-			$("#upper-sum-ex2").css("background-color", "#CD5C5C");
+			$("#upper-sum-ex2").css("background-color", "#FA5858");
 		}
 		
 		ans = Math.round(ans);
@@ -645,16 +714,19 @@ function getScore (exercise) {
 		
 	  // Avalia a nota do ex3
 	  case 3:
-	  	var user_answer_1 = parseFloat($("#U-ex3").val().replace(",","."));
-						
-		var right_answer_1 = ai.get("AREA");
+	    
+	  var user_answer_1 = parseFloat($("#U-ex3").val().replace(",","."));			
+	  var right_answer_1 = ai.get("AREA");
+		
+		//Desabilita botão Terminei.
+		$( ".check-button3" ).button({ disabled: true });
 		
 		if (evaluate(user_answer_1, right_answer_1, TOLERANCE)) {
 			ans += 100;
-			$("#U-ex3").css("background-color", "#008800");
+			$("#U-ex3").css("background-color", "#66CC33");
 		}
 		else {
-			$("#U-ex3").css("background-color", "#CD5C5C");
+			$("#U-ex3").css("background-color", "#FA5858");
 		}
 		
 		ans = Math.round(ans);
@@ -667,6 +739,9 @@ function getScore (exercise) {
 		var user_answer = ai.get("FUNCTION_VALUE", ai.get("M"));
 	    var right_answer_1 = ai.get("MEAN_VALUE");
 		
+		//Desabilita botão Terminei.
+		$( ".check-button4" ).button({ disabled: true });
+		
 		if (evaluate(user_answer, right_answer_1, 0.1)) {
 			ans += 100;
 			
@@ -678,6 +753,10 @@ function getScore (exercise) {
 		
 	  // Avalia a nota do ex5
 	  case 5:
+	  
+	  //Desabilita botão Terminei.
+	  $( ".check-button5" ).button({ disabled: true });
+	  
 	  //verifica se tem algum select não selecionado. 
 	  var valor1 = document.selects.ex5_select_01.value;
 	  var valor2 = document.selects.ex5_select_02.value;
@@ -725,24 +804,26 @@ function getScore (exercise) {
 		
 	  // Avalia a nota do ex6
 	  case 6:
-	  	var user_answer_1 = parseFloat($("#X-ex6").val().replace(",","."));
-						
-		var right_answer_1 = ai.get("PARALLELOGRAM_SUM");
-		
-		
-		if (evaluate(user_answer_1, right_answer_1, TOLERANCE)) {
-			ans += 100;
-			$("#X-ex6").css("background-color", "#008800");
-		}
-		else {
-			$("#X-ex6").css("background-color", "#CD5C5C");
-		}
-		
-		ans = Math.round(ans);
 	  
-		break;
+	  //Desabilita botão Terminei.
+	  $( ".check-button6" ).button({ disabled: true });
+		
+	  var user_answer_1 = parseFloat($("#X-ex6").val().replace(",","."));				
+	  var right_answer_1 = ai.get("PARALLELOGRAM_SUM");
+				
+	  if (evaluate(user_answer_1, right_answer_1, TOLERANCE)) {
+		ans += 100;
+		$("#X-ex6").css("background-color", "#008800");
+	  }
+	  else {
+		$("#X-ex6").css("background-color", "#FA5858");
+	  }
+		
+	  ans = Math.round(ans);
+	  
+	  break;
 
-  }
+    }
   return ans;
 }
 
@@ -760,7 +841,12 @@ function feedback (exercise, score) {
       } else {
 			var lower_sum = Number(ai.get("LOWER_SUM")).toFixed(2).replace(".", ",");	
 			var upper_sum = Number(ai.get("UPPER_SUM")).toFixed(2).replace(".", ",");  
-            $('#message1').html('O correto seria: soma inferior igual a ' + lower_sum + ' e soma superior igual a ' + upper_sum +'.').removeClass().addClass("wrong-answer");
+			
+			
+			var src = "img/int_ex1_red.gif";
+                       
+						
+            $('#message1').html('O correto seria: ' + lower_sum + '  <img style="vertical-align:middle;" src=' + src + '></img>  ' + upper_sum +'.').removeClass().addClass("wrong-answer");
         }
       
       break;
@@ -770,13 +856,11 @@ function feedback (exercise, score) {
       if (score == 100) {
           $('#message2').html('Resposta correta!').removeClass().addClass("right-answer");
       } else {
-			var N_number = Number(ai.get("N")).toFixed(0).replace(".", ",");
-			var A_number = Number(ai.get("A")).toFixed(0).replace(".", ",");	
-			var B_number = Number(ai.get("B")).toFixed(0).replace(".", ",");				
+			var N_number = Number(ai.get("N")).toFixed(0).replace(".", ",");			
 			var lower_sum = Number(ai.get("LOWER_SUM")).toFixed(2).replace(".", ",");	
 			var upper_sum = Number(ai.get("UPPER_SUM")).toFixed(2).replace(".", ",");
 					      
-          $('#message2').html('O correto seria: para N = ' + N_number + ', A = ' + A_number + ' e B = ' + B_number + ', a soma inferior é igual a ' + lower_sum + ' e a soma superior é ' + upper_sum +'.').removeClass().addClass("wrong-answer");
+          $('#message2').html('O correto seria: para N = ' + N_number + ', a soma inferior é igual a ' + lower_sum + ' e a soma superior é ' + upper_sum +'.').removeClass().addClass("wrong-answer");
       }
       break;
 	  
