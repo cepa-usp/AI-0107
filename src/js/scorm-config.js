@@ -107,6 +107,9 @@ function configAi () {
   //Começa com botão Próximo desabilitado.
   $( ".next-button" ).button({ disabled: true });
   $('.next-button3').button({ disabled: true });
+  $( ".next-button5-a" ).button({ disabled: true });
+  $( ".next-button5-b" ).button({ disabled: true });
+  $( ".next-button5-c" ).button({ disabled: true });
 }
 
 function selectExercise (exercise) {
@@ -148,6 +151,7 @@ function selectExercise (exercise) {
 		case 4:
 			ai.set("A",1);
 			ai.set("B",3);
+			ai.set("N", 4);
 			console.log("Configurando o exercício 4");
 			ai.setVisible("LOWER_SUM",false);
 			ai.setVisible("UPPER_SUM",false);
@@ -341,17 +345,28 @@ function iniciaAtividade(){
 	window.location.reload() 
 }*/
 
-//Verificar selects do Exercício 5 e mostra texto.
-/*function verificaSelect() {
+//Verificar selects do Exercício 5 e ativa/desativa botão Próximo.
+function verificaSelect() {
+
    	var valor1 = document.selects.ex5_select_01.value; 
 	var valor2 = document.selects.ex5_select_02.value;
 	var valor3 = document.selects.ex5_select_03.value;
 	var valor4 = document.selects.ex5_select_04.value;
-	if (valor1 == 'menor') {document.getElementById('feedback5-a').style.display="block";}
-	if (valor2 == 'maior') {document.getElementById('feedback5-b').style.display="block";}
-	if (valor3 == 'menor') {document.getElementById('feedback5-c').style.display="block";}	
-	if (valor4 == 'menor') {document.getElementById('feedback5-d').style.display="block";}
-} */
+	if (valor1 != '') { 
+		$( ".next-button5-a" ).button({ disabled: false });
+	}
+	if (valor2 != '') { 
+		$( ".next-button5-a" ).button({ disabled: true });
+		$( ".next-button5-b" ).button({ disabled: false });	
+	}
+	if (valor3 != '') { 
+	    $( ".next-button5-b" ).button({ disabled: true })
+		$( ".next-button5-c" ).button({ disabled: false });
+	}	
+	if (valor4 != '') { 
+	    $( ".next-button5-c" ).button({ disabled: true })
+	}	
+} 
 
 //Mostra bloco do Exercício 4:Frame4-3
 function MostraTexto()
@@ -807,6 +822,9 @@ function getScore (exercise) {
 	  
 	  //Desabilita botão Terminei.
 	  $( ".check-button6" ).button({ disabled: true });
+	  
+	  //Desabilita textfield.
+	  $( "#X-ex6" ).attr("disabled",true);
 		
 	  var user_answer_1 = parseFloat($("#X-ex6").val().replace(",","."));				
 	  var right_answer_1 = ai.get("PARALLELOGRAM_SUM");
