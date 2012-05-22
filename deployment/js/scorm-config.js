@@ -35,6 +35,24 @@ var funcao = [
     f_display: "x<SUP>3</SUP> - x<SUP>2</SUP> + 5",
     if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x",
   }
+  
+  ,
+  {
+    f_display: "-ln|x|",
+    if_display: "∫ f(x) dx = -ln|x|",
+  },
+  {
+    f_display: "cos(x)",
+    if_display: "∫ f(x) dx = cos(x)",
+  },
+  {
+    f_display: "sen(x) . cos(x)",
+    if_display: "∫ f(x) dx = sen(x) . cos(x)",
+  },
+   {
+    f_display: "sen(x) + 2",
+    if_display: "∫ f(x) dx = sen(x) + 2",
+  }
 ];
 
 $(document).ready(init); // Inicia a AI.
@@ -79,9 +97,6 @@ function configAi () {
   //Deixa a aba "Orientações" ativa no carregamento da atividade
   $('#exercicios').tabs({ selected: 0 });
 
-	
-  //INICIALIZA A ATIVIDADE 
-  //applyAndSortFunctions();  
 
   // Habilita/desabilita a visualização da mediatriz
   $('#exercicios').tabs({
@@ -112,10 +127,15 @@ function configAi () {
   $( ".next-button5-c" ).button({ disabled: true });
 }
 
+
+//sorteia N.
+var n = Math.round(4 + 16 * Math.random());
+
 function selectExercise (exercise) {
 	switch(exercise) {
 		case 1:
 			console.log("Configurando o exercício 1");
+			
 			ai.setVisible("LOWER_SUM",true);
 			ai.setVisible("UPPER_SUM",false);
 			ai.setVisible("AREA",false);
@@ -126,9 +146,8 @@ function selectExercise (exercise) {
 			break;
 			
 		case 2:
-		    
-		    //sorteia N no gráfico.
-			var n = Math.round(4 + 16 * Math.random());
+			console.log("Configurando o exercício 2");
+			
 			ai.set("N", n);
 	
 			break;
@@ -138,17 +157,23 @@ function selectExercise (exercise) {
 			
 			ai.set("A",1);
 			ai.set("B",3);
-			
 			ai.set("N", 1000);
-			var s_inf = Number(ai.get("LOWER_SUM")).toFixed(2).replace(".", ",");
-			var s_sup = Number(ai.get("UPPER_SUM")).toFixed(2).replace(".", ",");
-	  
-			$('#s_inf').html(s_inf);
-			$('#s_sup').html(s_sup);
+			var s_inf = Number(ai.get("LOWER_SUM"));
+			var s_sup = Number(ai.get("UPPER_SUM"));
+			var n_casas = -Math.floor(Math.log(s_sup - s_inf)/Math.log(10));
+			ai.set("N",5);
+			
+			$('#s_inf').html(s_inf.toFixed(n_casas).replace(".", ","));
+			$('#s_sup').html(s_sup.toFixed(n_casas).replace(".", ","));
+			
+			//Mostra função sorteada no corpo do exercício 3.
+			$('#ex3_funcao').html(funcao[sorteado].f_display);
 			
 			break;
 			
 		case 4:
+			console.log("Configurando o exercício 4");
+			
 			ai.set("A",1);
 			ai.set("B",3);
 			ai.set("N", 4);
@@ -164,12 +189,14 @@ function selectExercise (exercise) {
 			
 		case 5:
 			console.log("Configurando o exercício 5");
+			
 			ai.set("A",1);
 			ai.set("B",3);
 			break;
 		
 		case 6:
 			console.log("Configurando o exercício 6");
+			
 			ai.set("A",1);
 			ai.set("B",3);
 			ai.setVisible("LOWER_SUM",false);
@@ -194,7 +221,6 @@ function checkCallbacks () {
 	ai = document.getElementById("ai");
 	try {
 		ai.doNothing();
-		ai.setVisible("MONTE_CARLO",false);
 		message("swf ok!");
 		iniciaAtividade();
 	}
@@ -218,7 +244,10 @@ function getAi(){
 
 // Inicia a AI.
 function iniciaAtividade(){       
-   
+  
+  //INICIALIZA A ATIVIDADE 
+  applyAndSortFunctions();  
+
   //Configuração do botão inverter do primeiro e segundo exercício
   $('.invert-button').button().click(function(){
 	var value01 = $("input[type=text][id=U-ex1]").val();
@@ -310,7 +339,10 @@ function iniciaAtividade(){
   });
   
   initAI();
+  
 }
+
+
 
 //função para testar input nos boxes - apenas números, pontos e vírgulas.
 /*function checkNum(x)
@@ -354,17 +386,24 @@ function verificaSelect() {
 	var valor4 = document.selects.ex5_select_04.value;
 	if (valor1 != '') { 
 		$( ".next-button5-a" ).button({ disabled: false });
+		document.selects.ex5_select_01.disabled = true;
 	}
-	if (valor2 != '') { 
+	if (valor2 != ''){ 
 		$( ".next-button5-a" ).button({ disabled: true });
 		$( ".next-button5-b" ).button({ disabled: false });	
+		document.selects.ex5_select_02.disabled = true;
 	}
 	if (valor3 != '') { 
-	    $( ".next-button5-b" ).button({ disabled: true })
+	    $( ".next-button5-a" ).button({ disabled: true });
+	    $( ".next-button5-b" ).button({ disabled: true });
 		$( ".next-button5-c" ).button({ disabled: false });
+		document.selects.ex5_select_03.disabled = true;
 	}	
 	if (valor4 != '') { 
-	    $( ".next-button5-c" ).button({ disabled: true })
+	    $( ".next-button5-a" ).button({ disabled: true });
+	    $( ".next-button5-b" ).button({ disabled: true });
+	    $( ".next-button5-c" ).button({ disabled: true });
+		document.selects.ex5_select_04.disabled = true;
 	}	
 } 
 
@@ -772,21 +811,21 @@ function getScore (exercise) {
 	  //Desabilita botão Terminei.
 	  $( ".check-button5" ).button({ disabled: true });
 	  
-	  //verifica se tem algum select não selecionado. 
 	  var valor1 = document.selects.ex5_select_01.value;
 	  var valor2 = document.selects.ex5_select_02.value;
 	  var valor3 = document.selects.ex5_select_03.value;
 	  var valor4 = document.selects.ex5_select_04.value;
-	  if (valor1 != '' && valor2 != '' && valor3 != '' && valor4 != '' ) {
-	    //desabilita os selects após clique no botão 'terminei'
-		document.selects.ex5_select_01.disabled = true;
+	  //verifica se tem algum select não selecionado. 
+	  //if (valor1 != '' && valor2 != '' && valor3 != '' && valor4 != '' ) {
+	  //desabilita os selects após clique no botão 'terminei'
+	  /*document.selects.ex5_select_01.disabled = true;
 		document.selects.ex5_select_02.disabled = true;
 		document.selects.ex5_select_03.disabled = true;
 		document.selects.ex5_select_04.disabled = true; 
 	  }
 	  else { 
 		alert ("Preencha todos os itens!") 
-	  }
+	  }*/
 				
 	  if (valor1 == 'menor') {
           $('#message5a').html('O correto seria: >').removeClass().addClass("wrong-answer");
@@ -979,6 +1018,17 @@ log.error = function (message) {
   else {
     alert(message);
   }
+}
+
+function applyAndSortFunctions(){
+	sorteado = rand(0,funcao.length-1);
+	ai.setFunction(funcao[sorteado].f_display);
+	//alert(sorteado);
+}
+
+function rand(l,u) // lower bound and upper bound
+{
+	return Math.floor((Math.random() * (u-l+1))+l);
 }
 
 // Mensagens de log
