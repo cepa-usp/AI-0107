@@ -16,7 +16,6 @@ var SCORE_UNIT = 100/6;
 var sorteado;//valor do indice da função
 var currentScore = 0;
 var exOk;
-var n_ex1 = 5;
 
 var funcao = [
   {
@@ -31,11 +30,10 @@ var funcao = [
     f_display: "x <SUP> 3 </SUP> - 4x <SUP> 2 </SUP> - 11x + 30",
     if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - 4x<SUP>3</SUP>/3 - 11x<SUP>2</SUP>/2 + 30x",
   },
-  {
-    f_display: "x<SUP>3</SUP> - x<SUP>2</SUP> + 5",
-    if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x",
-  }
-  
+  //{
+    //f_display: "x<SUP>3</SUP> - x<SUP>2</SUP> + 5",
+    //if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x",
+  //}
   ,
   {
     f_display: "-ln|x|",
@@ -858,6 +856,15 @@ function getScore (exercise) {
 		
 	  // Avalia a nota do ex6
 	  case 6:
+	  
+		//Verifica se existe algum campo vazio.
+		var value01 = $("input[type=text][id=X-ex6]").val();
+ 
+		if(value01 == '') {
+			alert ('Preencher todos os campos!');
+			exOk = false;
+			return;
+		}
 	  
 	  //Desabilita botão Terminei.
 	  $( ".check-button6" ).button({ disabled: true });
