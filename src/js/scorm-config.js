@@ -30,11 +30,10 @@ var funcao = [
     f_display: "x <SUP> 3 </SUP> - 4x <SUP> 2 </SUP> - 11x + 30",
     if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - 4x<SUP>3</SUP>/3 - 11x<SUP>2</SUP>/2 + 30x",
   },
-  //{
-    //f_display: "x<SUP>3</SUP> - x<SUP>2</SUP> + 5",
-    //if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x",
-  //}
-  ,
+  /*{
+    f_display: "x<SUP>3</SUP> - x<SUP>2</SUP> + 5",
+    if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x",
+  },*/
   {
     f_display: "-ln|x|",
     if_display: "∫ f(x) dx = -ln|x|",
@@ -88,7 +87,6 @@ function configAi () {
 	var attributes = {};
 	attributes.id = "ai";
 	attributes.align = "middle";
-	
 
 	swfobject.embedSWF("swf/AI-0107.swf", "ai-container", flashvars.width, flashvars.height, "10.0.0", "expressInstall.swf", flashvars, params, attributes);
 	
@@ -133,7 +131,7 @@ function selectExercise (exercise) {
 	switch(exercise) {
 		case 1:
 			console.log("Configurando o exercício 1");
-			
+					
 			ai.setVisible("LOWER_SUM",true);
 			ai.setVisible("UPPER_SUM",false);
 			ai.setVisible("AREA",false);
@@ -146,16 +144,33 @@ function selectExercise (exercise) {
 		case 2:
 			console.log("Configurando o exercício 2");
 			
+			//Bloquear os pontos A e B
+			ai.lock("A", true);
+			ai.lock("B", true);
+			
 			ai.set("N", n);
-	
+			ai.setVisible("LOWER_SUM",true);
+			ai.setVisible("UPPER_SUM",false);
+			ai.setVisible("AREA",false);
+			ai.setVisible("PARALLELOGRAM_SUM",false);
+			ai.setVisible("MEAN_VALUE",false);
+			ai.setVisible("MONTE_CARLO",false);	
 			break;
 			
 		case 3:
 			console.log("Configurando o exercício 3");
 			
-			ai.set("A",1);
-			ai.set("B",3);
-			ai.set("N", 1000);
+			//Bloquear os pontos A e B
+			ai.lock("A", true);
+			ai.lock("B", true);
+			
+			ai.setVisible("LOWER_SUM",true);
+			ai.setVisible("UPPER_SUM",false);
+			ai.setVisible("AREA",false);
+			ai.setVisible("PARALLELOGRAM_SUM",false);
+			ai.setVisible("MEAN_VALUE",false);
+			ai.setVisible("MONTE_CARLO",false);
+            ai.set("N", 1000);
 			var s_inf = Number(ai.get("LOWER_SUM"));
 			var s_sup = Number(ai.get("UPPER_SUM"));
 			var n_casas = -Math.floor(Math.log(s_sup - s_inf)/Math.log(10));
@@ -166,16 +181,15 @@ function selectExercise (exercise) {
 			
 			//Mostra função sorteada no corpo do exercício 3.
 			$('#ex3_funcao').html(funcao[sorteado].f_display);
-			
 			break;
 			
 		case 4:
 			console.log("Configurando o exercício 4");
 			
-			ai.set("A",1);
-			ai.set("B",3);
-			ai.set("N", 4);
-			console.log("Configurando o exercício 4");
+			//Bloquear os pontos A e B
+			ai.lock("A", true);
+			ai.lock("B", true);
+
 			ai.setVisible("LOWER_SUM",false);
 			ai.setVisible("UPPER_SUM",false);
 			ai.setVisible("AREA",true);
@@ -188,15 +202,26 @@ function selectExercise (exercise) {
 		case 5:
 			console.log("Configurando o exercício 5");
 			
-			ai.set("A",1);
-			ai.set("B",3);
+			//Bloquear os pontos A e B
+			ai.lock("A", true);
+			ai.lock("B", true);
+			
+			ai.setVisible("LOWER_SUM",false);
+			ai.setVisible("UPPER_SUM",false);
+			ai.setVisible("AREA",true);
+			ai.setVisible("PARALLELOGRAM_SUM",false);
+			ai.setVisible("MEAN_VALUE",true);
+			ai.setVisible("MONTE_CARLO",false);
+			ai.setVisible("M", true);
 			break;
 		
 		case 6:
 			console.log("Configurando o exercício 6");
 			
-			ai.set("A",1);
-			ai.set("B",3);
+			//Bloquear os pontos A e B
+			ai.lock("A", true);
+			ai.lock("B", true);
+			
 			ai.setVisible("LOWER_SUM",false);
 			ai.setVisible("UPPER_SUM",false);
 			ai.setVisible("AREA",false);
