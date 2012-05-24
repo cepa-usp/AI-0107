@@ -153,7 +153,7 @@ function selectExercise (exercise) {
 			//Bloquear os pontos A e B
 			ai.lock("A", true);
 			ai.lock("B", true);
-			console.log(n);
+			//console.log(n);
 			ai.set("N", n);
 			ai.setVisible("LOWER_SUM",true);
 			ai.setVisible("UPPER_SUM",false);
