@@ -115,7 +115,12 @@ function configAi () {
   $('.next-button3').button().click(habilitaVisual);
   $('.next-button4').button().click(habilitaVisual);
   
-  //Começa com botão Próximo desabilitado.
+  //Começa com botão Próximo/Terminar desabilitado.
+  $( ".check-button" ).button({ disabled: true });
+  $( ".check-button2" ).button({ disabled: true });
+  $( ".check-button3" ).button({ disabled: true });
+  $( ".check-button5" ).button({ disabled: true })
+  $( ".check-button6" ).button({ disabled: true });
   $( ".next-button" ).button({ disabled: true });
   $('.next-button3').button({ disabled: true });
   $( ".next-button5-a" ).button({ disabled: true });
@@ -125,7 +130,8 @@ function configAi () {
 
 
 //sorteia N.
-var n = Math.round(4 + 16 * Math.random());
+//n entre 15 e 20
+var n = Math.round(15 + 5 * Math.random());
 
 function selectExercise (exercise) {
 	switch(exercise) {
@@ -147,7 +153,7 @@ function selectExercise (exercise) {
 			//Bloquear os pontos A e B
 			ai.lock("A", true);
 			ai.lock("B", true);
-			
+			console.log(n);
 			ai.set("N", n);
 			ai.setVisible("LOWER_SUM",true);
 			ai.setVisible("UPPER_SUM",false);
@@ -272,7 +278,7 @@ function iniciaAtividade(){
   applyAndSortFunctions();  
 
   //Configuração do botão inverter do primeiro e segundo exercício
-  $('.invert-button').button().click(function(){
+  /*$('.invert-button').button().click(function(){
 	var value01 = $("input[type=text][id=U-ex1]").val();
 	var value02 = $("input[type=text][id=K-ex1]").val();
 	$("input[type=text][id=U-ex1]").val(value02);
@@ -283,7 +289,7 @@ function iniciaAtividade(){
 	var value02 = $("input[type=text][id=upper-sum-ex2]").val();
 	$("input[type=text][id=lower-sum-ex2]").val(value02);
 	$("input[type=text][id=upper-sum-ex2]").val(value01);
-  });
+  });*/
  
   //Configuração do radio button do primeiro exercicio
   $("input[name='choice']").change(function(){
@@ -331,9 +337,9 @@ function iniciaAtividade(){
   $('#next-button5-a').button().click(MostraTexto3);
   $('#next-button5-b').button().click(MostraTexto4);
   $('#next-button5-c').button().click(MostraTexto5);
-  
+    
   //Textfields aceitam apenas número, ponto e vírgula.
-  $('input').keypress(function(e) {
+  $('input').keyup(function(e) {
   
     var a = [];
     var k = e.which;
@@ -344,28 +350,64 @@ function iniciaAtividade(){
     if (!(a.indexOf(k)>=0))
         e.preventDefault();
 	
+	  
 	var value01 = $("input[type=text][id=U-ex1]").val();
 	var value02 = $("input[type=text][id=K-ex1]").val();
 	var value03 = $("input[type=text][id=U-ex3]").val();
-	
-	
-	
-	if((screenExercise == 1) && (value01 != '' || value02 != '' )) {
-	    //Habilita botão de próximo no exercicio 1.
-		$( ".next-button" ).button({ disabled: false });
+	var value04 = $("input[type=text][id=N-ex2]").val();
+	var value05 = $("input[type=text][id=lower-sum-ex2]").val();
+	var value06 = $("input[type=text][id=upper-sum-ex2]").val();
+	var value07 = $("input[type=text][id=X-ex6]").val();
+  
+	//Habilitar Próximo
+	if(screenExercise == 1){
+		if(value01 != '' || value02 != '' ) {
+			//Habilita botão de próximo no exercicio 1.
+			if(!bt1ProxEnabled){
+				$( ".next-button" ).button({ disabled: false });
+				bt1ProxEnabled = true;
+			}
+		}
+		if(value01 != '' && value02 != '' ) {
+			//Habilita botão Terminar no exercicio 1.
+				$( ".check-button" ).button({ disabled: false });
+			
+		}
 	}
-	if((screenExercise == 3) && (value03 != '')) {
-	    //Habilita botão de próximo no exercicio 1.
-		$( ".next-button3" ).button({ disabled: false });
+	if(screenExercise == 2) {
+		if(value04 != '' && value05 != '' && value06 != '') {
+		    //Habilita botão Terminei no exercicio 2.
+			$( ".check-button2" ).button({ disabled: false });
+	    }
 	}
+	if(screenExercise == 3) {
+		if(value03 != '') {
+			//Habilita botão de próximo no exercicio 3.
+			if(!bt2ProxEnabled){
+				$( ".check-button3" ).button({ disabled: false });
+				bt2ProxEnabled = true;
+			}
+	    }
+	}
+	if(screenExercise == 6) {
+		if(value07 != '') {
+			//Habilita botão Terminei no exercicio 6.
+			$( ".check-button6" ).button({ disabled: false });
+	    }
+	}
+	
+	
 	
   });
+  
+
   
   initAI();
   
 }
 
-
+var bt1ProxEnabled = false;
+var bt2ProxEnabled = false;
 
 //função para testar input nos boxes - apenas números, pontos e vírgulas.
 /*function checkNum(x)
@@ -426,6 +468,7 @@ function verificaSelect() {
 	    $( ".next-button5-a" ).button({ disabled: true });
 	    $( ".next-button5-b" ).button({ disabled: true });
 	    $( ".next-button5-c" ).button({ disabled: true });
+		$( ".check-button5" ).button({ disabled: false });
 		document.selects.ex5_select_04.disabled = true;
 	}	
 } 
@@ -638,8 +681,8 @@ function nextExercise () {
 		// Caso seja o ex3	 
 		case 3:
 						
-			document.getElementById('frame03').style.display="block";
-			$( ".next-button3" ).button({ disabled: true });
+			//document.getElementById('frame03').style.display="block";
+			//$( ".next-button3" ).button({ disabled: true });
 			
 			
 			break;
@@ -677,11 +720,7 @@ function getScore (exercise) {
 			alert('Preencher todos os campos!');
 			exOk = false;
 			return;
-		}/*else if (!checkNum(value01) || !checkNum(value02)){
-			alert('Não é permitido letras!');
-			exOk = false;
-			return;
-		}*/
+		}
   
 		var field = $("#U-ex1");
 		var field2 = $("#K-ex1");
@@ -957,10 +996,12 @@ function feedback (exercise, score) {
     case 3:
       if (score == 100) {
           $('#message3').html('Resposta correta!').removeClass().addClass("right-answer");
+		  document.getElementById('frame03').style.display="block";
       } else {
 		  var resposta = Number(ai.get("AREA")).toFixed(2).replace(".", ",");	
 			      
           $('#message3').html('O correto seria ' + resposta +'.').removeClass().addClass("wrong-answer");
+		  document.getElementById('frame03').style.display="block";
       }
       
       break;	  

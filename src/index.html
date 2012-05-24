@@ -60,9 +60,9 @@
 	
 		<div id="frame01">
 		
-			<p>A área sob uma curva f(x) qualquer num intervalo [a,b] pode ser obtida, de forma aproximada, como no plano cartesiano acima: dividimos a área de nosso interesse em N (= 4, neste caso) retângulos de larguras iguais, mas com alturas que dependem de f(x), e somamos as áreas de cada um desses retângulos. Este processo é chamado de <i>soma de Riemann</i>.</p>
-			<p>Se escolhermos as alturas dos retângulos de modo que eles estejam sempre <b>abaixo</b> de f(x), como representado acima em vermelho, a soma das áreas será sempre <i>menor</i> que a área de interesse. Esta é a "soma inferior". Faça isso agora: para a situação do plano cartesiano acima, calcule a soma inferior e preencha o campo abaixo <strong>apropriado</strong>. Ao concluir, pressione "próximo":</p>
-			<p><input id="U-ex1" type="text" size="6" maxlength="4" style="vertical-align:-20%;"/> <img src="img/int_ex1.gif" alt="" height="41" width="134" style="vertical-align:middle;" /> <input id="K-ex1" type="text" size="6" maxlength="4" style="vertical-align:-20%;"/> <span class="invisible invert-button" style="vertical-align:-20%;">Inverter</span></p>
+			<p>A área sob a curva f(x) acima no intervalo [a,b], representada por <img src="img/ex1.gif" alt="" height="41" width="95" style="vertical-align:-38%;" />, pode ser obtida de forma aproximada assim: dividimos a área de nosso interesse em N retângulos de larguras iguais (N = 5, neste caso), mas com alturas que dependem de f(x), e somamos as áreas de cada um desses retângulos.</p>
+			<p>Se escolhermos as alturas dos retângulos de modo que eles estejam sempre <b>abaixo</b> de f(x), como representado acima em vermelho, a soma das áreas será sempre <i>menor</i> que a área de interesse. Esta é a "soma inferior". Faça isso agora: para a situação do plano cartesiano acima, calcule a soma inferior e preencha o campo abaixo <strong>apropriado</strong> (atenção: você deve decidir se preenche o campo à esquerda ou à direita da integral). Ao concluir, pressione "próximo":</p>
+			<p><input id="U-ex1" type="text" size="6" maxlength="4" style="vertical-align:-20%;"/> <img src="img/int_ex1.gif" alt="" height="41" width="134" style="vertical-align:middle;" /> <input id="K-ex1" type="text" size="6" maxlength="4" style="vertical-align:-20%;"/> <!--<span class="invisible invert-button" style="vertical-align:-20%;">Inverter</span>--></p>
 		</div>
 			
 		<p><span class="next-button">Próximo</span></p>
@@ -70,7 +70,7 @@
 		<!-- Segunda parte do exercício 1 -->
 		<div id="frame02" style="display:none;">
 			<p>Alternativamente, podemos escolher as alturas dos retângulos de tal modo que eles estejam sempre <b>acima</b> da curva, como representado em azul. Neste caso, a soma das áreas será sempre maior que a área de interesse. É a chamada "soma superior". Calcule-a agora e termine de preencher a desigualdade acima. Pressione "terminei" quando pronto.</p>
-			<p class="obs"><strong>obs</strong>.: caso você tenha invertido as somas inferior e superior, use o botão "inverter" para trocá-las. Além disso, caso queira refazer suas contas, use as duas opções abaixo para selecionar a soma que você gostaria de ver.</p>
+			<!--<p class="obs"><strong>obs</strong>.: caso você tenha invertido as somas inferior e superior, use o botão "inverter" para trocá-las. Além disso, caso queira refazer suas contas, use as duas opções abaixo para selecionar a soma que você gostaria de ver.</p>-->
 			<p>
 				<form id="radio-ex1">
 					<input type="radio" id="radio1" name="choice" value="inf" checked="true"/> soma inferior<br />
@@ -93,8 +93,8 @@
     <!-- Exercício 2 -->
     <div id="ex2">
 		<div id="frame01" class="active visible">
-			<p>Refaça as contas da questão anterior com N = <input id="N-ex2" type="text" size="6" maxlength="4"/> (preencha com base no plano cartesiano acima):</p>
-			<p><input id="lower-sum-ex2" type="text" size="6" maxlength="4" style="vertical-align:-20%;"/> <img src="img/int_ex2.gif" alt="" height="41" width="134" style="vertical-align:middle;" /> <input id="upper-sum-ex2" type="text" size="6" maxlength="4" style="vertical-align:-20%;"/> <span class="visible invert-button2" style="vertical-align:-20%;">Inverter</span></p>
+			<p>Agora vamos melhorar nossa aproximação: refaça as contas da questão anterior com N = <input id="N-ex2" type="text" size="6" maxlength="4"/> (preencha com base no plano cartesiano acima):</p>
+			<p><input id="lower-sum-ex2" type="text" size="6" maxlength="4" style="vertical-align:-20%;"/> <img src="img/int_ex2.gif" alt="" height="41" width="134" style="vertical-align:middle;" /> <input id="upper-sum-ex2" type="text" size="6" maxlength="4" style="vertical-align:-20%;"/> <!--<span class="visible invert-button2" style="vertical-align:-20%;">Inverter</span>--></p>
 			<p>
 				<form id="radio-ex2">
 					<input type="radio" id="radio2-1" name="choice2" value="inf" checked="true"/> soma inferior<br />
@@ -112,25 +112,20 @@
 	<!-- Exercício 3 -->
 	<div id="ex3">
 		<div class="active visible frame01">
-			<p>O <b>teorema fundamental do cálculo</b> estabelece, essencialmente, que a derivação e a integração são operações inversas. Ou seja, se f' é a <b>derivada</b> de f, então f é a <b>integral</b> de f'. Na verdade, o correto é escrever assim:</p>
-			<p><img src="img/ex3_1.gif" alt="" height="41" width="227" style="vertical-align:middle;" /></p>
-			<p>Mais importante que isso, o teorema fundamental do cálculo é uma ferramenta muito útil. Certamente foi bastante trabalhoso encontrar a resposta correta das duas questões anteriores. Imagine o trabalho de fazermos aquele cálculo para N = 1000, por exemplo. Nós fizemos isso para você e o resultado é: soma inferior igual a <b><span id="s_inf"></span></b>  e soma superior igual a <b><span id="s_sup"></span></b>.</p>
-			<p>Mas agora, sabendo que o gráfico apresentado acima é o da função f'(x) = <span id="ex3_funcao"></span>, você pode determinar a área sob ela utilizando as técnicas de primitivação (integração) que você aprendeu. Faça isso agora: determine a integral de f' no intervalo [a,b]. Dito de outra forma: encontre a função f cuja derivada é <span class="ex3-der"></span>, manualmente ou através de uma tabela de derivadas, como <a href="http://pt.wikipedia.org/wiki/Tabela_de_derivadas" target="_blank">esta</a>. Pressione "próximo" em seguida.</p>
-			<p><img src="img/ex3_2.gif" alt="" height="41" width="249" style="vertical-align:middle;" /> <input id="U-ex3" type="text" size="6" maxlength="4" style="vertical-align:-15%;" > <!--onChange='checkNum(this)'--><span class="right-answer"></span> </p>
-		</div>
-	
-		<p class="proximo visible"><span class="next-button3">Próximo</span></p>
-	
-		<div id="frame03" style="display:none">
-			<p>Observe como o resultado <span class="erro-ex3"></span> pelo teorema fundamental do cálculo é muito próximo daquele cálculo que fizemos para N = 1000. Isto significa que, ao invés de somarmos elementos de área (soma de Riemann), podemos simplesmente procurar pela função f cuja derivada é a curva sob a qual queremos calcular a área, e calcular f(b) - f(a).</p>
+			<p>À medida que aumentamos N, as somas inferior e superior aproximam-se cada vez mais, até que no limite em que <img src="img/ex3.gif" alt="" height="18" width="73" style="vertical-align:middle;" />, obtemos a área sob f(x) no intervalo [a,b]. Este limite é chamado de <b>soma de Riemann</b>.</p>
+			<p>Certamente foi bastante trabalhoso encontrar a resposta correta das duas questões anteriores. Imagine o trabalho de fazermos aquele cálculo para N = 1000. Nós fizemos isso para você e o resultado é: soma inferior igual a <b><span id="s_inf"></span></b> e soma superior igual a <b><span id="s_sup"></span></b> (observe como a diferença entre as duas somas diminuiu ainda mais). Mas e para N igual a um milhão, um bilhão...?</p>
+			<p>Para solucionar este problema existe o <b>teorema fundamental do Cálculo</b>. Ele estabelece que a derivação e a integração são operações inversas. Ou seja, se g' é a derivada de g, então g é a integral de g'. Na verdade, o correto é escrever assim:</p>
+			<p><img src="img/ex3_v2.gif" alt="" height="41" width="227" style="vertical-align:middle;" /></p>
+			<p>Vejamos: sabendo que o gráfico apresentado acima é o da função f(x) = g'(x) = <span id="ex3_funcao"></span>, você pode determinar a área sob ela utilizando as técnicas de integração que você aprendeu. Faça isso agora: encontre a função g(x) que, quando derivada, resulta em g'(x) = <span id="ex3_funcao"></span>. Em seguida, calcule a diferença g(b) - g(a) e escreva-a abaixo:</p>
+			<p><img src="img/ex3_v2-2.gif" alt="" height="41" width="249" style="vertical-align:middle;" /> <input id="U-ex3" type="text" size="6" maxlength="4" style="vertical-align:-15%;" ></p>
+			<p><b>Dica:</b> use uma tabela de integrais como <a href="http://pt.wikipedia.org/wiki/Tabela_de_derivadas" target="_blank">esta</a>.</p>
+		<!--<p class="proximo visible"><span class="next-button3">Próximo</span></p>-->
 		<p class="terminei invisible"><span class="check-button3">Terminei</span></p>
 		</div>
-		
-		<div id="frame01">
-			<p class="obs"><strong></strong></p>
-		</div>
-
 		<p id="message3"></p>
+		<div id="frame03" style="display:none">
+			<p><i>Observe como o resultado obtido pelo teorema fundamental do Cálculo é muito próximo daquele que obtivemos somando N = 1000 elementos de área. Isto significa que, ao invés de somarmos elementos de área (soma de Riemann), podemos simplesmente procurar pela função g cuja derivada é a curva sob a qual queremos encontrar a área, e calcular g(b) - g(a).</p></i>
+		</div>
 
 	</div>
 			
@@ -140,19 +135,19 @@
 			<p>Outro teorema importante do cálculo integral é o do <b>valor médio</b>:</p>
 			<p>Existe ao menos um &#958; &#8712; [a,b] tal que <img src="img/ex4_1.gif" alt="" height="41" width="218" style="vertical-align:middle;" />.</p>
 			<p>Mas não deixe a aparência desta expressão impressioná-lo(a), pois o significado dela é muito simples: independentemente de qual seja a função f(x) e o intervalo [a,b], existe um retângulo de base (b - a) e altura f(&#958;) cuja área é igual à área procurada (a integral de f(x) no intervalo [a,b]). Vejamos por partes...</p>
-			<p>No plano cartesiano acima, arraste o ponto m até a abscissa - dentro do intervalo [a,b] - em que f(m) é <b>mínima</b> no intervalo [a,b]. Ao concluir, pressione "Próximo".</p>
+			<p>No plano cartesiano acima, arraste o ponto m até a abscissa - dentro do intervalo [a,b] - em que f(x) é <b>mínima</b> no intervalo [a,b]. Ao concluir, pressione "Próximo".</p>
 		</div>
 		<p class="visible proximo01"><span class="next-button4">Próximo</span></p>
 			
 		<div id="frame04-2" style="display:none">
 			<p>Imagine agora uma função g<sub>1</sub>(x) = f(m), ou seja, uma reta horizontal em y = f(m). f(m) é apenas um número. Vamos chamá-lo de f<sub>min</sub> para simplificar.</p>
-			<p>Como <img src="img/ex4_2.gif" alt="" height="17" width="113" style="vertical-align:-25%;" /> em <b>todo</b> o intervalo [a,b], a área sob g<sub>1</sub>(x), que é simplesmente a área do retângulo com borda cinza na figura, é sempre menor ou igual à área sob f(x) (visualize mentalmente as áreas no plano cartesiano acima). Esta área é igual a f<sub>min</sub>(b - a) (a altura vezes a base do retângulo). Entenda isso antes de prosseguir.</p>
+			<p>Como <img src="img/ex4_2.gif" alt="" height="17" width="113" style="vertical-align:-25%;" /> em <b>todo</b> o intervalo [a,b], a área sob g<sub>1</sub>(x), que é simplesmente a área do retângulo com borda cinza na figura, é sempre menor ou igual à área sob f(x) (visualize as áreas no plano cartesiano acima). Esta área é igual a f<sub>min</sub>(b - a) (a altura vezes a base do retângulo). Entenda isso antes de prosseguir.</p>
 		
 		<p class="proximo02 invisible"><span id="next-button4-2" class="next-button4-2">Próximo</span></p>
 		</div>
 		
 		<div id="frame04-3" style="display:none">
-			<p>Agora faça o contrário: posicione o ponto m de modo que f(m) seja <b>máxima</b> no intervalo [a,b]. Ao concluir, pressione "Próximo".</p>
+			<p>Agora faça o contrário: posicione o ponto m de modo que f(x) seja <b>máxima</b> no intervalo [a,b]. Ao concluir, pressione "Próximo".</p>
 		
 		<p class="invisible proximo03"><span id="next-button4-3" class="next-button4-3">Próximo</span></p>
 		</div>
@@ -241,8 +236,8 @@
 	<div id="ex6">
 		<div id="frame01" class="active visible">
 			<p>Conforme vimos, o teorema fundamental do cálculo pode nos auxiliar bastante quando sabemos determinar analiticamente (ie, com "lápis e papel") a primitiva de uma função. No entanto, a maioria das situações reais não são assim. De fato, muitos fenômenos são caracterizados por funções cujas integrais simplesmente não têm representação analítica. Para esses casos empregam-se computadores e <b>métodos numéricos de integração</b>.</p>
-			<p>Para resolver uma integral com um computador podemos, por exemplo, instruí-lo a calcular as somas inferior e/ou superior para &#916;x bem pequeno, e assumir esse valor como "a área" procurada (isto implica também na necessidade de se avaliar o <b>erro</b> no cálculo da integral. Mas não vamos nos preocupar com isso aqui). As somas inferior e superior são a aproximação mais simples possível, embora não sejam muito utilizadas, devido ao grande erro inerente a elas.</p>
-			<p>Mas há vários outros métodos. Um exemplo simples de entender é a regra do trapézio, através do qual usamos não retângulos como elementos de área, mas trapézios, como está agora exibido no gráfico acima. Deste modo, o que fazemos é somar as áreas dos N = 4 trapézios acima e tomá-la como a integral procurada. Faça isso: calcule a área abaixo da curva através da regra do trapézio.</p>
+			<p>Para resolver uma integral com um computador podemos, por exemplo, instruí-lo a calcular as somas inferior e/ou superior para N bem grande, e assumir esse valor como "a área" procurada (isto implica também na necessidade de se avaliar o <b>erro</b> no cálculo da integral, mas não vamos nos preocupar com isso aqui). As somas inferior e superior são a aproximação mais simples possível, embora não sejam muito utilizadas, devido ao grande erro inerente a elas.</p>
+			<p>Mas há vários outros métodos. Um exemplo simples de entender é a regra do trapézio, através do qual usamos não retângulos como elementos de área, mas trapézios, como está agora exibido no gráfico acima. Deste modo, o que fazemos é somar as áreas dos N = 4 trapézios acima e tomá-la como a integral procurada. Faça isso: calcule a área abaixo da curva somando as áreas dos N trapézios.</p>
 			<p>Área sob a curva f(x) pela regra do trapézio = <input id="X-ex6" type="text" size="6" maxlength="4"><!--onChange='checkNum(this)'--></p>
 		</div>
 	
