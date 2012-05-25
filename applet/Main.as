@@ -191,10 +191,9 @@ package
 			dictionaryFunctions["1/x"] = 1;
 			dictionaryFunctions["x <SUP> 3 </SUP> - 4x <SUP> 2 </SUP> - 11x + 30"] = 2;
 			dictionaryFunctions["x<SUP>3</SUP> - x<SUP>2</SUP> + 5"] = 3;
-			dictionaryFunctions["-ln|x|"] = 4;
-			dictionaryFunctions["cos(x)"] = 5;
-			dictionaryFunctions["sen(x) . cos(x)"] = 6;
-			dictionaryFunctions["sen(x) + 2"] = 7;
+			dictionaryFunctions["cos(x) + 2"] = 4;
+			dictionaryFunctions["sen(x) . cos(x) + 2"] = 5;
+			dictionaryFunctions["sen(x) + 2"] = 6;
 			
 		}
 		
@@ -284,9 +283,8 @@ package
 			funcoes.push(new FunctionInfo(function(x:Number):Number { return 1/x;}, function(x:Number):Number { return Math.log(x);}, new Point(0, 5), new Point(0, 5), 1, 3, 2, "1/x", "ln |x|"));
 			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.pow(x, 3) - 4 * Math.pow(x, 2) - 11*x + 30;}, function(x:Number):Number { return Math.pow(x, 4)/4 - 4 * Math.pow(x, 3)/3 - 11 * Math.pow(x, 2)/2 + 30 * x;}, new Point(0, 0), new Point(0, 0), 0, 0, 0, "x <SUP> 3 </SUP> - 4x <SUP> 2 </SUP> - 11x + 30", "x<SUP>4</SUP>/4 - 4x<SUP>3</SUP>/3 - 11x<SUP>2</SUP>/2 + 30x"));
 			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.pow(x, 3) - Math.pow(x, 2) + 5;}, function(x:Number):Number { return Math.pow(x, 4)/4 - Math.pow(x, 3)/3 + 5 * x;}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "x<SUP>3</SUP> - x<SUP>2</SUP> + 5", "x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x"));
-			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.log(x);}, function(x:Number):Number { return -x * Math.log(x) + x;}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "-ln|x|", "-x . ln|x| + x"));
-			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.cos(x);}, function(x:Number):Number { return Math.sin(x);}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "cos(x)", "sen(x)"));
-			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.sin(x) * Math.cos(x);}, function(x:Number):Number { return -Math.pow(Math.cos(x), 2)/2;}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "sen(x) . cos(x)", "-cos<SUP>2</SUP>(x)/2"));
+			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.cos(x) + 2;}, function(x:Number):Number { return Math.sin(x);}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "cos(x) + 2", "sen(x)"));
+			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.sin(x) * Math.cos(x) + 2;}, function(x:Number):Number { return -Math.pow(Math.cos(x), 2)/2;}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "sen(x) . cos(x) + 2", "-cos<SUP>2</SUP>(x)/2"));
 			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.sin(x) + 2;}, function(x:Number):Number { return -Math.cos(x) + 2 * x;}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "sen(x) + 2", "-cos(x) + 2x"));
 			
 		}
