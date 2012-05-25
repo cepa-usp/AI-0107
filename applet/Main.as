@@ -603,6 +603,29 @@ package
 			return xNumber.toFixed(2);
 		}
 		
+		private function setRange(xmin, xmax, ymin, ymax):Boolean
+		{
+			var posA:Number = graph.pixel2x(pontoA.x - graph.x);
+			var posB:Number = graph.pixel2x(pontoB.x - graph.x);
+			var posM:Number = graph.pixel2x(pontoM.x - graph.x);
+			
+			graph.setRange(xmin, xmax, ymin, ymax);
+			graph.draw();
+			
+			pontoA.x = graph.x2pixel(posA) + graph.x;
+			pontoA.y = graph.y2pixel(0) + graph.y;
+			
+			pontoB.x = graph.x2pixel(posB) + graph.x;
+			pontoB.y = graph.y2pixel(0) + graph.y;
+			
+			pontoM.x = graph.x2pixel(posM) + graph.x;
+			pontoM.y = graph.y2pixel(0) + graph.y;
+			
+			drawAreas();
+			
+			return true;
+		}
+		
 		//------------------------------------------------
 		//Set e Get para a propriedade A (seta o valor de x e retorna o valor de x do ponto A).
 		private function setA(value:String):Boolean
@@ -936,6 +959,7 @@ package
 					ExternalInterface.addCallback("setFunction", setFunction);
 					ExternalInterface.addCallback("doNothing", doNothing);
 					ExternalInterface.addCallback("lock", lock);
+					ExternalInterface.addCallback("range", setRange);
 					trace("External interface ok.");
                 }
 				catch (error:SecurityError)
