@@ -34,16 +34,16 @@ var funcao = [
     f_display: "x<SUP>3</SUP> - x<SUP>2</SUP> + 5",
     if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x",
   },*/
-  {
+  /*{
     f_display: "-ln|x|",
     if_display: "∫ f(x) dx = -ln|x|",
-  },
+  },*/
   {
-    f_display: "cos(x)",
+    f_display: "cos(x) + 2",
     if_display: "∫ f(x) dx = cos(x)",
   },
   {
-    f_display: "sen(x) . cos(x)",
+    f_display: "sen(x) . cos(x) + 2",
     if_display: "∫ f(x) dx = sen(x) . cos(x)",
   },
    {
