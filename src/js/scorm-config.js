@@ -518,7 +518,10 @@ function initAI () {
   
   // A tentativa de conexão com o LMS foi bem sucedida.
   if (connected) {
-  
+	
+	if(scorm.get("cmi.mode") != "normal") return;
+	
+	scorm.set("cmi.exit","suspend");
     // Verifica se a AI já foi concluída.
     var completionstatus = scorm.get("cmi.completion_status");
     
@@ -595,11 +598,15 @@ function initAI () {
 function save2LMS () {
   if (scorm.connection.isActive) {
   
+	if(scorm.get("cmi.mode") != "normal") return;
+  
     // Salva no LMS a nota do aluno.
     var success = scorm.set("cmi.score.raw", score);
   
     // Notifica o LMS que esta atividade foi concluída.
     success = scorm.set("cmi.completion_status", (completed ? "completed" : "incomplete"));
+	
+    success = scorm.set("cmi.success_status", (completed ? "passed" : "failed"));
     
     // Salva no LMS o exercício que deve ser exibido quando a AI for acessada novamente.
     success = scorm.set("cmi.location", scormExercise);
