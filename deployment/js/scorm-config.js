@@ -93,7 +93,9 @@ function configAi () {
   //Deixa a aba "Orientações" ativa no carregamento da atividade
   $('#exercicios').tabs({ selected: 0 });
 
-
+  //Configura exibição do gráfico
+  ai.setVisible("MEAN_VALUE",false);
+  
   // Habilita/desabilita a visualização da mediatriz
   $('#exercicios').tabs({
     select: function(event, ui) {
