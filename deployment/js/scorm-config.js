@@ -627,6 +627,8 @@ function evaluateExercise (event) {
   
   // Avalia a nota
   var currentScore = getScore(screenExercise);
+  score += currentScore / N_EXERCISES;
+  
   if(exOk == false) return;
   console.log(screenExercise + "\t" + currentScore);
   // Mostra a mensagem de erro/acerto
