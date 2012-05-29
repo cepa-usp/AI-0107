@@ -99,7 +99,6 @@ package
 			configFuncoes();
 			configPontos();
 			configAreas();
-			configExternalInterface();
 			
 			funcaoAtual = -1;
 			
@@ -116,6 +115,7 @@ package
 			timeToShow.addEventListener(TimerEvent.TIMER_COMPLETE, showMouseCoords);
 			
 			//if(ExternalInterface.available) ExternalInterface.call("getAi");
+			configExternalInterface();
 		}
 		
 		private function showMouseCoords(e:TimerEvent):void 
