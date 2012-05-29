@@ -93,19 +93,6 @@ function configAi () {
   //Deixa a aba "Orientações" ativa no carregamento da atividade
   $('#exercicios').tabs({ selected: 0 });
 
-  //Configura exibição do gráfico
-  ai.setVisible("MEAN_VALUE",false);
-  
-  // Habilita/desabilita a visualização da mediatriz
-  $('#exercicios').tabs({
-    select: function(event, ui) {
-    
-      screenExercise = ui.index;  
-	  selectExercise(screenExercise);
-	  
-    }
-  });
-
   // Configurações dos botões em geral
   $('.check-button').button().click(evaluateExercise);
   $('.check-button2').button().click(evaluateExercise);
@@ -248,12 +235,13 @@ function selectExercise (exercise) {
 }
 
 function checkCallbacks () {
+	var swfOK = false;
 	var t2 = new Date().getTime();
 	ai = document.getElementById("ai");
 	try {
 		ai.doNothing();
 		message("swf ok!");
-		iniciaAtividade();
+		swfOK = true;
 	}
 	catch(error) {
 		++init_tries;
@@ -266,6 +254,8 @@ function checkCallbacks () {
 			setTimeout("checkCallbacks()", 1000);
 		}
 	}
+	
+	if(swfOK) iniciaAtividade();
 }
 
 function getAi(){
@@ -278,6 +268,19 @@ function iniciaAtividade(){
   
   //INICIALIZA A ATIVIDADE 
   applyAndSortFunctions();  
+  
+  //Configura exibição do gráfico
+  ai.setVisible("MEAN_VALUE",false);
+  
+  // Habilita/desabilita a visualização da mediatriz
+  $('#exercicios').tabs({
+    select: function(event, ui) {
+    
+      screenExercise = ui.index;  
+	  selectExercise(screenExercise);
+	  
+    }
+  });
 
   //Configuração do botão inverter do primeiro e segundo exercício
   /*$('.invert-button').button().click(function(){
