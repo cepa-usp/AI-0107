@@ -344,18 +344,19 @@ function iniciaAtividade(){
   $('#next-button5-c').button().click(MostraTexto5);
     
   //Textfields aceitam apenas número, ponto e vírgula.
-  $('input').keyup(function(e) {
-  
-    var a = [];
+  $('input').keypress(function(e) {
+	var a = [];
     var k = e.which;
-	    
-    for (i = 44; i < 58; i++)
-        a.push(i);
     
-    if (!(a.indexOf(k)>=0))
-        e.preventDefault();
-	
-	  
+    for (i = 44; i < 58; i++)
+		if (i != 47) a.push(i)
+    
+        if (!($.inArray(k,a)>=0))
+            e.preventDefault();
+  });
+  
+  $('input').keyup(function(e) {
+		
 	var value01 = $("input[type=text][id=U-ex1]").val();
 	var value02 = $("input[type=text][id=K-ex1]").val();
 	var value03 = $("input[type=text][id=U-ex3]").val();
