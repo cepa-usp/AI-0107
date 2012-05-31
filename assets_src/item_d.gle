@@ -1,0 +1,40 @@
+!
+! File: item_a
+! Author: Ivan Ramos Pagnossin
+! AI-0107
+!
+
+size 12 10
+set font texcmr
+set texlabels 1
+
+begin graph
+   math
+   xaxis min 0 max 2 dticks 1 dsubticks 0.1 format frac
+   yaxis min 0 max 10 dticks 5 dsubticks 1 format frac
+   let d1 = exp(x^2)
+   let d2 = exp(x)
+   key pos tl
+   d1 line color red
+   d2 line color blue
+   xtitle "$x$"
+   ytitle "$y$"
+end graph
+
+begin key
+   nobox
+   pos tl
+   offset 0.2 0
+   text "$e^{x^2}$" line color red
+   text "$e^x$" line color blue
+end key
+
+!set color blue
+!set just LEFT
+!amove xg(0.7) yg(0.1)
+!tex "$x^2\sin^2(x)$"
+
+!set color red
+!set just RIGHT
+!amove xg(0.6) yg(0.25)
+!tex "$x\sin^2(x)$"
