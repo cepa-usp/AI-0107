@@ -19,16 +19,16 @@ var exOk;
 
 var funcao = [
   {
-    f_display: "e <SUP> x </SUP>",
-    if_display: "∫ f(x) dx = e <SUP> x </SUP>",
+    f_display: "e<SUP>x</SUP>",
+    if_display: "∫ f(x) dx = e<SUP>x</SUP>",
   },
   {
     f_display: "1/x",
     if_display: "∫ f(x) dx = ln |x|",
   },
   {
-    f_display: "x <SUP> 3 </SUP> - 4x <SUP> 2 </SUP> - 11x + 30",
-    if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - 4x<SUP>3</SUP>/3 - 11x<SUP>2</SUP>/2 + 30x",
+    f_display: "x<SUP>3</SUP> - 4x<SUP>2</SUP> - 11x + 30",
+    if_display: "∫ f(x) dx = x<SUP>3</SUP> - 4x<SUP>2</SUP> - 11x + 30",
   },
   /*{
     f_display: "x<SUP>3</SUP> - x<SUP>2</SUP> + 5",
@@ -43,8 +43,8 @@ var funcao = [
     if_display: "∫ f(x) dx = cos(x) + 2",     
   },
   {
-    f_display: "x <SUP>2</SUP> + 1", //x<SUP>2</SUP> + 1
-    if_display: "∫ f(x) dx = x <SUP>2</SUP> + 1",
+    f_display: "x<SUP>2</SUP> + 1", 
+    if_display: "∫ f(x) dx = x<SUP>2</SUP> + 1",
   },
    {
     f_display: "sen(x) + 2",
@@ -151,6 +151,7 @@ function selectExercise (exercise) {
 			ai.lock("B", true);
 			//console.log(n);
 			ai.set("N", n);
+			ai.setVisible("M",false);
 			ai.setVisible("LOWER_SUM",true);
 			ai.setVisible("UPPER_SUM",false);
 			ai.setVisible("AREA",false);
@@ -175,6 +176,7 @@ function selectExercise (exercise) {
 			ai.lock("A", true);
 			ai.lock("B", true);
 			
+			ai.setVisible("M",false);
 			ai.setVisible("LOWER_SUM",true);
 			ai.setVisible("UPPER_SUM",false);
 			ai.setVisible("AREA",false);
@@ -191,7 +193,8 @@ function selectExercise (exercise) {
 			$('#s_sup').html(s_sup.toFixed(n_casas).replace(".", ","));
 			
 			//Mostra função sorteada no corpo do exercício 3.
-			$('#ex3_funcao').html(funcao[sorteado].f_display);
+			$('#ex3a_funcao').html(funcao[sorteado].f_display);
+			$('#ex3b_funcao').html(funcao[sorteado].f_display);
 			
 		//MODO DE DEBUG
 		//var right_answer_1 = ai.get("AREA");
@@ -306,6 +309,7 @@ function iniciaAtividade(){
   
   //Configura exibição do gráfico
   ai.setVisible("MEAN_VALUE",false);
+  ai.setVisible("M",false);
   
   // Habilita/desabilita a visualização da mediatriz
   $('#exercicios').tabs({
