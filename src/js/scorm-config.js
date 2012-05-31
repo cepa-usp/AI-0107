@@ -43,8 +43,8 @@ var funcao = [
     if_display: "∫ f(x) dx = cos(x) + 2",     
   },
   {
-    f_display: "x^2 + 1",
-    if_display: "∫ f(x) dx = x <SUP> 2 </SUP> + 1",
+    f_display: "x <SUP>2</SUP> + 1", //x<SUP>2</SUP> + 1
+    if_display: "∫ f(x) dx = x <SUP>2</SUP> + 1",
   },
    {
     f_display: "sen(x) + 2",
@@ -126,7 +126,8 @@ function selectExercise (exercise) {
 	switch(exercise) {
 		case 1:
 			console.log("Configurando o exercício 1");
-					
+			
+			ai.setVisible("M",false);
 			ai.setVisible("LOWER_SUM",true);
 			ai.setVisible("UPPER_SUM",false);
 			ai.setVisible("AREA",false);
@@ -1145,7 +1146,7 @@ log.error = function (message) {
 function applyAndSortFunctions(){
 	sorteado = rand(0,funcao.length-1);
 	ai.setFunction(funcao[sorteado].f_display);
-	//alert(sorteado);
+	alert(sorteado);
 }
 
 function rand(l,u) // lower bound and upper bound
