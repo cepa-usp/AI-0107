@@ -120,6 +120,7 @@ package
 		
 		private function showMouseCoords(e:TimerEvent):void 
 		{
+			if (stage.mouseX > botoes.x - 5) return;
 			Actuate.tween(mouseCoord, 1, { alpha:1 } );
 		}
 		
@@ -192,7 +193,7 @@ package
 			dictionaryFunctions["x <SUP> 3 </SUP> - 4x <SUP> 2 </SUP> - 11x + 30"] = 2;
 			dictionaryFunctions["x<SUP>3</SUP> - x<SUP>2</SUP> + 5"] = 3;
 			dictionaryFunctions["cos(x) + 2"] = 4;
-			dictionaryFunctions["sen(x) . cos(x) + 2"] = 5;
+			dictionaryFunctions["x^2 + 1"] = 5;
 			dictionaryFunctions["sen(x) + 2"] = 6;
 			
 		}
@@ -284,7 +285,7 @@ package
 			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.pow(x, 3) - 4 * Math.pow(x, 2) - 11*x + 30;}, function(x:Number):Number { return Math.pow(x, 4)/4 - 4 * Math.pow(x, 3)/3 - 11 * Math.pow(x, 2)/2 + 30 * x;}, new Point(0, 0), new Point(0, 0), 0, 0, 0, "x <SUP> 3 </SUP> - 4x <SUP> 2 </SUP> - 11x + 30", "x<SUP>4</SUP>/4 - 4x<SUP>3</SUP>/3 - 11x<SUP>2</SUP>/2 + 30x"));
 			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.pow(x, 3) - Math.pow(x, 2) + 5;}, function(x:Number):Number { return Math.pow(x, 4)/4 - Math.pow(x, 3)/3 + 5 * x;}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "x<SUP>3</SUP> - x<SUP>2</SUP> + 5", "x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x"));
 			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.cos(x) + 2;}, function(x:Number):Number { return Math.sin(x) + 2 * x;}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "cos(x) + 2", "sen(x)"));
-			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.sin(x) * Math.cos(x) + 2;}, function(x:Number):Number { return -Math.pow(Math.cos(x), 2)/2 + 2 * x;}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "sen(x) . cos(x) + 2", "-cos<SUP>2</SUP>(x)/2"));
+			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.pow(x, 2) + 1;}, function(x:Number):Number { return Math.pow(x, 3)/3 + x;}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "sen(x) . cos(x) + 2", "-cos<SUP>2</SUP>(x)/2"));
 			funcoes.push(new FunctionInfo(function(x:Number):Number { return Math.sin(x) + 2;}, function(x:Number):Number { return -Math.cos(x) + 2 * x;}, new Point(0, 5), new Point(-5, 5), 1, 4, 2, "sen(x) + 2", "-cos(x) + 2x"));
 			
 		}
@@ -343,6 +344,11 @@ package
 			
 			var posSnap = graph.x2pixel(Math.round(graph.pixel2x(pontoArraste.x - graph.x) / 0.5) * 0.5) + graph.x;
 			pontoArraste.x = Math.abs(posSnap - posCalc) < 5 ? posSnap: posCalc;
+			
+			if (pontoArraste == pontoM) {
+				if (Math.abs(pontoArraste.x - pontoA.x) <= 5) pontoArraste.x = pontoA.x;
+				else if (Math.abs(pontoArraste.x - pontoB.x) <= 5) pontoArraste.x = pontoB.x;
+			}
 			
 			drawAreas();
 		}
