@@ -34,16 +34,16 @@ var funcao = [
     f_display: "x<SUP>3</SUP> - x<SUP>2</SUP> + 5",
     if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x",
   },*/
-  {
+  /*{
     f_display: "-ln|x|",
     if_display: "∫ f(x) dx = -ln|x|",
-  },
+  },*/
   {
-    f_display: "cos(x)",
+    f_display: "cos(x) + 2",
     if_display: "∫ f(x) dx = cos(x)",
   },
   {
-    f_display: "sen(x) . cos(x)",
+    f_display: "sen(x) . cos(x) + 2",
     if_display: "∫ f(x) dx = sen(x) . cos(x)",
   },
    {
@@ -92,17 +92,6 @@ function configAi () {
 	
   //Deixa a aba "Orientações" ativa no carregamento da atividade
   $('#exercicios').tabs({ selected: 0 });
-
-
-  // Habilita/desabilita a visualização da mediatriz
-  $('#exercicios').tabs({
-    select: function(event, ui) {
-    
-      screenExercise = ui.index;  
-	  selectExercise(screenExercise);
-	  
-    }
-  });
 
   // Configurações dos botões em geral
   $('.check-button').button().click(evaluateExercise);
@@ -246,12 +235,13 @@ function selectExercise (exercise) {
 }
 
 function checkCallbacks () {
+	var swfOK = false;
 	var t2 = new Date().getTime();
 	ai = document.getElementById("ai");
 	try {
 		ai.doNothing();
 		message("swf ok!");
-		iniciaAtividade();
+		swfOK = true;
 	}
 	catch(error) {
 		++init_tries;
@@ -264,6 +254,8 @@ function checkCallbacks () {
 			setTimeout("checkCallbacks()", 1000);
 		}
 	}
+	
+	if(swfOK) iniciaAtividade();
 }
 
 function getAi(){
@@ -276,6 +268,19 @@ function iniciaAtividade(){
   
   //INICIALIZA A ATIVIDADE 
   applyAndSortFunctions();  
+  
+  //Configura exibição do gráfico
+  ai.setVisible("MEAN_VALUE",false);
+  
+  // Habilita/desabilita a visualização da mediatriz
+  $('#exercicios').tabs({
+    select: function(event, ui) {
+    
+      screenExercise = ui.index;  
+	  selectExercise(screenExercise);
+	  
+    }
+  });
 
   //Configuração do botão inverter do primeiro e segundo exercício
   /*$('.invert-button').button().click(function(){
@@ -339,18 +344,19 @@ function iniciaAtividade(){
   $('#next-button5-c').button().click(MostraTexto5);
     
   //Textfields aceitam apenas número, ponto e vírgula.
-  $('input').keyup(function(e) {
-  
-    var a = [];
+  $('input').keypress(function(e) {
+	var a = [];
     var k = e.which;
-	    
-    for (i = 44; i < 58; i++)
-        a.push(i);
     
-    if (!(a.indexOf(k)>=0))
-        e.preventDefault();
-	
-	  
+    for (i = 44; i < 58; i++)
+		if (i != 47) a.push(i)
+    
+        if (!($.inArray(k,a)>=0))
+            e.preventDefault();
+  });
+  
+  $('input').keyup(function(e) {
+		
 	var value01 = $("input[type=text][id=U-ex1]").val();
 	var value02 = $("input[type=text][id=K-ex1]").val();
 	var value03 = $("input[type=text][id=U-ex3]").val();
@@ -516,7 +522,10 @@ function initAI () {
   
   // A tentativa de conexão com o LMS foi bem sucedida.
   if (connected) {
-  
+	
+	if(scorm.get("cmi.mode") != "normal") return;
+	
+	scorm.set("cmi.exit","suspend");
     // Verifica se a AI já foi concluída.
     var completionstatus = scorm.get("cmi.completion_status");
     
@@ -593,11 +602,15 @@ function initAI () {
 function save2LMS () {
   if (scorm.connection.isActive) {
   
+	if(scorm.get("cmi.mode") != "normal") return;
+  
     // Salva no LMS a nota do aluno.
     var success = scorm.set("cmi.score.raw", score);
   
     // Notifica o LMS que esta atividade foi concluída.
     success = scorm.set("cmi.completion_status", (completed ? "completed" : "incomplete"));
+	
+    success = scorm.set("cmi.success_status", (completed ? "passed" : "failed"));
     
     // Salva no LMS o exercício que deve ser exibido quando a AI for acessada novamente.
     success = scorm.set("cmi.location", scormExercise);
@@ -625,6 +638,8 @@ function evaluateExercise (event) {
   
   // Avalia a nota
   var currentScore = getScore(screenExercise);
+  score += currentScore / N_EXERCISES;
+  
   if(exOk == false) return;
   console.log(screenExercise + "\t" + currentScore);
   // Mostra a mensagem de erro/acerto
