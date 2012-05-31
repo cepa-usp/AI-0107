@@ -189,12 +189,12 @@ package
 			
 			dictionaryFunctions = new Dictionary();
 			
-			dictionaryFunctions["e <SUP> x </SUP>"] = 0;
+			dictionaryFunctions["e<SUP>x</SUP>"] = 0;
 			dictionaryFunctions["1/x"] = 1;
-			dictionaryFunctions["x <SUP> 3 </SUP> - 4x <SUP> 2 </SUP> - 11x + 30"] = 2;
+			dictionaryFunctions["x<SUP>3</SUP> - 4x<SUP>2</SUP> - 11x + 30"] = 2;
 			dictionaryFunctions["x<SUP>3</SUP> - x<SUP>2</SUP> + 5"] = 3;
 			dictionaryFunctions["cos(x) + 2"] = 4;
-			dictionaryFunctions["x <SUP>2</SUP> + 1"] = 5;
+			dictionaryFunctions["x<SUP>2</SUP> + 1"] = 5;
 			dictionaryFunctions["sen(x) + 2"] = 6;
 			
 		}
