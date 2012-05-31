@@ -1155,7 +1155,7 @@ log.error = function (message) {
 function applyAndSortFunctions(){
 	sorteado = rand(0,funcao.length-1);
 	ai.setFunction(funcao[sorteado].f_display);
-	alert(sorteado);
+	//alert(sorteado);
 }
 
 function rand(l,u) // lower bound and upper bound
