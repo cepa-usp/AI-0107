@@ -134,6 +134,12 @@ function selectExercise (exercise) {
 			ai.setVisible("MEAN_VALUE",false);
 			ai.setVisible("MONTE_CARLO",false);
 			ai.set("N",5);
+			
+		//MODO DE DEBUG
+		var right_answer = ai.get("LOWER_SUM");
+		var right_answer2 = ai.get("UPPER_SUM");
+		console.log('resposta correta:' + right_answer);
+		console.log('resposta2 correta:' + right_answer2);
 			break;
 			
 		case 2:
@@ -150,6 +156,15 @@ function selectExercise (exercise) {
 			ai.setVisible("PARALLELOGRAM_SUM",false);
 			ai.setVisible("MEAN_VALUE",false);
 			ai.setVisible("MONTE_CARLO",false);	
+			
+		//MODO DE DEBUG
+		var right_answer_1 = ai.get("N");
+		var right_answer_2 = ai.get("LOWER_SUM");
+		var right_answer_3 = ai.get("UPPER_SUM");
+		console.log('resposta 1 correta:' + right_answer_1);
+		console.log('resposta 2 correta:' + right_answer_2);
+		console.log('resposta 3 correta:' + right_answer_3);
+		
 			break;
 			
 		case 3:
@@ -176,6 +191,11 @@ function selectExercise (exercise) {
 			
 			//Mostra função sorteada no corpo do exercício 3.
 			$('#ex3_funcao').html(funcao[sorteado].f_display);
+			
+		//MODO DE DEBUG
+		var right_answer_1 = ai.get("AREA");
+		console.log('resposta 1 correta:' + right_answer_1);
+	
 			break;
 			
 		case 4:
@@ -192,6 +212,11 @@ function selectExercise (exercise) {
 			ai.setVisible("MEAN_VALUE",true);
 			ai.setVisible("MONTE_CARLO",false);
 			ai.setVisible("M", true);
+			
+		//MODO DE DEBUG
+		var right_answer_1 = ai.get("MEAN_VALUE");
+		console.log('resposta 1 correta:' + right_answer_1);
+		
 			break;
 			
 		case 5:
@@ -208,6 +233,10 @@ function selectExercise (exercise) {
 			ai.setVisible("MEAN_VALUE",true);
 			ai.setVisible("MONTE_CARLO",false);
 			ai.setVisible("M", true);
+			
+		//MODO DE DEBUG
+		console.log('resposta correta em ordem: \na)MAIOR \nb)MENOR \nc)MAIOR \nd)MAIOR');
+		
 			break;
 		
 		case 6:
@@ -226,6 +255,11 @@ function selectExercise (exercise) {
 			ai.setVisible("A", false);
 			ai.setVisible("B", false);
 			ai.setVisible("M", false);
+			
+		//MODO DE DEBUG
+		var right_answer_1 = ai.get("PARALLELOGRAM_SUM");
+		console.log('resposta 1 correta:' + right_answer_1);
+		
 			break;
 			
 		default:
@@ -752,10 +786,10 @@ function getScore (exercise) {
 		
 		var right_answer = ai.get("LOWER_SUM");
 		var right_answer2 = ai.get("UPPER_SUM");
-		//console.log(user_answer);
-	    //console.log(user_answer2);
-		//console.log(right_answer);
-		//console.log(right_answer2);
+		//console.log('resposta do usuário:' + user_answer);
+		//console.log('resposta correta:' + right_answer);
+		//console.log('resposta 2 do usuário:' + user_answer2);
+		//console.log('resposta correta:' + right_answer2);
 		//console.log(evaluate(user_answer, right_answer, TOLERANCE));
 		//console.log(evaluate(user_answer2, right_answer2, TOLERANCE));
 				
