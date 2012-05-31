@@ -745,10 +745,11 @@ function nextExercise () {
 		case 4:
 			document.getElementById('frame04-2').style.display="block";
 			$(".next-button4").button({ disabled: true });	
-			$('#ex4a_m').html(ai.get("M"));
-			$('#ex4b_m').html(ai.get("M"));
-			$('#ex4c_m').html(ai.get("M"));
-			$('#getM').html(ai.get("M"));
+			var m = Number(ai.get("M")).toFixed(1).replace(".", ",");	
+			$('#ex4a_m').html(m);
+			$('#ex4b_m').html(m);
+			$('#ex4c_m').html(m);
+			$('#getM').html(m);
 			
 			break;
 			
