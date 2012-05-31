@@ -19,16 +19,16 @@ var exOk;
 
 var funcao = [
   {
-    f_display: "e <SUP> x </SUP>",
-    if_display: "∫ f(x) dx = e <SUP> x </SUP>",
+    f_display: "e<SUP>x</SUP>",
+    if_display: "∫ f(x) dx = e<SUP>x</SUP>",
   },
   {
     f_display: "1/x",
     if_display: "∫ f(x) dx = ln |x|",
   },
   {
-    f_display: "x <SUP> 3 </SUP> - 4x <SUP> 2 </SUP> - 11x + 30",
-    if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - 4x<SUP>3</SUP>/3 - 11x<SUP>2</SUP>/2 + 30x",
+    f_display: "x<SUP>3</SUP> - 4x<SUP>2</SUP> - 11x + 30",
+    if_display: "∫ f(x) dx = x<SUP>3</SUP> - 4x<SUP>2</SUP> - 11x + 30",
   },
   /*{
     f_display: "x<SUP>3</SUP> - x<SUP>2</SUP> + 5",
@@ -40,11 +40,11 @@ var funcao = [
   },*/
   {
     f_display: "cos(x) + 2",
-    if_display: "∫ f(x) dx = cos(x)",
+    if_display: "∫ f(x) dx = cos(x) + 2",     
   },
   {
-    f_display: "sen(x) . cos(x) + 2",
-    if_display: "∫ f(x) dx = sen(x) . cos(x)",
+    f_display: "x<SUP>2</SUP> + 1", 
+    if_display: "∫ f(x) dx = x<SUP>2</SUP> + 1",
   },
    {
     f_display: "sen(x) + 2",
@@ -126,7 +126,8 @@ function selectExercise (exercise) {
 	switch(exercise) {
 		case 1:
 			console.log("Configurando o exercício 1");
-					
+			
+			ai.setVisible("M",false);
 			ai.setVisible("LOWER_SUM",true);
 			ai.setVisible("UPPER_SUM",false);
 			ai.setVisible("AREA",false);
@@ -136,10 +137,10 @@ function selectExercise (exercise) {
 			ai.set("N",5);
 			
 		//MODO DE DEBUG
-		var right_answer = ai.get("LOWER_SUM");
-		var right_answer2 = ai.get("UPPER_SUM");
-		console.log('resposta correta:' + right_answer);
-		console.log('resposta2 correta:' + right_answer2);
+		//var right_answer = ai.get("LOWER_SUM");
+		//var right_answer2 = ai.get("UPPER_SUM");
+		//console.log('resposta correta:' + right_answer);
+		//console.log('resposta2 correta:' + right_answer2);
 			break;
 			
 		case 2:
@@ -150,6 +151,7 @@ function selectExercise (exercise) {
 			ai.lock("B", true);
 			//console.log(n);
 			ai.set("N", n);
+			ai.setVisible("M",false);
 			ai.setVisible("LOWER_SUM",true);
 			ai.setVisible("UPPER_SUM",false);
 			ai.setVisible("AREA",false);
@@ -158,12 +160,12 @@ function selectExercise (exercise) {
 			ai.setVisible("MONTE_CARLO",false);	
 			
 		//MODO DE DEBUG
-		var right_answer_1 = ai.get("N");
-		var right_answer_2 = ai.get("LOWER_SUM");
-		var right_answer_3 = ai.get("UPPER_SUM");
-		console.log('resposta 1 correta:' + right_answer_1);
-		console.log('resposta 2 correta:' + right_answer_2);
-		console.log('resposta 3 correta:' + right_answer_3);
+		//var right_answer_1 = ai.get("N");
+		//var right_answer_2 = ai.get("LOWER_SUM");
+		//var right_answer_3 = ai.get("UPPER_SUM");
+		//console.log('resposta 1 correta:' + right_answer_1);
+		//console.log('resposta 2 correta:' + right_answer_2);
+		//console.log('resposta 3 correta:' + right_answer_3);
 		
 			break;
 			
@@ -174,6 +176,7 @@ function selectExercise (exercise) {
 			ai.lock("A", true);
 			ai.lock("B", true);
 			
+			ai.setVisible("M",false);
 			ai.setVisible("LOWER_SUM",true);
 			ai.setVisible("UPPER_SUM",false);
 			ai.setVisible("AREA",false);
@@ -190,11 +193,12 @@ function selectExercise (exercise) {
 			$('#s_sup').html(s_sup.toFixed(n_casas).replace(".", ","));
 			
 			//Mostra função sorteada no corpo do exercício 3.
-			$('#ex3_funcao').html(funcao[sorteado].f_display);
+			$('#ex3a_funcao').html(funcao[sorteado].f_display);
+			$('#ex3b_funcao').html(funcao[sorteado].f_display);
 			
 		//MODO DE DEBUG
-		var right_answer_1 = ai.get("AREA");
-		console.log('resposta 1 correta:' + right_answer_1);
+		//var right_answer_1 = ai.get("AREA");
+		//console.log('resposta 1 correta:' + right_answer_1);
 	
 			break;
 			
@@ -214,8 +218,8 @@ function selectExercise (exercise) {
 			ai.setVisible("M", true);
 			
 		//MODO DE DEBUG
-		var right_answer_1 = ai.get("MEAN_VALUE");
-		console.log('resposta 1 correta:' + right_answer_1);
+		//var right_answer_1 = ai.get("MEAN_VALUE");
+		//console.log('resposta 1 correta:' + right_answer_1);
 		
 			break;
 			
@@ -235,7 +239,7 @@ function selectExercise (exercise) {
 			ai.setVisible("M", true);
 			
 		//MODO DE DEBUG
-		console.log('resposta correta em ordem: \na)MAIOR \nb)MENOR \nc)MAIOR \nd)MAIOR');
+		//console.log('resposta correta em ordem: \na)MAIOR \nb)MENOR \nc)MAIOR \nd)MAIOR');
 		
 			break;
 		
@@ -257,8 +261,8 @@ function selectExercise (exercise) {
 			ai.setVisible("M", false);
 			
 		//MODO DE DEBUG
-		var right_answer_1 = ai.get("PARALLELOGRAM_SUM");
-		console.log('resposta 1 correta:' + right_answer_1);
+		//var right_answer_1 = ai.get("PARALLELOGRAM_SUM");
+		//console.log('resposta 1 correta:' + right_answer_1);
 		
 			break;
 			
@@ -305,6 +309,7 @@ function iniciaAtividade(){
   
   //Configura exibição do gráfico
   ai.setVisible("MEAN_VALUE",false);
+  ai.setVisible("M",false);
   
   // Habilita/desabilita a visualização da mediatriz
   $('#exercicios').tabs({
@@ -739,7 +744,12 @@ function nextExercise () {
 		// Caso seja o ex4	
 		case 4:
 			document.getElementById('frame04-2').style.display="block";
-			$(".next-button4").button({ disabled: true });		
+			$(".next-button4").button({ disabled: true });	
+			$('#ex4a_m').html(ai.get("M"));
+			$('#ex4b_m').html(ai.get("M"));
+			$('#ex4c_m').html(ai.get("M"));
+			$('#getM').html(ai.get("M"));
+			
 			break;
 			
 	}
@@ -1145,7 +1155,7 @@ log.error = function (message) {
 function applyAndSortFunctions(){
 	sorteado = rand(0,funcao.length-1);
 	ai.setFunction(funcao[sorteado].f_display);
-	//alert(sorteado);
+	alert(sorteado);
 }
 
 function rand(l,u) // lower bound and upper bound

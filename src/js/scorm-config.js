@@ -744,7 +744,12 @@ function nextExercise () {
 		// Caso seja o ex4	
 		case 4:
 			document.getElementById('frame04-2').style.display="block";
-			$(".next-button4").button({ disabled: true });		
+			$(".next-button4").button({ disabled: true });	
+			$('#ex4a_m').html(ai.get("M"));
+			$('#ex4b_m').html(ai.get("M"));
+			$('#ex4c_m').html(ai.get("M"));
+			$('#getM').html(ai.get("M"));
+			
 			break;
 			
 	}
