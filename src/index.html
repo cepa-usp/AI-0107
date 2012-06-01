@@ -48,10 +48,9 @@
 
     <!-- Orientações -->
     <div id="orientacoes">
-		<p>Esta Atividade Interativa é um pouco diferente dos questionários que você experimentou até agora. Nele, começaremos com ideias que você já experimentou antes no curso, e iremos além, até conceitos muito interessantes, úteis, mas não por isso complexos.</p>
-		<p>As cinco primeiras questões valem nota, mas a sexta não, pois trata de um assunto não explorado até então. Entretanto, ela é muito interessante e recomendamos fazê-la também.</p>
-		<p>Diferentemente dos questionários anteriores, neste você pode fazer e refazer as questões quantas vezes quiser, sempre valendo nota. Seu objetivo é atingir um aproveitamento de pelo menos 80% (mesmo após atingir esta meta você pode continuar tentando).</p>
-		<p>Então, se por um lado você pode sempre tentar recuperar uma questão perdida, por outro esta questão pesará bastante nessa recuperação, obrigando-o(a) a refazer as questões mais vezes (e a treinar mais, por conseguinte). Por isso, responda as questões com atenção.</p>
+		<p>A janela acima apresenta o gráfico de uma função <img src="img/or_1.gif" alt="" height="20" width="13" style="vertical-align:-30%;" />: <img src="img/or_2.gif" alt="" height="13" width="56" style="vertical-align:-20%;" /> arbitrária (escolhida aleatoriamente pelo software). Nosso objetivo nesta atividade interativa é explorar o processo através do qual podemos determinar a área da região delimitada acima por <img src="img/or_1.gif" alt="" height="20" width="13" style="vertical-align:-30%;" />, abaixo pelo eixo <img src="img/or_3.gif" alt="" height="11" width="12" style="vertical-align:-15%;" />, e à esquerda e à direita pelos pontos <img src="img/or_4.gif" alt="" height="11" width="12" style="vertical-align:-15%;" /> e <img src="img/or_5.gif" alt="" height="16" width="10" style="vertical-align:-15%;" />, respectivamente (experimente arrastá-los). Desenvolveremos os conceitos envolvidos neste processo passo-a-passo; exercício por exercício.
+		<p>Este questionário é avaliativo: metade da nota dele corresponde a seguí-lo até o fim (isto é, você receberá 50% de aproveitamento se apenas chegar no final dele). A outra metade será proporcional à quantidade de respostas corretas que você der.</p>
+		<p><i>obs.</i>: apesar de o questionário ser avaliativo, seu Ambiente Virtual de Aprendizagem (como o Moodle, Blackboard, Sakai <i>etc</i>), se for o caso, pode ter sido configurado para dar peso zero para esta atividade, tornando-a uma atividade complementar.</p>
     </div>	
     
     <!-- Exercício 1 -->
@@ -60,8 +59,8 @@
 	
 		<div id="frame01">
 		
-			<p>A área sob a curva f(x) acima no intervalo [a,b], representada por <img src="img/ex1.gif" alt="" height="41" width="95" style="vertical-align:-38%;" />, pode ser obtida de forma aproximada assim: dividimos a área de nosso interesse em N retângulos de larguras iguais (N = 5, neste caso), mas com alturas que dependem de f(x), e somamos as áreas de cada um desses retângulos.</p>
-			<p>Se escolhermos as alturas dos retângulos de modo que eles estejam sempre <b>abaixo</b> de f(x), como representado acima em vermelho, a soma das áreas será sempre <i>menor</i> que a área de interesse. Esta é a "soma inferior". Faça isso agora: para a situação do plano cartesiano acima, calcule a soma inferior e preencha o campo abaixo <strong>apropriado</strong> (atenção: você deve decidir se preenche o campo à esquerda ou à direita da integral). Ao concluir, pressione "próximo":</p>
+			<p>A área da região sob y = f(x) e acima do eixo x, no intervalo [a,b], representada por <img src="img/ex1.gif" alt="" height="41" width="95" style="vertical-align:-38%;" /> (isto é, a integral definida de f em [a,b]), pode ser obtida de forma aproximada da seguinte maneira: dividimos o intervalo [a,b] em n subintervalos de comprimento (b - a)/n (isto se chama uma partição de [a,b]). Cada subintervalo será a base de um retângulo de altura igual a algum valor de f(x), para x nesse subintervalo (veja a figura). Em seguida, somamos as áreas desses retângulos. Este processo se chama <i>soma de Riemann</i>.</p>
+			<p>Se escolhermos, para a altura de um retângulo qualquer, o menor valor de f(x) naquele subintervalo, como representado acima em vermelho, a soma das áreas será sempre <i>menor</i> que a área de interesse. Esta é a "soma inferior". Faça isso agora: para a situação do plano cartesiano acima, calcule a soma inferior e preencha o campo abaixo <strong>apropriado</strong> (atenção: você deve decidir se preenche o campo à esquerda ou à direita da integral). Ao concluir, pressione "próximo":</p>
 			<p><input id="U-ex1" type="text" size="6" maxlength="4" style="vertical-align:-20%;"/> <img src="img/int_ex1.gif" alt="" height="41" width="134" style="vertical-align:middle;" /> <input id="K-ex1" type="text" size="6" maxlength="4" style="vertical-align:-20%;"/> <!--<span class="invisible invert-button" style="vertical-align:-20%;">Inverter</span>--></p>
 		</div>
 			
@@ -69,7 +68,7 @@
 			
 		<!-- Segunda parte do exercício 1 -->
 		<div id="frame02" style="display:none;">
-			<p>Alternativamente, podemos escolher as alturas dos retângulos de tal modo que eles estejam sempre <b>acima</b> da curva, como representado em azul. Neste caso, a soma das áreas será sempre maior que a área de interesse. É a chamada "soma superior". Calcule-a agora e termine de preencher a desigualdade acima. Pressione "terminei" quando pronto.</p>
+			<p>Alternativamente, podemos escolher, para a altura de um retângulo qualquer, o maior valor de f(x) naquele subintervalo, como representado em azul. Neste caso, a soma das áreas será sempre maior que a área de interesse. É a chamada "soma superior". Calcule-a agora e termine de preencher a desigualdade acima. Pressione "terminei" quando pronto.</p>
 			<!--<p class="obs"><strong>obs</strong>.: caso você tenha invertido as somas inferior e superior, use o botão "inverter" para trocá-las. Além disso, caso queira refazer suas contas, use as duas opções abaixo para selecionar a soma que você gostaria de ver.</p>-->
 			<p>
 				<form id="radio-ex1">
@@ -83,7 +82,7 @@
 			
 	
 		<div id="frame01">
-			<p class="obs"><strong>Dica:</strong> note que as coordenadas do ponto sob o mouse são exibidas no canto superior direito do gráfico.</p>
+			<p class="obs"><strong>Dica:</strong> para ver as coordenadas de um ponto qualquer no plano cartesiano, coloque o mouse sobre ele e aguarde alguns instantes.</p>
 		</div>
 
 		<p id="message1"></p>
@@ -101,7 +100,7 @@
 					<input type="radio" id="radio2-2" name="choice2" value="sup" /> soma superior
 				</form> 
 			</p>
-			<p>Observe como as duas somas estão mais próximas uma da outra, quando comparadas com a questão anterior. Este comportamento progride conforme aumentamos a quantidade N de <b>elementos de área</b>; ou, equivalentemente, conforme reduzimos a largura do elemento de área.</p>
+			<p>Observe como as duas somas estão mais próximas uma da outra, quando comparadas com a questão anterior. Este comportamento progride conforme aumentamos a quantidade N de elementos de área (e, portanto, o número de subintervalos de [a,b]); ou, equivalentemente, conforme reduzimos a largura do elemento de área.</p>
 		</div>
 			
 		<p class="terminei visible"><span id="" class="check-button2">Terminei</span></p>
@@ -112,11 +111,11 @@
 	<!-- Exercício 3 -->
 	<div id="ex3">
 		<div class="active visible frame01">
-			<p>À medida que aumentamos N, as somas inferior e superior aproximam-se cada vez mais, até que no limite em que <img src="img/ex3.gif" alt="" height="18" width="73" style="vertical-align:middle;" />, obtemos a área sob f(x) no intervalo [a,b]. Este limite é chamado de <b>soma de Riemann</b>.</p>
+			<p>À medida que aumentamos N, as somas inferior e superior aproximam-se cada vez mais, até que no limite em que <img src="img/ex3.gif" alt="" height="18" width="101" style="vertical-align:-15%;" />, obtemos a área da região sob f(x) e acima do eixo x no intervalo [a,b]. Isto ocorre ainda que tivéssemos escolhido retângulos de larguras distintas, e este limite se chama <b>a integral definida de <img src="img/or_1.gif" alt="" height="20" width="13" style="vertical-align:-30%;" /> em [a,b]</b>.</p>
 			<p>Certamente foi bastante trabalhoso encontrar a resposta correta das duas questões anteriores. Imagine o trabalho de fazermos aquele cálculo para N = 1000. Nós fizemos isso para você e o resultado é: soma inferior igual a <b><span id="s_inf"></span></b> e soma superior igual a <b><span id="s_sup"></span></b> (observe como a diferença entre as duas somas diminuiu ainda mais). Mas e para N igual a um milhão, um bilhão...?</p>
-			<p>Para solucionar este problema existe o <b>teorema fundamental do Cálculo</b>. Ele estabelece que a derivação e a integração são operações inversas. Ou seja, se g' é a derivada de g, então g é a integral de g'. Na verdade, o correto é escrever assim:</p>
+			<p>Para solucionar este problema existe o <b>teorema fundamental do Cálculo</b>. Ele estabelece, essencialmente, que a derivação e a integração são processos inversos. Ou seja, deixando de lado o rigor matemático, podemos dizer que se g' é a derivada de g, então g é a anti-derivada de g'. De acordo com este teorema:</p>
 			<p><img src="img/ex3_v2.gif" alt="" height="41" width="227" style="vertical-align:middle;" /></p>
-			<p>Vejamos: sabendo que o gráfico apresentado acima é o da função f(x) = g'(x) = <span id="ex3_funcao"></span>, você pode determinar a área sob ela utilizando as técnicas de integração que você aprendeu. Faça isso agora: encontre a função g(x) que, quando derivada, resulta em g'(x) = <span id="ex3_funcao"></span>. Em seguida, calcule a diferença g(b) - g(a) e escreva-a abaixo:</p>
+			<p>Vejamos: sabendo que o gráfico apresentado acima é o da função f(x) = g'(x) = <span id="ex3a_funcao"></span>, você pode determinar a área procurada usando a anti-derivada dela. Faça isso agora: encontre a função g(x) que, quando derivada, resulta em g'(x) = <span id="ex3b_funcao"></span>. Em seguida, calcule a diferença g(b) - g(a) e escreva-a abaixo:</p>
 			<p><img src="img/ex3_v2-2.gif" alt="" height="41" width="249" style="vertical-align:middle;" /> <input id="U-ex3" type="text" size="6" maxlength="4" style="vertical-align:-15%;" ></p>
 			<p><b>Dica:</b> use uma tabela de integrais como <a href="http://pt.wikipedia.org/wiki/Tabela_de_derivadas" target="_blank">esta</a>.</p>
 		<!--<p class="proximo visible"><span class="next-button3">Próximo</span></p>-->
@@ -124,7 +123,7 @@
 		</div>
 		<p id="message3"></p>
 		<div id="frame03" style="display:none">
-			<p><i>Observe como o resultado obtido pelo teorema fundamental do Cálculo é muito próximo daquele que obtivemos somando N = 1000 elementos de área. Isto significa que, ao invés de somarmos elementos de área (soma de Riemann), podemos simplesmente procurar pela função g cuja derivada é a curva sob a qual queremos encontrar a área, e calcular g(b) - g(a).</p></i>
+			<p><i>Observe como o resultado obtido pelo teorema fundamental do Cálculo é muito próximo daquele que obtivemos somando N = 1000 elementos de área. Isto significa que, ao invés de somarmos elementos de área (soma de Riemann), podemos procurar pela função g cuja derivada tem por gráfico a curva y = g'(x) que delimita a região cuja área queremos determinar, e calcular g(b) - g(a).</p></i>
 		</div>
 
 	</div>
@@ -132,16 +131,16 @@
 	<!-- Exercício 4 -->
 	<div id="ex4">
 		<div id="frame04" class="active visible">
-			<p>Outro teorema importante do cálculo integral é o do <b>valor médio</b>:</p>
+			<p>Outro teorema importante do cálculo integral é o do <b>valor médio (para integrais)</b>.</p>
 			<p>Existe ao menos um &#958; &#8712; [a,b] tal que <img src="img/ex4_1.gif" alt="" height="41" width="218" style="vertical-align:middle;" />.</p>
-			<p>Mas não deixe a aparência desta expressão impressioná-lo(a), pois o significado dela é muito simples: independentemente de qual seja a função f(x) e o intervalo [a,b], existe um retângulo de base (b - a) e altura f(&#958;) cuja área é igual à área procurada (a integral de f(x) no intervalo [a,b]). Vejamos por partes...</p>
+			<p>Mas não deixe a aparência desta expressão impressioná-lo(a), pois o significado dela é muito simples: independentemente de qual seja a função contínua f(x) e o intervalo [a,b], existe um retângulo cuja medida da base e da altura é (b - a) e f(ξ), respectivamente, e cuja área é igual à integral definida de f(x) no intervalo [a,b]. Vejamos por partes...</p>
 			<p>No plano cartesiano acima, arraste o ponto m até a abscissa - dentro do intervalo [a,b] - em que f(x) é <b>mínima</b> no intervalo [a,b]. Ao concluir, pressione "Próximo".</p>
 		</div>
 		<p class="visible proximo01"><span class="next-button4">Próximo</span></p>
 			
 		<div id="frame04-2" style="display:none">
-			<p>Imagine agora uma função g<sub>1</sub>(x) = f(m), ou seja, uma reta horizontal em y = f(m). f(m) é apenas um número. Vamos chamá-lo de f<sub>min</sub> para simplificar.</p>
-			<p>Como <img src="img/ex4_2.gif" alt="" height="17" width="113" style="vertical-align:-25%;" /> em <b>todo</b> o intervalo [a,b], a área sob g<sub>1</sub>(x), que é simplesmente a área do retângulo com borda cinza na figura, é sempre menor ou igual à área sob f(x) (visualize as áreas no plano cartesiano acima). Esta área é igual a f<sub>min</sub>(b - a) (a altura vezes a base do retângulo). Entenda isso antes de prosseguir.</p>
+			<p>Imagine agora uma função g<sub>1</sub>(x) = f(<span id="ex4a_m"></span>), cujo gráfico é uma reta horizontal em y = f(<span id="ex4b_m"></span>). Note que f(<span id="ex4c_m"></span>) é apenas um número. Vamos chamá-lo de f<sub>min</sub> para simplificar.</p>
+			<p>Como <img src="img/ex4_2.gif" alt="" height="17" width="113" style="vertical-align:-25%;" /> em <b>todo</b> o intervalo [a,b], a área sob g<sub>1</sub>(x), que é simplesmente a área do retângulo com borda cinza na figura, é sempre menor ou igual à área procurada (visualize as áreas no plano cartesiano acima). Esta área é igual a f<sub>min</sub>(b - a) (a medida da altura vezes a medida da base do retângulo). Entenda isso antes de prosseguir.</p>
 		
 		<p class="proximo02 invisible"><span id="next-button4-2" class="next-button4-2">Próximo</span></p>
 		</div>
@@ -153,13 +152,13 @@
 		</div>
 		
 		<div id="frame04-4" style="display:none">
-			<p>Analogamente à situação anterior, se imaginarmos <img src="img/ex4_9.gif" alt="" height="17" width="192" style="vertical-align:-25%;" />, então, como <img src="img/ex4_3.gif" alt="" height="17" width="113" style="vertical-align:-25%;" /> em <b>todo</b> o intervalo [a,b], a área sob g<sub>2</sub>(x), que é simplesmente <img src="img/ex4_4.gif" alt="" height="17" width="113" style="vertical-align:-25%;" />, é sempre <b>maior</b> ou igual à área sob f(x). Logo, podemos escrever que</p>
-			<p><img src="img/ex4_5.gif" alt="" height="25" width="298" style="vertical-align:middle;" /></p>
-			<p>Se f(x) é contínua no intevalo [a,b] - e isto é muito importante - então ao variar de f<sub>min</sub> até f<sub>max</sub>, f(x) assumirá, para <b>algum x</b> em [a,b], um valor &#956; tal que <img src="img/ex4_6.gif" alt="" height="16" width="153" style="vertical-align:-25%;" /> e <img src="img/ex4_7.gif" alt="" height="17" width="71" style="vertical-align:-25%;" />, igual à área procurada. Matematicamente,</p>
+			<p>Analogamente à situação anterior, se imaginarmos <img src="img/ex4a.gif" alt="" height="17" width="93" style="vertical-align:-25%;" /><span id="getM"></span><img src="img/ex4b.gif" alt="" height="17" width="78" style="vertical-align:-25%;" />, então, como <img src="img/ex4_3.gif" alt="" height="17" width="113" style="vertical-align:-25%;" /> em <b>todo</b> o intervalo [a,b], a área sob g<sub>2</sub>(x), que é simplesmente <img src="img/ex4_4.gif" alt="" height="17" width="113" style="vertical-align:-25%;" />, é sempre <b>maior</b> ou igual à área sob f(x). Logo, podemos escrever que</p>
+			<p><img src="img/ex4_5.gif" alt="" height="41" width="362" style="vertical-align:middle;" /></p>
+			<p>Se f(x) é contínua no intevalo [a,b] - e isto é muito importante - então ao variar de f<sub>min</sub> até f<sub>max</sub>, f(x) assumirá, para <b>algum x</b> em [a,b], um valor &#956; tal que <img src="img/ex4_6.gif" alt="" height="16" width="153" style="vertical-align:-25%;" />, de modo que <img src="img/ex4_7.gif" alt="" height="17" width="71" style="vertical-align:-25%;" /> é igual à área procurada. Matematicamente,</p>
 			<p><img src="img/ex4_8.gif" alt="" height="41" width="196" style="vertical-align:middle;" /></p>
 		    <p>&#956; é o chamado <b>valor médio</b> da função f(x) no intervalo [a,b], e como &#956 é um valor assumido por f(x) para <b>algum x</b>, chamamos <b>esse x</b> de &#958;. Ou seja, f(&#958;) = &#956;.</p>
-			<p>Vamos então reescrever o teorema do valor médio: existe um retângulo de base (b - a) e altura f(&#958;) cuja área é igual à área de interesse.</p>
-			<p>Vamos colocar isto em prática: posicione o ponto m de modo que a área f(m)(b - a) seja <b>aproximadamente</b> igual à integral de f(x) no intervalo [a,b] (você não precisa fazer conta alguma para isso). Uma maneira de fazer isso é posicionar m de modo que a área pintada acima de f(m) seja aproximadamente igual àquela pintada abaixo de f(m). Imagine-se movendo a área acima de f(m) para abaixo dele, de modo a completar a área do quadrado de base (b - a) e altura f(m). Quando tiver concluído, pressione "Terminei".</p>
+			<p>Vamos então expressar informalmente o teorema do valor médio: existe um retângulo de área f(ξ) (b - a), que é igual à integral definida de <img src="img/or_1.gif" alt="" height="20" width="13" style="vertical-align:-30%;" /> em [a,b].</p>
+			<p>Vamos colocar isto em prática: posicione o ponto m de modo que a área f(m)(b - a) seja <b>aproximadamente</b> igual à integral definida de f(x) no intervalo [a,b] (você não precisa fazer conta alguma para isso). Uma maneira de fazer isso é posicionar m de modo que a região pintada acima de f(m) seja visualmente igual àquela pintada abaixo de f(m).</p>
 			<p>Você talvez esteja se perguntado: mas se eu não sei a integral, como determinar o valor médio? Na verdade, o teorema do valor médio é útil na dedução de resultados mais práticos, como o próprio teorema fundamental do cálculo (veja uma demonstração <a href="http://ecalculo.if.usp.br/integrais/teo_fund_calculo/links/teorema.htm" target="_blank">aqui</a>).</p>
 			<p><strong>obs</strong>.: o que expusemos aqui é o chamado teorema do valor médio para integrais. Há também o teorema do valor médio para derivadas, que não usamos aqui.</p>
 		
@@ -174,57 +173,56 @@
 	<form name="selects">
 	<div id="ex5">
 		<p>Na questão anterior nós deduzimos que uma integral é maior ou menor que outra apenas comparando os integrandos (as funções que estamos integrando). Faça isso nas integrais abaixo: sem calculá-las, indique a relação de ordem delas selecionando < ou >. Pressione "Terminei" para concluir.</p>
+		<div style="height:300px; float:left; vertical-align:middle;"><br><br><br><br><br><br><br><br>
 		<b>a)</b> <img src="img/ex5_1.gif" alt="" height="42" width="133" style="vertical-align:middle;" />
 		<select name="ex5_select_01" onchange="verificaSelect();">
 			<option value="" selected>Selecione:</option>
 			<option value="menor"><</option>
 			<option value="maior">></option>
 		</select>
-		<img src="img/ex5_1a.gif" alt="" height="42" width="68" style="vertical-align:middle;" /></p>
-		
-		<div class="clear"></div>
-		<p id="message5a"></p><p id="feedback5-a" style="display:none"><i>No item a, observe primeiramente que o intervalo de integração é o mesmo (se não fosse, teríamos de calcular as integrais para poder ordená-las). Nesse intervalo, a função &#8730;{1 + x<sup>2</sup>} <b>></b> x sempre (calcule mentalmente as funções em x = 0 e x = 1 para ter uma percepção disso). Logo, a integral à esquerda é maior que a integral à direita. </i></p></p>
+		<img src="img/ex5_1a.gif" alt="" height="42" width="68" style="vertical-align:middle;" /></p></div>
+		<div style="height:300px; vertical-align:middle; margin-left:400px;"><img src="img/grafico_a.png" alt="" height="286" width="343" style="vertical-align:middle;" /></div>		
+		<div><p id="message5a"></p><p id="feedback5-a" style="display:none"><i>No item a, observe primeiramente que o intervalo de integração é o mesmo (se não fosse, teríamos de calcular as integrais para poder ordená-las). Nesse intervalo, a função <img src="img/rel5a.gif" alt="" height="21" width="74" style="vertical-align:-20%;" /> > x sempre (veja a figura acima). Logo, a integral à esquerda é maior que a integral à direita.</i></p></div>
 		<p><span id="next-button5-a" class="next-button5-a">Próximo</span></p>
 		
 		<div id="ex5b" style="display:none">
+		<div style="height:300px; float:left; vertical-align:middle;"><br><br><br><br><br><br><br><br>
 		<b>b)</b> <img src="img/ex5_2.gif" alt="" height="42" width="146" style="vertical-align:middle;" />
 		<select name="ex5_select_02" onchange="verificaSelect();">
 			<option value="" selected>Selecione:</option>
 			<option value="menor"><</option>
 			<option value="maior">></option>
 		</select>
-	 	<img src="img/ex5_2a.gif" alt="" height="42" width="135" style="vertical-align:middle;" /></p>
-		
-		<div class="clear"></div>
-		<p id="message5b"></p><p id="feedback5-b" style="display:none"><i>No item b, observe primeiramente que o intervalo de integração é o mesmo (se não fosse, teríamos de calcular as integrais para poder ordená-las). Observe também que a função à esquerda (f<sub>e</sub>) é igual à função à direita (f<sub>d</sub>), vezes x: f<sub>e</sub> = x * f<sub>d</sub>. Como 0 <= x <= 1, então f<sub>e</sub> < f<sub>d</sub> em todo o intervalo aberto ]0,1[. E apenas para x = 0 e x = 1 teremos f<sub>e</sub> = f<sub>d</sub>. Logo, a integral à esquerda é menor que aquela à direita.</i></p>
+	 	<img src="img/ex5_2a.gif" alt="" height="42" width="135" style="vertical-align:middle;" /></p></div>
+		<div style="height:300px; vertical-align:middle; margin-left:400px;"><img src="img/grafico_bc.png" alt="" height="286" width="343" style="vertical-align:middle;" /></div>		
+		<p id="message5b"></p><p id="feedback5-b" style="display:none"><i>No item b, observe primeiramente que o intervalo de integração é o mesmo (se não fosse, teríamos de calcular as integrais para poder ordená-las) e que, nele, x<sup>2</sup> < x. Além disso, como sen<sup>2</sup>(x) > 0, podemos multiplicar os dois lados da inequação anterior sem alterá-la, isto é: x<sup>2</sup> sen<sup>2</sup>(x) < x sen<sup>2</sup>(x). Deste modo, a integral à esquerda é menor que aquela à direita (veja os gráficos dessas funções na figura acima).</i></p>
 		<p><span id="next-button5-b" class="next-button5-b">Próximo</span></p>
 		</div>
 	    
 		<div id="ex5c" style="display:none">
+		<div style="height:300px; float:left; vertical-align:middle;"><br><br><br><br><br><br><br><br>
 		<b>c)</b> <img src="img/ex5_3.gif" alt="" height="41" width="146" style="vertical-align:middle;" />
 		<select name="ex5_select_03" onchange="verificaSelect();">
 			<option value="" selected>Selecione:</option>
 			<option value="menor"><</option>
 			<option value="maior">></option>
 		</select>
-	 	<img src="img/ex5_3a.gif" alt="" height="41" width="135" style="vertical-align:middle;" /></p>
-		
-		<div class="clear"></div>
-		<p id="message5c"></p><p id="feedback5-c" style="display:none"><i>No item c, observe primeiramente que o intervalo de integração é o mesmo (se não fosse, teríamos de calcular as integrais para poder ordená-las). Observe também que a função à esquerda (f<sub>e</sub>) é igual à função à direita (f<sub>d</sub>), vezes x: f<sub>e</sub> = x * f<sub>d</sub>. Como x >= 1, então f<sub>e</sub> > f<sub>d</sub> em todo o intervalo aberto ]1,2[. E apenas para x = 1 teremos f<sub>e</sub> = f<sub>d</sub>. Logo, a integral à esquerda é maior que aquela à direita.</i></p>
+	 	<img src="img/ex5_3a.gif" alt="" height="41" width="135" style="vertical-align:middle;" /></p></div>
+		<div style="height:300px; vertical-align:middle; margin-left:400px;"><img src="img/grafico_bc.png" alt="" height="286" width="343" style="vertical-align:middle;" /></div>		
+		<p id="message5c"></p><p id="feedback5-c" style="display:none"><i>No item c, observe primeiramente que o intervalo de integração é o mesmo (se não fosse, teríamos de calcular as integrais para poder ordená-las) e que, nele, x<sup>2</sup> > x (diferentemente do item anterior). Além disso, como sen<sup>2</sup>(x) > 0, podemos multiplicar os dois lados da inequação anterior sem alterá-la, isto é: x<sup>2</sup> sen<sup>2</sup>(x) > x sen<sup>2</sup>(x). Deste modo, a integral à esquerda é maior que aquela à direita (veja os gráficos dessas funções na figura acima).</i></p>
 		<p><span id="next-button5-c" class="next-button5-c">Próximo</span></p>
 		</div>
 	
         <div id="ex5d" style="display:none">	
- 		<b>d)</b> <img src="img/ex5_4.gif" alt="" height="41" width="89" style="vertical-align:middle;" />
+ 		<div style="height:300px; float:left; vertical-align:middle;"><br><br><br><br><br><br><br><br>
+		<b>d)</b> <img src="img/ex5_4.gif" alt="" height="41" width="89" style="vertical-align:middle;" />
 		<select name="ex5_select_04" onchange="verificaSelect();">
 		    <option value="" selected>Selecione:</option>
 			<option value="menor"><</option>
 			<option value="maior">></option>
 		</select>
-	 	<img src="img/ex5_4a.gif" alt="" height="41" width="79" style="vertical-align:middle;" /></p>
-		
-		
-		<div class="clear"></div>
+	 	<img src="img/ex5_4a.gif" alt="" height="41" width="79" style="vertical-align:middle;" /></p></div>
+		<div style="height:300px; vertical-align:middle; margin-left:400px;"><img src="img/grafico_d.png" alt="" height="286" width="343" style="vertical-align:middle;" /></div>		
 		<p id="message5d"></p><p id="feedback5-d" style="display:none"><i>No item d, observe primeiramente que o intervalo de integração é o mesmo (se não fosse, teríamos de calcular as integrais para poder ordená-las). Observe também que na função à esquerda o expoente (x<sup>2</sup>) é o quadrado daquele da função à direita (x). E como x<sup>2</sup> > x no intervalo de integração, também e<sup>{x<sup>2</sup>}</sup> > e<sup>x</sup>. Apenas em x = 1 teremos as duas funções iguais. Portanto, a integral à esquerda é maior que aquela à direita.</i></p>
 		<p><span class="check-button5">Terminei</span></p>
 		</div>
@@ -236,8 +234,8 @@
 	<div id="ex6">
 		<div id="frame01" class="active visible">
 			<p>Conforme vimos, o teorema fundamental do cálculo pode nos auxiliar bastante quando sabemos determinar analiticamente (ie, com "lápis e papel") a primitiva de uma função. No entanto, a maioria das situações reais não são assim. De fato, muitos fenômenos são caracterizados por funções cujas integrais simplesmente não têm representação analítica. Para esses casos empregam-se computadores e <b>métodos numéricos de integração</b>.</p>
-			<p>Para resolver uma integral com um computador podemos, por exemplo, instruí-lo a calcular as somas inferior e/ou superior para N bem grande, e assumir esse valor como "a área" procurada (isto implica também na necessidade de se avaliar o <b>erro</b> no cálculo da integral, mas não vamos nos preocupar com isso aqui). As somas inferior e superior são a aproximação mais simples possível, embora não sejam muito utilizadas, devido ao grande erro inerente a elas.</p>
-			<p>Mas há vários outros métodos. Um exemplo simples de entender é a regra do trapézio, através do qual usamos não retângulos como elementos de área, mas trapézios, como está agora exibido no gráfico acima. Deste modo, o que fazemos é somar as áreas dos N = 4 trapézios acima e tomá-la como a integral procurada. Faça isso: calcule a área abaixo da curva somando as áreas dos N trapézios.</p>
+			<p>Para resolver uma integral com um computador podemos, por exemplo, instruí-lo a calcular as somas inferior e/ou superior para N bem grande, e assumir esse valor como "a área" procurada (isto implica também na necessidade de avaliar o erro no cálculo da integral, mas não vamos nos preocupar com isso aqui).As somas inferior e superior são as aproximações mais simples, embora não sejam muito utilizadas, pois há outros métodos que, com a mesma quantidade de cálculos, permitem-nos obter incertezas menores na aproximação da área.</p>
+			<p>Mas há vários outros métodos. Um exemplo simples de entender é a regra do trapézio, através da qual usamos não retângulos como elementos de área, mas trapézios, como está agora exibido no gráfico acima. Deste modo, o que fazemos é somar as áreas dos N = 5 trapézios acima e tomá-la como a integral procurada. Faça isso: calcule a área abaixo da curva somando as áreas dos N trapézios.</p>
 			<p>Área sob a curva f(x) pela regra do trapézio = <input id="X-ex6" type="text" size="6" maxlength="4"><!--onChange='checkNum(this)'--></p>
 		</div>
 	
