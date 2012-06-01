@@ -496,25 +496,24 @@ function verificaSelect() {
 	var valor4 = document.selects.ex5_select_04.value;
 	if (valor1 != '') { 
 		$( ".next-button5-a" ).button({ disabled: false });
-		document.selects.ex5_select_01.disabled = true;
 	}
 	if (valor2 != ''){ 
 		$( ".next-button5-a" ).button({ disabled: true });
 		$( ".next-button5-b" ).button({ disabled: false });	
-		document.selects.ex5_select_02.disabled = true;
+		//document.selects.ex5_select_02.disabled = true;
 	}
 	if (valor3 != '') { 
 	    $( ".next-button5-a" ).button({ disabled: true });
 	    $( ".next-button5-b" ).button({ disabled: true });
 		$( ".next-button5-c" ).button({ disabled: false });
-		document.selects.ex5_select_03.disabled = true;
+		//document.selects.ex5_select_03.disabled = true;
 	}	
 	if (valor4 != '') { 
 	    $( ".next-button5-a" ).button({ disabled: true });
 	    $( ".next-button5-b" ).button({ disabled: true });
 	    $( ".next-button5-c" ).button({ disabled: true });
 		$( ".check-button5" ).button({ disabled: false });
-		document.selects.ex5_select_04.disabled = true;
+		//document.selects.ex5_select_04.disabled = true;
 	}	
 } 
 
@@ -536,18 +535,21 @@ function MostraTexto3()
 {
   document.getElementById('ex5b').style.display="block";
   $( ".next-button5-a" ).button({ disabled: true });
+  document.selects.ex5_select_01.disabled = true;
 }
 
 function MostraTexto4()
 {
   document.getElementById('ex5c').style.display="block";
   $( ".next-button5-b" ).button({ disabled: true });
+  document.selects.ex5_select_02.disabled = true;
 }
 
 function MostraTexto5()
 {
   document.getElementById('ex5d').style.display="block";
   $( ".next-button5-c" ).button({ disabled: true });
+  document.selects.ex5_select_03.disabled = true;
 } 
  
  
@@ -932,6 +934,7 @@ function getScore (exercise) {
 	  
 	  //Desabilita botão Terminei.
 	  $( ".check-button5" ).button({ disabled: true });
+	  document.selects.ex5_select_04.disabled = true;
 	  
 	  var valor1 = document.selects.ex5_select_01.value;
 	  var valor2 = document.selects.ex5_select_02.value;
