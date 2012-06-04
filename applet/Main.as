@@ -102,7 +102,17 @@ package
 			
 			funcaoAtual = -1;
 			
-			setFunction("1/x");
+			setFunction("1+x<SUP>2</SUP>/5");
+			//setFunction("&radic;x");
+			//setFunction("sen(x)+3/2");
+			//setFunction("cos(x)+3/2");
+			//setFunction("ln(x+1)");
+			//setFunction("e<SUP>(x/5)</SUP>");
+			//setFunction("e<SUP>(-x)</SUP>+1");
+			//setFunction("cos(x)<SUP>2</SUP>+1");
+			//setFunction("sen(x)<SUP>2</SUP>+1");
+			//setFunction("1+1/x");
+			
 			setN("5");
 			
 			setChildIndex(mouseCoord, numChildren - 1);
@@ -189,13 +199,16 @@ package
 			
 			dictionaryFunctions = new Dictionary();
 			
-			dictionaryFunctions["e<SUP>x</SUP>"] = 0;
-			dictionaryFunctions["1/x"] = 1;
-			dictionaryFunctions["x<SUP>3</SUP> - 4x<SUP>2</SUP> - 11x + 30"] = 2;
-			dictionaryFunctions["x<SUP>3</SUP> - x<SUP>2</SUP> + 5"] = 3;
-			dictionaryFunctions["cos(x) + 2"] = 4;
-			dictionaryFunctions["x<SUP>2</SUP> + 1"] = 5;
-			dictionaryFunctions["sen(x) + 2"] = 6;
+			dictionaryFunctions["1+x<SUP>2</SUP>/5"] = 0;
+			dictionaryFunctions["&radic;x"] = 1;
+			dictionaryFunctions["sen(x)+3/2"] = 2;
+			dictionaryFunctions["cos(x)+3/2"] = 3;
+			dictionaryFunctions["ln(x+1)"] = 4;
+			dictionaryFunctions["e<SUP>(x/5)</SUP>"] = 5;
+			dictionaryFunctions["e<SUP>(-x)</SUP>+1"] = 6;
+			dictionaryFunctions["cos(x)<SUP>2</SUP>+1"] = 7;
+			dictionaryFunctions["sen(x)<SUP>2</SUP>+1"] = 8;
+			dictionaryFunctions["1+1/x"] = 9;
 			
 		}
 		
@@ -286,62 +299,87 @@ package
 			funcoes.push(new FunctionInfo(função que retorna algo, new Point(xMin eixo X, xMax eixo X), new Point(yMin eixo Y, yMax eixo Y), 
 			Number(posicao do ponto A no gráfico), Number(posição do ponto B no gráfico), Number(posição do ponto médio no gráfico, String(String da funçã em HTML))));
 			*/
+			
 			funcoes.push(new FunctionInfo(
-				function(x:Number):Number { return Math.exp(x); }, 
-				function(x:Number):Number { return Math.exp(x); }, 
-				new Point(0, 4), 
-				new Point(0, 60), 
-				1, 3, 2, 
-				"e <SUP> x </SUP>", 
-				"e <SUP> x </SUP>"));
-			funcoes.push(new FunctionInfo(
-				function(x:Number):Number { return 1 / x; }, 
-				function(x:Number):Number { return Math.log(x); }, 
+				function(x:Number):Number { return 1+Math.pow(x,2)/5; }, 
+				function(x:Number):Number { return Math.pow(x,3)/15+x; }, 
 				new Point(0, 5), 
 				new Point(0, 5), 
 				1, 3, 2, 
-				"1/x", 
-				"ln |x|"));
+				"1+x<SUP>2</SUP>/5", 
+				"x<SUP>3</SUP>/15+x"));
 			funcoes.push(new FunctionInfo(
-				function(x:Number):Number { return Math.pow(x, 3) - 4 * Math.pow(x, 2) - 11 * x + 30; }, 
-				function(x:Number):Number { return Math.pow(x, 4) / 4 - 4 * Math.pow(x, 3) / 3 - 11 * Math.pow(x, 2) / 2 + 30 * x; }, 
-				new Point(0, 0), 
-				new Point(0, 0), 
-				0, 0, 0, 
-				"x <SUP> 3 </SUP> - 4x <SUP> 2 </SUP> - 11x + 30", 
-				"x<SUP>4</SUP>/4 - 4x<SUP>3</SUP>/3 - 11x<SUP>2</SUP>/2 + 30x"));
-			funcoes.push(new FunctionInfo(
-				function(x:Number):Number { return Math.pow(x, 3) - Math.pow(x, 2) + 5; }, 
-				function(x:Number):Number { return Math.pow(x, 4) / 4 - Math.pow(x, 3) / 3 + 5 * x; }, 
+				function(x:Number):Number { return Math.sqrt(x); }, 
+				function(x:Number):Number { return 2/3*Math.pow(x,(3/2)); }, 
 				new Point(0, 5), 
-				new Point( -5, 5), 
-				1, 4, 2, 
-				"x<SUP>3</SUP> - x<SUP>2</SUP> + 5", 
-				"x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x"));
+				new Point(0, 3), 
+				1, 3, 2, 
+				"&radic;x", 
+				"2/3 x<SUP>(3/2)</SUP>"));
 			funcoes.push(new FunctionInfo(
-				function(x:Number):Number { return Math.cos(x) + 2; }, 
-				function(x:Number):Number { return Math.sin(x) + 2 * x; }, 
+				function(x:Number):Number { return Math.sin(x)+3/2 ; }, 
+				function(x:Number):Number { return 3 * x/2 - Math.cos(x); }, 
 				new Point(0, 5), 
-				new Point( -5, 5), 
-				1, 4, 2, 
-				"cos(x) + 2", 
-				"sen(x)"));
+				new Point(0, 3), 
+				1, 3, 2, 
+				"sen(x)+3/2", 
+				"3x/2-cos(x)"));
 			funcoes.push(new FunctionInfo(
-				function(x:Number):Number { return Math.pow(x, 2) + 1; }, 
-				function(x:Number):Number { return Math.pow(x, 3) / 3 + x; }, 
+				function(x:Number):Number { return Math.cos(x)+3/2; }, 
+				function(x:Number):Number { return 3*x/2+Math.sin(x); }, 
 				new Point(0, 5), 
-				new Point( -5, 5), 
-				1, 4, 2, 
-				"x<SUP>2</SUP> + 1", 
-				"x<SUP>3</SUP>/3 + x"));
+				new Point(0, 3), 
+				1, 3, 2, 
+				"cos(x)+3/2", 
+				"3x/2+sen(x) "));
 			funcoes.push(new FunctionInfo(
-				function(x:Number):Number { return Math.sin(x) + 2; }, 
-				function(x:Number):Number { return -Math.cos(x) + 2 * x; }, 
+				function(x:Number):Number { return Math.log(x+1); }, 
+				function(x:Number):Number { return (x+1)*Math.log(x+1)-x; }, 
 				new Point(0, 5), 
-				new Point( -5, 5), 
-				1, 4, 2, 
-				"sen(x) + 2", 
-				"-cos(x) + 2x"));
+				new Point(0, 2), 
+				1, 3, 2, 
+				"ln(x+1)", 
+				"(x+1)ln(x+1)-x"));
+			funcoes.push(new FunctionInfo(
+				function(x:Number):Number { return Math.exp(x/5); }, 
+				function(x:Number):Number { return 5*Math.exp(x/5); }, 
+				new Point(0, 5), 
+				new Point(0, 3), 
+				1, 3, 2, 
+				"e<SUP>(x/5)</SUP>", 
+				"5e<SUP>(x/5)</SUP>"));
+			funcoes.push(new FunctionInfo(
+				function(x:Number):Number { return Math.exp(-x)+1; }, 
+				function(x:Number):Number { return -Math.exp(-x)+x; }, 
+				new Point(0, 5), 
+				new Point(0, 3), 
+				1, 3, 2, 
+				"e<SUP>(-x)</SUP>+1", 
+				"-e<SUP>(-x)</SUP>+x"));
+			funcoes.push(new FunctionInfo(
+				function(x:Number):Number { return Math.pow(Math.cos(x),2)+1; }, 
+				function(x:Number):Number { return x/2+Math.sin(2*x)/4+x; }, 
+				new Point(0, 5), 
+				new Point(0, 3), 
+				1, 3, 2, 
+				"cos(x)<SUP>2</SUP>+1", 
+				"x/2+sen(2x)/4+x"));
+			funcoes.push(new FunctionInfo(
+				function(x:Number):Number { return Math.pow(Math.sin(x), 2)+1; }, 
+				function(x:Number):Number { return x/2-Math.sin(2*x)/4+x; }, 
+				new Point(0, 5), 
+				new Point(0, 3), 
+				1, 3, 2, 
+				"sen(x)<SUP>2</SUP>+1", 
+				"x/2-sen(2x)/4+x"));
+			funcoes.push(new FunctionInfo(
+				function(x:Number):Number { return 1+1/x; }, 
+				function(x:Number):Number { return x+Math.log(x); }, 
+				new Point(0, 5), 
+				new Point(0, 5), 
+				1, 3, 2, 
+				"1+1/x", 
+				"x+ln(x)"));
 		}
 		
 		/**

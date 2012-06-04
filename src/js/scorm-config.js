@@ -17,6 +17,17 @@ var sorteado;//valor do indice da função
 var currentScore = 0;
 var exOk;
 
+//setFunction("1+x<SUP>2</SUP>/5");
+//setFunction("&radic;x");
+//setFunction("sen(x)+3/2");
+//setFunction("cos(x)+3/2");
+//setFunction("ln(x+1)");
+//setFunction("e<SUP>(x/5)</SUP>");
+//setFunction("e<SUP>(-x)</SUP>+1");
+//setFunction("cos(x)<SUP>2</SUP>+1");
+//setFunction("sen(x)<SUP>2</SUP>+1");
+//setFunction("1+1/x");
+
 var funcao = [
   {
     f_display: "e<SUP>x</SUP>",
