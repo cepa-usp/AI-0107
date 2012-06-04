@@ -17,50 +17,43 @@ var sorteado;//valor do indice da função
 var currentScore = 0;
 var exOk;
 
-//setFunction("1+x<SUP>2</SUP>/5");
-//setFunction("&radic;x");
-//setFunction("sen(x)+3/2");
-//setFunction("cos(x)+3/2");
-//setFunction("ln(x+1)");
-//setFunction("e<SUP>(x/5)</SUP>");
-//setFunction("e<SUP>(-x)</SUP>+1");
-//setFunction("cos(x)<SUP>2</SUP>+1");
-//setFunction("sen(x)<SUP>2</SUP>+1");
-//setFunction("1+1/x");
-
 var funcao = [
   {
-    f_display: "e<SUP>x</SUP>",
-    if_display: "∫ f(x) dx = e<SUP>x</SUP>",
+    f_display: "1+x<SUP>2</SUP>/5",
+    if_display: "∫ f(x) dx = 1+x<SUP>2</SUP>/5",
   },
   {
-    f_display: "1/x",
-    if_display: "∫ f(x) dx = ln |x|",
+    f_display: "&radic;x",
+    if_display: "∫ f(x) dx = &radic;x",
   },
   {
-    f_display: "x<SUP>3</SUP> - 4x<SUP>2</SUP> - 11x + 30",
-    if_display: "∫ f(x) dx = x<SUP>3</SUP> - 4x<SUP>2</SUP> - 11x + 30",
-  },
-  /*{
-    f_display: "x<SUP>3</SUP> - x<SUP>2</SUP> + 5",
-    if_display: "∫ f(x) dx = x<SUP>4</SUP>/4 - x<SUP>3</SUP>/3 + 5x",
-  },*/
-  /*{
-    f_display: "-ln|x|",
-    if_display: "∫ f(x) dx = -ln|x|",
-  },*/
-  {
-    f_display: "cos(x) + 2",
-    if_display: "∫ f(x) dx = cos(x) + 2",     
+    f_display: "sen(x)+3/2",
+    if_display: "∫ f(x) dx = sen(x)+3/2",
   },
   {
-    f_display: "x<SUP>2</SUP> + 1", 
-    if_display: "∫ f(x) dx = x<SUP>2</SUP> + 1",
+    f_display: "cos(x)+3/2",
+    if_display: "∫ f(x) dx = cos(x)+3/2",
+  },
+  {
+    f_display: "ln(x+1)",
+    if_display: "∫ f(x) dx = ln(x+1)",
+  },
+  {
+    f_display: "e<SUP>(-x)</SUP>+1",
+    if_display: "∫ f(x) dx = e<SUP>(-x)</SUP>+1",     
+  },
+  {
+    f_display: "cos(x)<SUP>2</SUP>+1", 
+    if_display: "∫ f(x) dx = cos(x)<SUP>2</SUP>+1",
   },
    {
-    f_display: "sen(x) + 2",
-    if_display: "∫ f(x) dx = sen(x) + 2",
-  }
+    f_display: "sen(x)<SUP>2</SUP>+1",
+    if_display: "∫ f(x) dx = sen(x)<SUP>2</SUP>+1",
+  },
+   {
+    f_display: "1+1/x",
+    if_display: "∫ f(x) dx = 1+1/x",
+  }  
 ];
 
 $(document).ready(init); // Inicia a AI.
@@ -132,6 +125,7 @@ function configAi () {
 //sorteia N.
 //n entre 15 e 20
 var n = Math.round(15 + 5 * Math.random());
+var debug = true;
 
 function selectExercise (exercise) {
 	switch(exercise) {
@@ -147,11 +141,13 @@ function selectExercise (exercise) {
 			ai.setVisible("MONTE_CARLO",false);
 			ai.set("N",5);
 			
-		//MODO DE DEBUG
-		//var right_answer = ai.get("LOWER_SUM");
-		//var right_answer2 = ai.get("UPPER_SUM");
-		//console.log('resposta correta:' + right_answer);
-		//console.log('resposta2 correta:' + right_answer2);
+			//MODO DE DEBUG
+			if(debug){
+			var right_answer = ai.get("LOWER_SUM");
+			var right_answer2 = ai.get("UPPER_SUM");
+			console.log('resposta correta:' + right_answer);
+			console.log('resposta2 correta:' + right_answer2);
+			}
 			break;
 			
 		case 2:
@@ -170,14 +166,15 @@ function selectExercise (exercise) {
 			ai.setVisible("MEAN_VALUE",false);
 			ai.setVisible("MONTE_CARLO",false);	
 			
-		//MODO DE DEBUG
-		//var right_answer_1 = ai.get("N");
-		//var right_answer_2 = ai.get("LOWER_SUM");
-		//var right_answer_3 = ai.get("UPPER_SUM");
-		//console.log('resposta 1 correta:' + right_answer_1);
-		//console.log('resposta 2 correta:' + right_answer_2);
-		//console.log('resposta 3 correta:' + right_answer_3);
-		
+			//MODO DE DEBUG
+			if(debug){
+			var right_answer_1 = ai.get("N");
+			var right_answer_2 = ai.get("LOWER_SUM");
+			var right_answer_3 = ai.get("UPPER_SUM");
+			console.log('resposta 1 correta:' + right_answer_1);
+			console.log('resposta 2 correta:' + right_answer_2);
+			console.log('resposta 3 correta:' + right_answer_3);
+			}
 			break;
 			
 		case 3:
@@ -207,10 +204,11 @@ function selectExercise (exercise) {
 			$('#ex3a_funcao').html(funcao[sorteado].f_display);
 			$('#ex3b_funcao').html(funcao[sorteado].f_display);
 			
-		//MODO DE DEBUG
-		//var right_answer_1 = ai.get("AREA");
-		//console.log('resposta 1 correta:' + right_answer_1);
-	
+			//MODO DE DEBUG
+			if(debug){
+			var right_answer_1 = ai.get("AREA");
+			console.log('resposta 1 correta:' + right_answer_1);
+			}
 			break;
 			
 		case 4:
@@ -228,10 +226,11 @@ function selectExercise (exercise) {
 			ai.setVisible("MONTE_CARLO",false);
 			ai.setVisible("M", true);
 			
-		//MODO DE DEBUG
-		//var right_answer_1 = ai.get("MEAN_VALUE");
-		//console.log('resposta 1 correta:' + right_answer_1);
-		
+			//MODO DE DEBUG
+			if(debug){
+			var right_answer_1 = ai.get("MEAN_VALUE");
+			console.log('resposta 1 correta:' + right_answer_1);
+			}
 			break;
 			
 		case 5:
@@ -249,9 +248,10 @@ function selectExercise (exercise) {
 			ai.setVisible("MONTE_CARLO",false);
 			ai.setVisible("M", true);
 			
-		//MODO DE DEBUG
-		//console.log('resposta correta em ordem: \na)MAIOR \nb)MENOR \nc)MAIOR \nd)MAIOR');
-		
+			//MODO DE DEBUG
+			if(debug){
+			console.log('resposta correta em ordem: \na)MAIOR \nb)MENOR \nc)MAIOR \nd)MAIOR');
+			}
 			break;
 		
 		case 6:
@@ -271,10 +271,11 @@ function selectExercise (exercise) {
 			ai.setVisible("B", false);
 			ai.setVisible("M", false);
 			
-		//MODO DE DEBUG
-		//var right_answer_1 = ai.get("PARALLELOGRAM_SUM");
-		//console.log('resposta 1 correta:' + right_answer_1);
-		
+			//MODO DE DEBUG
+			if(debug){
+			var right_answer_1 = ai.get("PARALLELOGRAM_SUM");
+			console.log('resposta 1 correta:' + right_answer_1);
+			}
 			break;
 			
 		default:
@@ -589,7 +590,6 @@ function initAI () {
       case "unknown":
       default:
         completed = false;
-        learnername = scorm.get("cmi.learner_name");
         scormExercise = 1;
         score = 0;
         
@@ -599,7 +599,6 @@ function initAI () {
       // Continuando a AI...
       case "incomplete":
         completed = false;
-        learnername = scorm.get("cmi.learner_name");
         scormExercise = parseInt(scorm.get("cmi.location"));
         score = parseInt(scorm.get("cmi.score.raw"));
         
@@ -608,8 +607,7 @@ function initAI () {
         
       // A AI já foi completada.
       case "completed":
-        completed = true;
-        learnername = scorm.get("cmi.learner_name");
+        completed = true;      
         scormExercise = parseInt(scorm.get("cmi.location"));
         score = parseInt(scorm.get("cmi.score.raw"));
         
@@ -662,7 +660,7 @@ function save2LMS () {
     // Notifica o LMS que esta atividade foi concluída.
     success = scorm.set("cmi.completion_status", (completed ? "completed" : "incomplete"));
 	
-    success = scorm.set("cmi.success_status", (completed ? "passed" : "failed"));
+    success = scorm.set("cmi.success_status", (score > 75 ? "passed" : "failed"));
     
     // Salva no LMS o exercício que deve ser exibido quando a AI for acessada novamente.
     success = scorm.set("cmi.location", scormExercise);
@@ -690,7 +688,7 @@ function evaluateExercise (event) {
   
   // Avalia a nota
   var currentScore = getScore(screenExercise);
-  score += currentScore / N_EXERCISES;
+  score += (currentScore / N_EXERCISES)/2;
   
   if(exOk == false) return;
   console.log(screenExercise + "\t" + currentScore);
@@ -705,6 +703,7 @@ function evaluateExercise (event) {
       nextExercise();
     }
     else {
+		score += 50;
       completed = true;
       scormExercise = 1;
       save2LMS();
