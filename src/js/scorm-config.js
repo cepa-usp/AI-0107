@@ -125,7 +125,7 @@ function configAi () {
 //sorteia N.
 //n entre 15 e 20
 var n = Math.round(15 + 5 * Math.random());
-var debug = true;
+var debug = false;
 
 function selectExercise (exercise) {
 	switch(exercise) {
