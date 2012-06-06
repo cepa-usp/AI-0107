@@ -125,7 +125,7 @@ function configAi () {
 //sorteia N.
 //n entre 15 e 20
 var n = Math.round(15 + 5 * Math.random());
-var debug = false;
+var debug = true;
 
 function selectExercise (exercise) {
 	switch(exercise) {
@@ -655,7 +655,7 @@ function save2LMS () {
 	if(scorm.get("cmi.mode") != "normal") return;
   
     // Salva no LMS a nota do aluno.
-    var success = scorm.set("cmi.score.raw", score);
+    var success = scorm.set("cmi.score.raw", Math.max(0, Math.min(score,100)));
   
     // Notifica o LMS que esta atividade foi concluída.
     success = scorm.set("cmi.completion_status", (completed ? "completed" : "incomplete"));
