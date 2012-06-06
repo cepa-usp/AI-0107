@@ -577,9 +577,10 @@ function initAI () {
   // A tentativa de conexão com o LMS foi bem sucedida.
   if (connected) {
 	
-	if(scorm.get("cmi.mode") != "normal") return;
+	var mode = scorm.get("cmi.mode");
+	if(mode == "normal") scorm.set("cmi.credit", "credit")
+	else scorm.set("cmi.credit", "no-credit");
 	
-	scorm.set("cmi.exit","suspend");
     // Verifica se a AI já foi concluída.
     var completionstatus = scorm.get("cmi.completion_status");
     
@@ -663,6 +664,12 @@ function save2LMS () {
   
     // Notifica o LMS que esta atividade foi concluída.
     success = scorm.set("cmi.completion_status", (completed ? "completed" : "incomplete"));
+	
+	if (completed) {
+		scorm.set("cmi.exit", "normal");
+	} else { 
+		scorm.set("cmi.exit","suspend");
+	}
 	
     success = scorm.set("cmi.success_status", (score > 75 ? "passed" : "failed"));
     
