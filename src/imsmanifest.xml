@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<manifest   identifier="CEPA_SCORM2004" version="1.0"
+			xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+			xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3"
+			xmlns:adlseq="http://www.adlnet.org/xsd/adlseq_v1p3"
+			xmlns:adlnav="http://www.adlnet.org/xsd/adlnav_v1p3"
+			xmlns:imsss="http://www.imsglobal.org/xsd/imsss"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://www.imsglobal.org/xsd/imscp_v1p1 imscp_v1p1.xsd
+			http://www.imsglobal.org/xsd/imsss imsss_v1p0.xsd
+			http://www.adlnet.org/xsd/adlcp_v1p3 adlcp_v1p3.xsd
+			http://www.adlnet.org/xsd/adlseq_v1p3 adlseq_v1p3.xsd
+			http://www.adlnet.org/xsd/adlnav_v1p3 adlnav_v1p3.xsd" >
+<metadata>
+	<schema>ADL SCORM</schema>
+	<schemaversion>2004 3rd Edition</schemaversion>
+</metadata>
+<organizations default="CEPA">
+	<organization identifier="CEPA">
+		<title>Soma de Riemann</title>
+		<item identifier="AI0107_item1" identifierref="AI0107_item1_resource">
+			<title>Questionário</title>
+		</item>
+		<imsss:sequencing>
+			<imsss:controlMode choiceExit="true" flow="true"/>
+			<imsss:deliveryControls completionSetByContent="true" objectiveSetByContent="true"/>
+		</imsss:sequencing>
+	</organization>
+</organizations>
+<resources>
+	<resource identifier="AI0107_item1_resource" adlcp:scormType="sco" href="index.html" type="webcontent">
+		<file href="./index.html"/>
+		<file href="./js/SCORM_API_wrapper.js"/>
+		<file href="./js/scorm-config.js"/>
+		<file href="./js/swfobject.js"/>
+		<file href="./js/jquery-1.4.2.min.js"/>
+		<file href="./js/jquery-ui-1.8.6.custom.min.js"/>
+    <file href="./css/style.css"/>
+    <file href="./css/smoothness/jquery-ui-1.8.19.custom.css"/>
+    <file href="./css/smoothness/images/ui-bg_flat_0_aaaaaa_40x100.png"/>
+    <file href="./css/smoothness/images/ui-bg_flat_75_ffffff_40x100.png"/>
+    <file href="./css/smoothness/images/ui-bg_glass_55_fbf9ee_1x400.png"/>
+    <file href="./css/smoothness/images/ui-bg_glass_65_ffffff_1x400.png"/>
+    <file href="./css/smoothness/images/ui-bg_glass_75_dadada_1x400.png"/>
+    <file href="./css/smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png"/>
+    <file href="./css/smoothness/images/ui-bg_glass_95_fef1ec_1x400.png"/>
+    <file href="./css/smoothness/images/ui-bg_highlight-soft_75_cccccc_1x100.png"/>
+    <file href="./css/smoothness/images/ui-icons_2e83ff_256x240.png"/>
+    <file href="./css/smoothness/images/ui-icons_222222_256x240.png"/>
+    <file href="./css/smoothness/images/ui-icons_454545_256x240.png"/>
+    <file href="./css/smoothness/images/ui-icons_888888_256x240.png"/>
+    <file href="./css/smoothness/images/ui-icons_cd0a0a_256x240.png"/>
+    <file href="./img/ex1.gif"/>
+    <file href="./img/ex3.gif"/>
+    <file href="./img/ex3_1.gif"/>
+    <file href="./img/ex3_2.gif"/>
+    <file href="./img/ex3_v2.gif"/>
+    <file href="./img/ex3_v2-2.gif"/>
+    <file href="./img/ex4_1.gif"/>
+    <file href="./img/ex4_2.gif"/>
+    <file href="./img/ex4_3.gif"/>
+    <file href="./img/ex4_4.gif"/>
+	<file href="./img/ex4_5.gif"/>
+	<file href="./img/ex4_6.gif"/>
+	<file href="./img/ex4_7.gif"/>
+	<file href="./img/ex4_8.gif"/>
+	<file href="./img/ex4_9.gif"/>
+	<file href="./img/ex4a.gif"/>
+	<file href="./img/ex4b.gif"/>
+	<file href="./img/ex5_1.gif"/>
+	<file href="./img/ex5_1a.gif"/>
+	<file href="./img/ex5_2.gif"/>
+	<file href="./img/ex5_2a.gif"/>
+	<file href="./img/ex5_3.gif"/>
+	<file href="./img/ex5_3a.gif"/>
+	<file href="./img/ex5_4.gif"/>
+	<file href="./img/ex5_4a.gif"/>
+	<file href="./img/grafico_a.png"/>
+	<file href="./img/grafico_bc.png"/>
+	<file href="./img/grafico_d.png"/>
+	<file href="./img/int_ex1.gif"/>
+	<file href="./img/int_ex1_red.gif"/>
+	<file href="./img/int_ex2.gif"/>
+	<file href="./img/or_1.gif"/>
+	<file href="./img/or_2.gif"/>
+	<file href="./img/or_3.gif"/>
+	<file href="./img/or_4.gif"/>
+	<file href="./img/or_5.gif"/>
+	<file href="./img/rel5a.gif"/>
+	<file href="./swf/AI_Loader.swf"/>
+	<file href="./swf/AI-0107.swf"/>
+	<file href="./swf/expressInstall.swf"/>  
+	</resource>
+</resources>
+</manifest>
