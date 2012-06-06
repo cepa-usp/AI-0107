@@ -125,7 +125,7 @@ function configAi () {
 //sorteia N.
 //n entre 15 e 20
 var n = Math.round(15 + 5 * Math.random());
-var debug = true;
+var debug = false;
 
 function selectExercise (exercise) {
 	switch(exercise) {
@@ -291,6 +291,7 @@ function checkCallbacks () {
 	try {
 		ai.doNothing();
 		message("swf ok!");
+		console.log("atualizado!");
 		swfOK = true;
 	}
 	catch(error) {
@@ -617,6 +618,9 @@ function initAI () {
     
     if (isNaN(scormExercise)) scormExercise = 1;
     if (isNaN(score)) score = 0;
+	
+	scorm.set("cmi.score.min", 0);
+	scorm.set("cmi.score.max", 100);
     
     // Posiciona o aluno no exercício da vez
     screenExercise = scormExercise;
@@ -655,7 +659,7 @@ function save2LMS () {
 	if(scorm.get("cmi.mode") != "normal") return;
   
     // Salva no LMS a nota do aluno.
-    var success = scorm.set("cmi.score.raw", Math.max(0, Math.min(score,100)));
+    var success = scorm.set("cmi.score.raw", score);
   
     // Notifica o LMS que esta atividade foi concluída.
     success = scorm.set("cmi.completion_status", (completed ? "completed" : "incomplete"));
@@ -686,24 +690,29 @@ function pingLMS () {
  */ 
 function evaluateExercise (event) {
   
+  
   // Avalia a nota
   var currentScore = getScore(screenExercise);
+  console.log(score);
+  console.log(currentScore);
   score += (currentScore / N_EXERCISES)/2;
+  console.log(score);
   
   if(exOk == false) return;
-  console.log(screenExercise + "\t" + currentScore);
+  //console.log(screenExercise + "\t" + currentScore);
   // Mostra a mensagem de erro/acerto
   feedback(screenExercise, currentScore);
  
   // Atualiza a nota do LMS (apenas se a questão respondida é aquela esperada pelo LMS)
   if (!completed && screenExercise == scormExercise) {
-    score = Math.max(0, Math.min(score + currentScore, 100));
+    //score = Math.max(0, Math.min(score, 100));
     
     if (scormExercise < N_EXERCISES) {
       nextExercise();
     }
     else {
 		score += 50;
+		score = Math.round(score);
       completed = true;
       scormExercise = 1;
       save2LMS();
