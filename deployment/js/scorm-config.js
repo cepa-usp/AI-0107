@@ -130,7 +130,7 @@ var debug = false;
 function selectExercise (exercise) {
 	switch(exercise) {
 		case 1:
-			console.log("Configurando o exercício 1");
+			//console.log("Configurando o exercício 1");
 			
 			ai.setVisible("M",false);
 			ai.setVisible("LOWER_SUM",true);
@@ -151,7 +151,7 @@ function selectExercise (exercise) {
 			break;
 			
 		case 2:
-			console.log("Configurando o exercício 2");
+			//console.log("Configurando o exercício 2");
 			
 			//Bloquear os pontos A e B
 			ai.lock("A", true);
@@ -178,7 +178,7 @@ function selectExercise (exercise) {
 			break;
 			
 		case 3:
-			console.log("Configurando o exercício 3");
+			//console.log("Configurando o exercício 3");
 			
 			//Bloquear os pontos A e B
 			ai.lock("A", true);
@@ -212,7 +212,7 @@ function selectExercise (exercise) {
 			break;
 			
 		case 4:
-			console.log("Configurando o exercício 4");
+			//console.log("Configurando o exercício 4");
 			
 			//Bloquear os pontos A e B
 			ai.lock("A", true);
@@ -234,7 +234,7 @@ function selectExercise (exercise) {
 			break;
 			
 		case 5:
-			console.log("Configurando o exercício 5");
+			//console.log("Configurando o exercício 5");
 			
 			//Bloquear os pontos A e B
 			ai.lock("A", true);
@@ -255,7 +255,7 @@ function selectExercise (exercise) {
 			break;
 		
 		case 6:
-			console.log("Configurando o exercício 6");
+			//console.log("Configurando o exercício 6");
 			
 			//Bloquear os pontos A e B
 			ai.lock("A", true);
@@ -700,10 +700,10 @@ function evaluateExercise (event) {
   
   // Avalia a nota
   var currentScore = getScore(screenExercise);
-  console.log(score);
-  console.log(currentScore);
+  //console.log(score);
+  //console.log(currentScore);
   score += (currentScore / N_EXERCISES)/2;
-  console.log(score);
+  //console.log(score);
   
   if(exOk == false) return;
   //console.log(screenExercise + "\t" + currentScore);
