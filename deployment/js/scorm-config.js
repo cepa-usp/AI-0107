@@ -913,7 +913,6 @@ function getScore (exercise) {
 		
 		ans = Math.round(ans);
 		
-	  
 		break;
 		
 	  // Avalia a nota do ex3
@@ -934,7 +933,7 @@ function getScore (exercise) {
 		}
 		
 		ans = Math.round(ans);
-	  
+		
 		break;
 		
 	  // Avalia a nota do ex4
@@ -952,7 +951,7 @@ function getScore (exercise) {
 		}
 	    
 		ans = Math.round(ans);
-		
+
 		break;
 		
 	  // Avalia a nota do ex5
@@ -1005,7 +1004,7 @@ function getScore (exercise) {
 	  
 	  ans = Math.round(ans);
 	   	  	  	    
-		break;
+	  break;
 		
 	  // Avalia a nota do ex6
 	  case 6:
@@ -1037,10 +1036,11 @@ function getScore (exercise) {
 	  }
 		
 	  ans = Math.round(ans);
-	  
+	
 	  break;
 
     }
+  save2LMS();
   return ans;
 }
 
