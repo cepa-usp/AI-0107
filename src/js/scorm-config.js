@@ -674,7 +674,7 @@ function save2LMS () {
     success = scorm.set("cmi.success_status", (score > 75 ? "passed" : "failed"));
     
     // Salva no LMS o exercício que deve ser exibido quando a AI for acessada novamente.
-    success = scorm.set("cmi.location", scormExercise);
+    //success = scorm.set("cmi.location", scormExercise);
     
     if (!success) log.error("Falha ao enviar dados para o LMS.");
   }
